@@ -12,13 +12,13 @@
 
 #include "minishell.h"
 
-void	free_arr(char **str)
+void	*free_arr(char **str)
 {
 	int	i;
 
 	i = 0;
 	if (!str)
-		return ;
+		return (NULL);
 	while (str[i])
 	{
 		free(str[i]);
@@ -29,4 +29,5 @@ void	free_arr(char **str)
 	str[i] = NULL;
 	free(str);
 	str = NULL;
+	return (NULL);
 }

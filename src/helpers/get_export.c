@@ -45,13 +45,12 @@ static	char	*get_export_value(char **env, int i)
 		j++;
 	}
 	res[++j] = '"';
-	j++;
 	while (env[i][j])
 	{
-		res[j] = env[i][j];
+		res[j + 1] = env[i][j];
 		j++;
 	}
-	res[j] = '"';
+	res[++j] = '"';
 	res[++j] = '\0';
 	return (res);
 }
@@ -66,7 +65,7 @@ char	**get_export(char **env)
 	i = 0;
 	while (env[i])
 		i++;
-	res = (char **)malloc(sizeof(char *) * (i + 1));
+	res = (char **)malloc(sizeof(char *) * (i + 2));//for OLDPWD
 	if (!res)
 		return (NULL);//maybe malloc error
 	i = 0;
@@ -74,12 +73,12 @@ char	**get_export(char **env)
 	{
 		res[i] = ft_strjoin("declare -x ", get_export_value(env, i));
 		if (!res[i])
-		{
-			free_arr(res);
-			return (NULL);
-		}
+			return (free_arr(res));
 		i++;
 	}
+	res[i++] = ft_strdup("declare -x OLDPWD");
+	if (!res[i - 1])
+		return (free_arr(res));
 	res[i] = NULL;
 	sort_export(res);
 	return (res);

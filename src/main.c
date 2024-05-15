@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-
-
 int	main(int ac, char **av, char **env)
 {
 	t_data	data;
@@ -21,13 +19,13 @@ int	main(int ac, char **av, char **env)
 	data.env = ft_arrdup(env);
 	data.export = get_export(data.env);
 	int i = 0;
-	while (data.env[i])
-	{
-		printf("%s\n", data.env[i]);
-		i++;
-	}
-	printf("\n\n\n");
-	i = 0;
+//	while (data.env[i])
+//	{
+//		printf("%s\n", data.env[i]);
+//		i++;
+//	}
+//	printf("\n\n\n");
+//	i = 0;
 	while (data.export[i])
 	{
 		printf("%s\n", data.export[i]);

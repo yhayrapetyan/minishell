@@ -33,7 +33,7 @@ char	*ft_strdup(const char *s1);
 char	**get_export(char **env);
 int		ft_strlen(const char *s);
 char	**ft_arrdup(char **env);
-void	free_arr(char **str);
+void	*free_arr(char **str);
 
 
 
