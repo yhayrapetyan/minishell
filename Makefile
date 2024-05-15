@@ -8,7 +8,8 @@ HELPERS = 	free_arr.c \
 			ft_error.c \
 			sort_arr.c \
 			strjoin_and_free.c \
-			init_data.c
+			init_data.c \
+			fill_data_with_null.c \
 
 LIBFT = 	ft_strtrim.c \
 			ft_strlen.c \
@@ -43,7 +44,7 @@ SRC += $(ENV)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-READLINE_LIB = #-lreadline
+READLINE_LIB = -lreadline
 NAME = minishell
 RM = rm -f
 

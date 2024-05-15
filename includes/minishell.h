@@ -18,13 +18,17 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 # ifndef PATH_MAX
 #  define PATH_MAX 4096
-# endif
 
-//# include <readline/readline.h>
-//# include <readline/history.h>
+# endif
+# ifndef MINISHELL
+#  define MINISHELL "msh$"
+
+# endif
 
 typedef struct s_data
 {
@@ -32,6 +36,7 @@ typedef struct s_data
 	char	**export;
 	char	*work_dir;
 	char	*old_work_dir;
+	char	*input;
 	int 	env_len;
 }	t_data;
 
@@ -51,6 +56,7 @@ int		ft_strlen(const char *s);
 char	*strjoin_and_free(char const *s1, char const *s2);
 void	ft_error(char *message, int status);
 void	init_data(t_data *data, char **env);
+void	fill_data_with_null(t_data *data);
 int		init_work_dir(t_data *data);
 int		init_export(t_data *data);
 void	*clean_data(t_data *data);
