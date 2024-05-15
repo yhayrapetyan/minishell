@@ -12,27 +12,15 @@
 
 #include "minishell.h"
 
+
 int	main(int ac, char **av, char **env)
 {
 	t_data	data;
+	fill_data_with_null(&data);
+	init_data(&data, env);
+//	start_minishell(&data);
+	clean_data(&data);
 
-	data.env = ft_arrdup(env);
-	data.export = get_export(data.env);
-	int i = 0;
-//	while (data.env[i])
-//	{
-//		printf("%s\n", data.env[i]);
-//		i++;
-//	}
-//	printf("\n\n\n");
-//	i = 0;
-	while (data.export[i])
-	{
-		printf("%s\n", data.export[i]);
-		i++;
-	}
-	free_arr(data.env);
-	free_arr(data.export);
 	(void)ac;
 	(void)av;
 	(void)env;

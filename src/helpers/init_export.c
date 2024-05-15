@@ -1,32 +1,6 @@
 #include "minishell.h"
 
-static void sort_export(char **export)
-{
-	int 	count;
-	char	*temp;
-	int 	i;
-	int 	j;
-
-	count = 0;
-	while (export[count] != NULL) {
-		count++;
-	}
-	i = 0;
-	while (i < count - 1) {
-		j = 0;
-		while (j < count - i - 1) {
-			if (ft_strcmp(export[j], export[j + 1]) > 0) {
-				temp = export[j];
-				export[j] = export[j + 1];
-				export[j + 1] = temp;
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
-static	char	*get_export_value(char **env, int i)
+static	char	*create_exp_value(char **env, int i)
 {
 	char	*res;
 	int 	len;
@@ -55,31 +29,29 @@ static	char	*get_export_value(char **env, int i)
 	return (res);
 }
 
-char	**get_export(char **env)
+int	init_export(t_data *data)
 {
 	int		i;
-	char	**res;
 
-	if (!env)
-		return (NULL);
+	data->export = (char **)malloc(sizeof(char *) * (data->env_len + 2));//need to optimize not always + 2
+	if (!data->export)
+		return (0);
 	i = 0;
-	while (env[i])
-		i++;
-	res = (char **)malloc(sizeof(char *) * (i + 2));//for OLDPWD
-	if (!res)
-		return (NULL);//maybe malloc error
-	i = 0;
-	while (env[i])
+	while (data->env[i])
 	{
-		res[i] = ft_strjoin("declare -x ", get_export_value(env, i));
-		if (!res[i])
-			return (free_arr(res));
+		data->export[i] = strjoin_and_free("declare -x ",
+										   	create_exp_value(data->env, i));
+		if (!data->export[i])
+			return (0);
 		i++;
 	}
-	res[i++] = ft_strdup("declare -x OLDPWD");
-	if (!res[i - 1])
-		return (free_arr(res));
-	res[i] = NULL;
-	sort_export(res);
-	return (res);
+	if (get_env_index(data->env, "OLDPWD") == -1)
+	{
+		data->export[i++] = ft_strdup("declare -x OLDPWD");
+		if (!data->export[i - 1])
+			return (0);
+	}
+	data->export[i] = NULL;
+	sort_arr(data->export);
+	return (1);
 }

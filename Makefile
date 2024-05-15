@@ -1,28 +1,45 @@
 SRC =		main.c
 
-HELPERS = 	ft_strlcpy.c \
-			ft_strtrim.c \
+HELPERS = 	free_arr.c \
+			ft_arrdup.c \
+			init_export.c \
+			print_arr.c \
+			clean_data.c \
+			ft_error.c \
+			sort_arr.c \
+			strjoin_and_free.c \
+			init_data.c
+
+LIBFT = 	ft_strtrim.c \
 			ft_strlen.c \
 			ft_strdup.c \
+			ft_strlcpy.c \
 			ft_split.c \
-			free_arr.c \
-			ft_arrdup.c \
 			ft_strjoin.c \
 			ft_strcmp.c \
-			get_export.c
+			ft_strncmp.c \
+			ft_strchr.c
+
+ENV =		env_utils.c
 
 HEADERS = 	minishell.h
 
 SRC_DIR = ./src/
 HELPERS_DIR = ./src/helpers/
+LIBFT_DIR = ./src/libft/
+ENV_DIR = ./src/env/
 INC = ./includes/
 
 HEADERS := $(addprefix $(INC), $(HEADERS))
 SRC := $(addprefix $(SRC_DIR), $(SRC))
 HELPERS := $(addprefix $(HELPERS_DIR), $(HELPERS))
+LIBFT := $(addprefix $(LIBFT_DIR), $(LIBFT))
+ENV := $(addprefix $(ENV_DIR), $(ENV))
 OBJS = $(SRC:.c=.o)
 
 SRC += $(HELPERS)
+SRC += $(LIBFT)
+SRC += $(ENV)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror

@@ -24,7 +24,7 @@ char	**ft_arrdup(char **env)
 		i++;
 	res = (char **)malloc(sizeof(char *) * (i + 1));
 	if (!res)
-		return (NULL);//maybe need to throw allocation error
+		return (NULL);
 	i = 0;
 	while (env[i])
 	{
@@ -32,7 +32,7 @@ char	**ft_arrdup(char **env)
 		if (!res[i])
 		{
 			free_arr(res);
-			return (NULL);//maybe allocation error
+			return (NULL);
 		}
 		i++;
 	}
