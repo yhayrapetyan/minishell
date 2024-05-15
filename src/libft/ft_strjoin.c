@@ -24,6 +24,5 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		size1 ++;
 	}
 	ch[size1] = '\0';
-	free((void *)s2);//be careful it's not lib strjoin
 	return (ch);
 }
