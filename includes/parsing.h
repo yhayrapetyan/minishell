@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:03:38 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/16 16:14:14 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:28:41 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int		get_env_index(char **env, char *key);
 int		get_env_len(char **env);
 
 /* LEXER */
+int		tokenization(t_data *data);
 int		lexer(t_data *data);
 
 #endif

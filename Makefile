@@ -23,7 +23,8 @@ LIBFT = 	ft_strtrim.c \
 
 ENV =		env_utils.c
 
-LEXER =		lexer.c
+LEXER =		lexer.c \
+			tokenization.c
 
 HEADERS = 	minishell.h \
 			colors.h \
