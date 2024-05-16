@@ -27,6 +27,7 @@
 # define ENV_INIT_ERR		"Can't init env\n"
 # define EXPORT_INIT_ERR	"Can't init export\n"
 # define WDIR_INIT_ERR 		"Can't init work dir\n"
+# define RLINE_ERR			"Can't read from readline()"
 
 # define WAIT_STAT 			2
 # define MALLOC_STAT 		3
@@ -40,6 +41,7 @@
 # define ENV_INIT_STAT		11
 # define EXPORT_INIT_STAT	12
 # define WDIR_INIT_STAT		13
+# define RLINE_STAT			14
 # define EXEC_STAT			126
 # define CMD_NOT_FOUND_STAT	127
 
