@@ -19,7 +19,7 @@ static	char	*create_exp_value(char **env, int i)
 	int		j;
 
 	len = ft_strlen(env[i]);
-	res = (char *)malloc(sizeof(char) * (len + 3));//for "" and \0
+	res = (char *)malloc(sizeof(char) * (len + 3));
 	if (!res)
 		return (NULL);
 	j = 0;
@@ -48,7 +48,7 @@ static int	get_opt_len(t_data *data)
 	i = 1;
 	if (get_env_index(data->env, "OLDPWD") != -1)
 		i++;
-	return (data->env_len + i);
+	return (get_env_len(data->env) + i);
 }
 
 int	init_export(t_data *data)

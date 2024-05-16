@@ -41,7 +41,6 @@ void	init_data(t_data *data, char **env)
 	data->env = ft_arrdup(env);//need to increment shell level or set to 1
 	if (!data->env)
 		ft_error(ENV_INIT_ERR, ENV_INIT_STAT);
-	data->env_len = get_env_len(data->env);
 	if (!init_export(data))
 	{
 		clean_data(data);

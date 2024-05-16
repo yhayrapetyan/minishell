@@ -23,12 +23,20 @@ LIBFT = 	ft_strtrim.c \
 
 ENV =		env_utils.c
 
-HEADERS = 	minishell.h
+LEXER =		lexer.c
+
+HEADERS = 	minishell.h \
+			colors.h \
+			errors.h \
+			libft.h \
+			parsing.h \
+			utils.h
 
 SRC_DIR = ./src/
 HELPERS_DIR = ./src/helpers/
 LIBFT_DIR = ./src/libft/
 ENV_DIR = ./src/env/
+LEXER_DIR = ./src/lexer/
 INC = ./includes/
 
 HEADERS := $(addprefix $(INC), $(HEADERS))
@@ -36,11 +44,13 @@ SRC := $(addprefix $(SRC_DIR), $(SRC))
 HELPERS := $(addprefix $(HELPERS_DIR), $(HELPERS))
 LIBFT := $(addprefix $(LIBFT_DIR), $(LIBFT))
 ENV := $(addprefix $(ENV_DIR), $(ENV))
+LEXER := $(addprefix $(LEXER_DIR), $(LEXER))
 OBJS = $(SRC:.c=.o)
 
 SRC += $(HELPERS)
 SRC += $(LIBFT)
 SRC += $(ENV)
+SRC += $(LEXER)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -96,6 +106,6 @@ print_info: print_name
 
 print_name:
 	@printf "%b" "$(BLUE)"
-	@echo "Philosophers\n"
+	@echo "$(NAME)\n"
 
 .PHONY: all clean fclean re sanitize print_name print_info

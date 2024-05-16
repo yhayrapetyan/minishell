@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	sort_arr(char **export)
+void	sort_arr(char **arr)
 {
 	int		count;
 	char	*temp;
@@ -20,7 +20,7 @@ void	sort_arr(char **export)
 	int		j;
 
 	count = 0;
-	while (export[count] != NULL)
+	while (arr[count] != NULL)
 		count++;
 	i = 0;
 	while (i < count - 1)
@@ -28,11 +28,11 @@ void	sort_arr(char **export)
 		j = 0;
 		while (j < count - i - 1)
 		{
-			if (ft_strcmp(export[j], export[j + 1]) > 0)
+			if (ft_strcmp(arr[j], arr[j + 1]) > 0)
 			{
-				temp = export[j];
-				export[j] = export[j + 1];
-				export[j + 1] = temp;
+				temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
 			}
 			j++;
 		}
