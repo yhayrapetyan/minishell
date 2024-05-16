@@ -41,11 +41,21 @@ static	char	*create_exp_value(char **env, int i)
 	return (res);
 }
 
+static int	get_opt_len(t_data *data)
+{
+	int	i;
+
+	i = 1;
+	if (get_env_index(data->env, "OLDPWD") != -1)
+		i++;
+	return (data->env_len + i);
+}
+
 int	init_export(t_data *data)
 {
 	int		i;
 
-	data->export = (char **)malloc(sizeof(char *) * (data->env_len + 2));//need to optimize not always + 2
+	data->export = (char **)malloc(sizeof(char *) * (get_opt_len(data)));
 	if (!data->export)
 		return (0);
 	i = 0;
