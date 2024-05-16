@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_export.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/16 11:36:27 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/16 11:36:27 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static	char	*create_exp_value(char **env, int i)
 {
 	char	*res;
-	int 	len;
-	int 	j;
+	int		len;
+	int		j;
 
 	len = ft_strlen(env[i]);
 	res = (char *)malloc(sizeof(char) * (len + 3));//for "" and \0
@@ -40,7 +52,7 @@ int	init_export(t_data *data)
 	while (data->env[i])
 	{
 		data->export[i] = strjoin_and_free("declare -x ",
-										   	create_exp_value(data->env, i));
+				create_exp_value(data->env, i));
 		if (!data->export[i])
 			return (0);
 		i++;

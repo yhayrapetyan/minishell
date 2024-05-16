@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/16 11:38:04 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/16 11:38:04 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 char	*get_env_value(char **env, char *key)
@@ -44,9 +56,9 @@ int	get_env_index(char **env, char *key)
 	return (-1);
 }
 
-int get_env_len(char **env)
+int	get_env_len(char **env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!env)

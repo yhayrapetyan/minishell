@@ -1,4 +1,16 @@
-# ifndef ERRORS_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/16 11:39:11 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/16 11:39:11 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef ERRORS_H
 # define ERRORS_H
 
 # define WAIT_ERR 			"Waitpid Failed\n"
@@ -32,5 +44,3 @@
 # define CMD_NOT_FOUND_STAT	127
 
 #endif
-
-
