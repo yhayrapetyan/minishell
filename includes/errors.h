@@ -31,6 +31,7 @@
 # define SQUOTE_ERR			"Unexpected EOF while looking for matching '\n"
 # define DQUOTE_ERR			"Unexpected EOF while looking for matching \"\n"
 
+//syntax err exit status 2
 # define WAIT_STAT 			2
 # define MALLOC_STAT 		3
 # define ARG_STAT			4

@@ -25,7 +25,7 @@ int	save_word(t_data *data, int start, int end)
 	return (1);
 }
 
-int	save_seperator(t_data *data, int index, int type)
+int	save_separator(t_data *data, int index, int type)
 {
 	int 	i;
 	char	*sep;
@@ -67,7 +67,7 @@ int save_token(t_data *data, int start, int *end)
 		}
 		if (!(type == SPACES || type == END))
 		{
-			if (!save_seperator(data, *end, type))
+			if (!save_separator(data, *end, type))
 				return (-1);
 			if (type == HEREDOC || type == APPEND)
 				(*end)++;

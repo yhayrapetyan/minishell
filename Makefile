@@ -25,6 +25,7 @@ LIBFT = 	ft_strtrim.c \
 ENV =		env_utils.c
 
 LEXER =		lexer.c \
+			check_separators_consecutives.c \
 
 TOKEN =		add_token.c \
             clean_tokens.c \
@@ -92,7 +93,7 @@ $(NAME): $(OBJS)
 $(OBJS): $(HEADERS) Makefile
 
 sanitize: fclean print_info $(OBJS)
-	@cc $(OBJS) -fsanitize=address -o $(NAME)
+	@cc $(OBJS) $(READLINE_LIB) -fsanitize=address -o $(NAME)
 
 .c.o:
 	@$(eval SRC_COUNT = $(shell expr $(SRC_COUNT) + 1))
