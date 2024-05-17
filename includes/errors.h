@@ -27,7 +27,9 @@
 # define ENV_INIT_ERR		"Can't init env\n"
 # define EXPORT_INIT_ERR	"Can't init export\n"
 # define WDIR_INIT_ERR 		"Can't init work dir\n"
-# define RLINE_ERR			"Can't read from readline()"
+# define RLINE_ERR			"Can't read from readline()\n"
+# define SQUOTE_ERR			"Unexpected EOF while looking for matching '\n"
+# define DQUOTE_ERR			"Unexpected EOF while looking for matching \"\n"
 
 # define WAIT_STAT 			2
 # define MALLOC_STAT 		3
@@ -42,6 +44,8 @@
 # define EXPORT_INIT_STAT	12
 # define WDIR_INIT_STAT		13
 # define RLINE_STAT			14
+# define SQUOTE_STAT		15
+# define DQUOTE_STAT		16
 # define EXEC_STAT			126
 # define CMD_NOT_FOUND_STAT	127
 

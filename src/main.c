@@ -18,13 +18,15 @@ void	start_minishell(t_data *data)
 	while (1)
 	{
 		data->input = readline(MINISHELL);
-		if (ft_strcmp(data->input, "STOP") == 0)
-		{
-			// rl_clear_history();
+		if (ft_strcmp(data->input, "exit") == 0)
 			break ;
+		if (lexer(data) < 1)
+		{
+			clean_data(data);
+			rl_clear_history();
+			exit(21);//need to handle error print
 		}
-		lexer(data);
-		printf("%s\n", data->input);
+//		printf("%s\n", data->input);
 		free(data->input);
 		data->input = NULL;
 	}

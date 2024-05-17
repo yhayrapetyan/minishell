@@ -12,11 +12,11 @@
 
 #include "minishell.h"
 
-int	set_status(char ch, int status)
-{
-	if 
-}
-
+/*
+ * -1 => malloc_err
+ * -2 => dquote_err
+ * -3 => squote_err
+ */
 int	tokenization(t_data *data)
 {
 	int	i;
@@ -29,5 +29,14 @@ int	tokenization(t_data *data)
 	while (data->input[i])
 	{
 		status = set_status(data->input[i], status);
+		if (status == DEFAULT)
+			start = save_token(data, start, &i);
+		if (start == -1)
+			return (-1);
+		i++;
 	}
+	if (status == DEFAULT)
+		return (save_token(data, start, &i));
+	else
+		return (status - 4);
 }

@@ -15,7 +15,7 @@
 
 typedef enum s_type
 {
-	SPACES,
+	SPACES = 1,
 	WORD,
 	ENV,
 	PIPE,
@@ -50,6 +50,7 @@ typedef struct s_data
 	char	*work_dir;
 	char	*old_work_dir;
 	char	*input;
+	t_token *tokens;
 }	t_data;
 
 /* INITIALIZATION */
@@ -66,7 +67,22 @@ int		get_env_index(char **env, char *key);
 int		get_env_len(char **env);
 
 /* LEXER */
-int		tokenization(t_data *data);
 int		lexer(t_data *data);
+int		is_white_space(char ch);
+
+/* TOKENIZATION */
+t_token	*add_token(t_token *token, char *content, int type, int state);
+int		save_seperator(t_data *data, int index, int type);
+t_token	*create_token(char *content, int type, int state);
+int 	save_token(t_data *data, int start, int *end);
+int		save_word(t_data *data, int start, int end);
+t_token *get_first_token(t_token *token);
+int		set_status(char ch, int status);
+int 	is_separator(char *str, int i);
+void	*clean_tokens(t_token *tokens);
+void	print_tokens(t_data *data);
+int		tokenization(t_data *data);
+
+
 
 #endif

@@ -10,6 +10,7 @@ HELPERS = 	free_arr.c \
 			strjoin_and_free.c \
 			init_data.c \
 			fill_data_with_null.c \
+			is_white_space.c \
 
 LIBFT = 	ft_strtrim.c \
 			ft_strlen.c \
@@ -24,7 +25,15 @@ LIBFT = 	ft_strtrim.c \
 ENV =		env_utils.c
 
 LEXER =		lexer.c \
-			tokenization.c
+
+TOKEN =		add_token.c \
+            clean_tokens.c \
+            create_token.c \
+            get_first_token.c \
+            save_token.c \
+            tokenization.c \
+            tokenization_utils.c \
+            print_tokens.c
 
 HEADERS = 	minishell.h \
 			colors.h \
@@ -38,6 +47,7 @@ HELPERS_DIR = ./src/helpers/
 LIBFT_DIR = ./src/libft/
 ENV_DIR = ./src/env/
 LEXER_DIR = ./src/lexer/
+TOKEN_DIR = ./src/tokenization/
 INC = ./includes/
 
 HEADERS := $(addprefix $(INC), $(HEADERS))
@@ -46,12 +56,14 @@ HELPERS := $(addprefix $(HELPERS_DIR), $(HELPERS))
 LIBFT := $(addprefix $(LIBFT_DIR), $(LIBFT))
 ENV := $(addprefix $(ENV_DIR), $(ENV))
 LEXER := $(addprefix $(LEXER_DIR), $(LEXER))
+TOKEN := $(addprefix $(TOKEN_DIR), $(TOKEN))
 OBJS = $(SRC:.c=.o)
 
 SRC += $(HELPERS)
 SRC += $(LIBFT)
 SRC += $(ENV)
 SRC += $(LEXER)
+SRC += $(TOKEN)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror

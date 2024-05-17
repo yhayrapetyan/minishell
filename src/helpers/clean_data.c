@@ -18,5 +18,7 @@ void	*clean_data(t_data *data)
 	free_arr(data->export);
 	free(data->old_work_dir);
 	free(data->work_dir);
+	free(data->input);
+	clean_tokens(data->tokens);
 	return (NULL);
 }

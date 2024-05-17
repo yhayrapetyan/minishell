@@ -46,7 +46,7 @@ static int	get_opt_len(t_data *data)
 	int	i;
 
 	i = 1;
-	if (get_env_index(data->env, "OLDPWD") != -1)
+	if (get_env_index(data->env, "OLDPWD") == -1)
 		i++;
 	return (get_env_len(data->env) + i);
 }

@@ -18,13 +18,14 @@
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+#include "colors.h"//maybe need to delete
 
 # ifndef PATH_MAX
 #  define PATH_MAX 4096
 # endif
 
 # ifndef MINISHELL
-#  define MINISHELL "msh$"
+#  define MINISHELL RED"msh$"RESET_COLOR
 # endif
 
 #endif
