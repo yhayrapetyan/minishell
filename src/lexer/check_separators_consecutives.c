@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static int	invalid_consecutives(t_token *token)
+static int	invalid_consecutive(t_token *token)
 {
 	if (token->prev)
 	{
@@ -23,13 +23,17 @@ int check_separators_consecutive(t_token *tokens)
 {
 	tokens = get_first_token(tokens);
 	if (tokens->type == PIPE)
-		return (-1);
+		return (syntax_err(SYNTAX_ERR, tokens->content, 1));
 	while (tokens)
 	{
-		if (invalid_consecutives(tokens))
+		if (invalid_consecutive(tokens))
 		{
-			printf("SYNTAX ERROR\n");
-			return (-1);//need to handle correct error message generation.
+			if (tokens->type == END && tokens->prev && tokens->prev->type > PIPE)
+				return (syntax_err(SYNTAX_ERR, "newline", 1));
+			else if (tokens->type == END && tokens->prev)
+				return (syntax_err(SYNTAX_ERR, tokens->prev->content, 1));
+			else
+				return (syntax_err(SYNTAX_ERR, tokens->content, 1));
 		}
 		tokens = tokens->next;
 	}

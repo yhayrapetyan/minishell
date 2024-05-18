@@ -41,7 +41,7 @@ int	save_separator(t_data *data, int index, int type)
 	if (!sep)
 		return (0);
 	i = 0;
-	while (i < len )
+	while (i < len)
 	{
 		sep[i] = data->input[index + i];
 		i++;
@@ -69,7 +69,7 @@ int save_token(t_data *data, int start, int *end)
 			if (!save_word(data, start, *end))
 				return (-1);
 		}
-		if (!(type == SPACES || type == END))
+		if (type != SPACES)
 		{
 			if (!save_separator(data, *end, type))
 				return (-1);
