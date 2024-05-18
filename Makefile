@@ -34,11 +34,15 @@ GNL =		get_next_line_utils.c \
 
 LEXER =		lexer.c \
 			check_separators_consecutives.c \
-			expand_variables.c \
-			get_variable_value.c \
-			update_content.c \
-			update_env_token_type.c \
 			syntax_err.c
+
+EXPANSION =	expand_variables.c \
+            get_var_key_len.c \
+            get_variable_value.c \
+            expand_variables_utils.c \
+            update_content.c \
+            update_content_utils.c \
+            update_env_token_type.c
 
 TOKEN =		add_token.c \
             clean_tokens.c \
@@ -63,6 +67,7 @@ ENV_DIR = ./src/env/
 LEXER_DIR = ./src/lexer/
 TOKEN_DIR = ./src/tokenization/
 GNL_DIR = ./src/GNL/
+EXPANSION_DIR = ./src/expansion/
 INC = ./includes/
 
 HEADERS := $(addprefix $(INC), $(HEADERS))
@@ -72,6 +77,7 @@ LIBFT := $(addprefix $(LIBFT_DIR), $(LIBFT))
 ENV := $(addprefix $(ENV_DIR), $(ENV))
 LEXER := $(addprefix $(LEXER_DIR), $(LEXER))
 TOKEN := $(addprefix $(TOKEN_DIR), $(TOKEN))
+EXPANSION := $(addprefix $(EXPANSION_DIR), $(EXPANSION))
 GNL := $(addprefix $(GNL_DIR), $(GNL))
 OBJS = $(SRC:.c=.o)
 
@@ -81,6 +87,7 @@ SRC += $(ENV)
 SRC += $(LEXER)
 SRC += $(TOKEN)
 SRC += $(GNL)
+SRC += $(EXPANSION)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror

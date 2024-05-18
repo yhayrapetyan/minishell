@@ -26,33 +26,6 @@ static int	is_input_empty(t_data *data)
 	return (1);
 }
 
-static void update_var_node_type(t_token **tokens)
-{
-	int 	i;
-	t_token *temp;
-
-	if (!tokens)
-		return ;
-	*tokens = get_first_token(*tokens);
-	temp = *tokens;
-	while ((*tokens))
-	{
-		i = 0;
-		while ((*tokens)->content[i])
-		{
-			if ((*tokens)->content[i] == '$')
-			{
-				if ((*tokens)->prev && (*tokens)->prev->type == HEREDOC)
-					break ;
-				(*tokens)->type = ENV;
-			}
-			i++;
-		}
-		(*tokens) = (*tokens)->next;
-	}
-	*tokens = temp;
-}
-
 /* returns
  * 1 => success
  * -1 => malloc_err
@@ -65,21 +38,23 @@ int	lexer(t_data *data)
 {
 	int status;
 
-	status = 0;
 	if (data->input == NULL)
 		return (-4);
 	if (is_input_empty(data))//if input = '\0' someone throw error?
 		return (1);
-	add_history(data->input);
+//	add_history(data->input);
 	status = tokenization(data);
 	if (status < 1)
 		return (status);
-	if (data->tokens->type == END)
-		return (-11);//idk steal about this
-	update_var_node_type(&data->tokens);//need to find better name
+//	if (data->tokens->type != END)
+//		return (-11);//idk steal about this
+	update_env_token_type(&data->tokens);//need to find better name
 	status = check_separators_consecutive(data->tokens);
 	if (status < 1)
-		return (-5);
+		return (status);
+	status = expand_variables(data);
+	if (status < 1)
+		return (status);
 	print_tokens(data);
 	return (1);
 }
