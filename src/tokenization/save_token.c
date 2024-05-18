@@ -4,6 +4,7 @@ int	save_word(t_data *data, int start, int end)
 {
 	int		i;
 	char	*word;
+	t_token	*temp;
 
 	i = 0;
 	word = (char *)malloc(sizeof(char) * (end - start + 1));
@@ -16,12 +17,13 @@ int	save_word(t_data *data, int start, int end)
 		i++;
 	}
 	word[i] = '\0';
-	data->tokens = add_token(data->tokens, word, WORD, DEFAULT);
-	if (!data->tokens)
+	temp = add_token(data->tokens, &word, WORD, DEFAULT);
+	if (!temp)
 	{
 		free(word);
 		return (0);
 	}
+	data->tokens = temp;
 	return (1);
 }
 
@@ -30,6 +32,7 @@ int	save_separator(t_data *data, int index, int type)
 	int 	i;
 	char	*sep;
 	int 	len;
+	t_token	*temp;
 
 	len = 1;
 	if (type == HEREDOC || type == APPEND)
@@ -44,12 +47,13 @@ int	save_separator(t_data *data, int index, int type)
 		i++;
 	}
 	sep[i] = '\0';
-	data->tokens = add_token(data->tokens, sep, type, DEFAULT);
-	if (!data->tokens)
+	temp = add_token(data->tokens, &sep, type, DEFAULT);
+	if (!temp)
 	{
 		free(sep);
 		return (0);
 	}
+	data->tokens = temp;
 	return (1);
 }
 

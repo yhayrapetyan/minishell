@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-t_token	*add_token(t_token *token, char *content, int type, int state)
+t_token	*add_token(t_token *token, char **content, int type, int state)
 {
 	t_token	*new_token;
 

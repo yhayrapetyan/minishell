@@ -2,15 +2,17 @@
 
 void	print_tokens(t_data *data)
 {
-	int type;
-	int state;
+	int 		type;
+	int 		state;
+	t_token 	*temp;
 
 	data->tokens = get_first_token(data->tokens);
+	temp = data->tokens;
 	while (data->tokens)
 	{
 		type = data->tokens->type;
 		state = data->tokens->state;
-		printf("content = %sEOF\nlen = %d\n",
+		printf("content = %s\nlen = %d\n",
 			   data->tokens->content,
 			   data->tokens->len);
 		if (state == 0)
@@ -40,4 +42,5 @@ void	print_tokens(t_data *data)
 
 		data->tokens = data->tokens->next;
 	}
+	data->tokens = temp;
 }
