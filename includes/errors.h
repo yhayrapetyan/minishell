@@ -30,6 +30,7 @@
 # define RLINE_ERR			"Can't read from readline()\n"
 # define SQUOTE_ERR			"Unexpected EOF while looking for matching '\n"
 # define DQUOTE_ERR			"Unexpected EOF while looking for matching \"\n"
+# define SYNTAX_ERR			"syntax error near unexpected token"
 
 //syntax err exit status 2
 # define WAIT_STAT 			2

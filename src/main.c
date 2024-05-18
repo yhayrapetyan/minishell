@@ -14,21 +14,25 @@
 
 void	start_minishell(t_data *data)
 {
-
 	while (1)
 	{
-		data->input = readline(MINISHELL);
+//		data->input = readline(MINISHELL);
+		data->input = get_next_line(0);
+		data->input[ft_strlen(data->input) - 1] = '\0';//temp solution for need for checking memory leaks
 		if (ft_strcmp(data->input, "exit") == 0)
 			break ;
 		if (lexer(data) < 1)
 		{
 			clean_data(data);
 			rl_clear_history();
+			get_next_line(-1);
 			exit(21);//need to handle error print
 		}
 //		printf("%s\n", data->input);
 		free(data->input);
 		data->input = NULL;
+		clean_tokens(data->tokens);
+		data->tokens = NULL;
 	}
 }
 
@@ -39,7 +43,7 @@ int	main(int ac, char **av, char **env)
 	fill_data_with_null(&data);
 	init_data(&data, env);
 	start_minishell(&data);
-	// print_arr(data.export);
+	get_next_line(-1);
 	clean_data(&data);
 	(void)ac;
 	(void)av;

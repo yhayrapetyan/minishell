@@ -20,12 +20,25 @@ LIBFT = 	ft_strtrim.c \
 			ft_strjoin.c \
 			ft_strcmp.c \
 			ft_strncmp.c \
-			ft_strchr.c
+			ft_strchr.c \
+			ft_itoa.c \
+			ft_substr.c \
+			ft_isalnum.c \
+			ft_isalpha.c \
+			ft_isdigit.c
 
 ENV =		env_utils.c
 
+GNL =		get_next_line_utils.c \
+			get_next_line.c
+
 LEXER =		lexer.c \
 			check_separators_consecutives.c \
+			expand_variables.c \
+			get_variable_value.c \
+			update_content.c \
+			update_env_token_type.c \
+			syntax_err.c
 
 TOKEN =		add_token.c \
             clean_tokens.c \
@@ -49,6 +62,7 @@ LIBFT_DIR = ./src/libft/
 ENV_DIR = ./src/env/
 LEXER_DIR = ./src/lexer/
 TOKEN_DIR = ./src/tokenization/
+GNL_DIR = ./src/GNL/
 INC = ./includes/
 
 HEADERS := $(addprefix $(INC), $(HEADERS))
@@ -58,6 +72,7 @@ LIBFT := $(addprefix $(LIBFT_DIR), $(LIBFT))
 ENV := $(addprefix $(ENV_DIR), $(ENV))
 LEXER := $(addprefix $(LEXER_DIR), $(LEXER))
 TOKEN := $(addprefix $(TOKEN_DIR), $(TOKEN))
+GNL := $(addprefix $(GNL_DIR), $(GNL))
 OBJS = $(SRC:.c=.o)
 
 SRC += $(HELPERS)
@@ -65,6 +80,7 @@ SRC += $(LIBFT)
 SRC += $(ENV)
 SRC += $(LEXER)
 SRC += $(TOKEN)
+SRC += $(GNL)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
