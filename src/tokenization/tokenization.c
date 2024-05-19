@@ -28,7 +28,7 @@ int	tokenization(t_data *data)
 	status = DEFAULT;
 	while (data->input[i])
 	{
-		status = set_status(data->input[i], status);
+		status = set_state(data->input[i], status);
 		if (status == DEFAULT)
 			start = save_token(data, start, &i);
 		if (start == -1)

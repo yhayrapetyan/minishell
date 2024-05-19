@@ -55,6 +55,9 @@ int	lexer(t_data *data)
 	status = expand_variables(data);
 	if (status < 1)
 		return (status);
+	status = handle_quotes(data);
+	if (status < 1)
+		return (status);
 	print_tokens(data);
 	return (1);
 }

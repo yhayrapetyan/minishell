@@ -34,7 +34,9 @@ GNL =		get_next_line_utils.c \
 
 LEXER =		lexer.c \
 			check_separators_consecutives.c \
-			syntax_err.c
+			syntax_err.c \
+			handle_quotes.c \
+			remove_quotes.c
 
 EXPANSION =	expand_variables.c \
             get_var_key_len.c \

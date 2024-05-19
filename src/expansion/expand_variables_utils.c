@@ -26,7 +26,7 @@ int	is_valid_variable(t_data *data, int i)
 	return (1);
 }
 
-void	update_status(t_token **token, char ch)
+void	update_state(t_token **token, char ch)
 {
 	if (ch == '\'' && (*token)->state == DEFAULT)
 		(*token)->state = IN_SQUOTE;

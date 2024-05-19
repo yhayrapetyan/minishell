@@ -69,6 +69,8 @@ int		get_env_len(char **env);
 /* LEXER */
 int		syntax_err(char *message, char *detail, int quotes);
 int 	check_separators_consecutive(t_token *tokens);
+int 	remove_quotes(t_token **tokens);
+int 	handle_quotes(t_data *data);
 int		is_white_space(char ch);
 int		lexer(t_data *data);
 
@@ -77,7 +79,7 @@ int		replace_old_content(t_token **tokens, char *var_value, int index);
 int 	erase_variable(t_token **token, char *content, int index);
 int		update_content(t_data *data, char *var_value, int i);
 char	*get_variable_value(t_data *data, char *str);
-void	update_status(t_token **token, char ch);
+void	update_state(t_token **token, char ch);
 void 	update_env_token_type(t_token **tokens);
 int		is_valid_variable(t_data *data, int i);
 int		expand_variables(t_data *data);
@@ -91,7 +93,7 @@ t_token	*create_token(char **content, int type, int state);
 int 	save_token(t_data *data, int start, int *end);
 int		save_word(t_data *data, int start, int end);
 t_token *get_first_token(t_token *token);
-int		set_status(char ch, int status);
+int		set_state(char ch, int status);
 int 	is_separator(char *str, int i);
 void	*clean_tokens(t_token *tokens);
 void	print_tokens(t_data *data);

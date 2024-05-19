@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	set_status(char ch, int status)
+int	set_state(char ch, int status)
 {
 	if (ch == '\'' && status == DEFAULT)
 		status = IN_SQUOTE;
