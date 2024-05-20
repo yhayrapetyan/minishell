@@ -16,8 +16,11 @@
 # include "errors.h"
 # include "colors.h" 
 # include "utils.h"
-# include "parsing.h"
+# include "lexer.h"
 # include "libft.h"
+# include "parsing.h"
+# include "expansion.h"
+# include "tokenization.h"
 # include "get_next_line.h"
 
 /* HELPERS */

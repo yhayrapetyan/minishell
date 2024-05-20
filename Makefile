@@ -67,7 +67,10 @@ HEADERS = 	minishell.h \
 			errors.h \
 			libft.h \
 			parsing.h \
-			utils.h
+			utils.h \
+			tokenization.h \
+			expansion.h \
+			lexer.h
 
 SRC_DIR = ./src/
 HELPERS_DIR = ./src/helpers/
