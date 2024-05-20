@@ -43,62 +43,84 @@ typedef struct s_token
 	struct s_token	*prev;
 }	t_token;
 
+typedef struct s_command
+{
+	char				*name;
+	char				*path;
+	char				**args;
+//	bool				pipe_output;
+//	int					*pipe_fd;
+//	t_io_fds			*io_fds;
+	struct s_command	*next;
+	struct s_command	*prev;
+}	t_command;
+
 typedef struct s_data
 {
-	char	**env;
-	char	**export;
-	char	*work_dir;
-	char	*old_work_dir;
-	char	*input;
-	t_token *tokens;
+	char		**env;
+	char		**export;
+	char		*work_dir;
+	char		*old_work_dir;
+	char		*input;
+	t_token 	*tokens;
+	t_command	*commands;
 }	t_data;
 
 /* INITIALIZATION */
-void	init_data(t_data *data, char **env);
-void	fill_data_with_null(t_data *data);
-int		init_work_dir(t_data *data);
-int		init_export(t_data *data);
-void	sort_arr(char **arr);
-
+void		init_data(t_data *data, char **env);
+void		fill_data_with_null(t_data *data);
+int			init_work_dir(t_data *data);
+int			init_export(t_data *data);
+void		sort_arr(char **arr);
 
 /* ENV */
-char	*get_env_value(char **env, char *key);
-int		get_env_index(char **env, char *key);
-int		get_env_len(char **env);
+char		*get_env_value(char **env, char *key);
+int			get_env_index(char **env, char *key);
+int			get_env_len(char **env);
 
 /* LEXER */
-int		syntax_err(char *message, char *detail, int quotes);
-int 	check_separators_consecutive(t_token *tokens);
-int 	remove_quotes(t_token **tokens);
-int 	handle_quotes(t_data *data);
-int		is_white_space(char ch);
-int		lexer(t_data *data);
+int			syntax_err(char *message, char *detail, int quotes);
+int 		check_separators_consecutive(t_token *tokens);
+int 		remove_quotes(t_token **tokens);
+int		 	handle_quotes(t_data *data);
+int			is_white_space(char ch);
+int			lexer(t_data *data);
 
 /* EXPANSION */
-int		replace_old_content(t_token **tokens, char *var_value, int index);
-int 	erase_variable(t_token **token, char *content, int index);
-int		update_content(t_data *data, char *var_value, int i);
-char	*get_variable_value(t_data *data, char *str);
-void	update_state(t_token **token, char ch);
-void 	update_env_token_type(t_token **tokens);
-int		is_valid_variable(t_data *data, int i);
-int		expand_variables(t_data *data);
-int		get_var_key_len(char *str);
-int 	get_var_len(char *str);
+int			replace_old_content(t_token **tokens, char *var_value, int index);
+int 		erase_variable(t_token **token, char *content, int index);
+int			update_content(t_data *data, char *var_value, int i);
+char		*get_variable_value(t_data *data, char *str);
+void		update_state(t_token **token, char ch);
+void 		update_env_token_type(t_token **tokens);
+int			is_valid_variable(t_data *data, int i);
+int			expand_variables(t_data *data);
+int			get_var_key_len(char *str);
+int 		get_var_len(char *str);
 
 /* TOKENIZATION */
-t_token	*add_token(t_token *token, char **content, int type, int state);
-int		save_separator(t_data *data, int index, int type);
-t_token	*create_token(char **content, int type, int state);
-int 	save_token(t_data *data, int start, int *end);
-int		save_word(t_data *data, int start, int end);
-t_token *get_first_token(t_token *token);
-int		set_state(char ch, int status);
-int 	is_separator(char *str, int i);
-void	*clean_tokens(t_token *tokens);
-void	print_tokens(t_data *data);
-int		tokenization(t_data *data);
+t_token		*add_token(t_token *token, char **content, int type, int state);
+int			save_separator(t_data *data, int index, int type);
+t_token		*create_token(char **content, int type, int state);
+int 		save_token(t_data *data, int start, int *end);
+int			save_word(t_data *data, int start, int end);
+t_token 	*get_first_token(t_token *token);
+int			set_state(char ch, int status);
+int 		is_separator(char *str, int i);
+void		*clean_tokens(t_token *tokens);
+void		print_tokens(t_data *data);
+int			tokenization(t_data *data);
 
+/* PARSING */
+t_command	*add_command(t_command *old_command, t_command *new_command);
+int			fill_args(t_token **tokens, t_command *last_command);
+t_command	*get_last_command(t_command *command);
+t_command 	*get_first_command(t_command *command);
+int 		create_commands(t_data *data);
+t_command	*empty_command(void);
+int 		parse_word(t_command **commands, t_token **tokens);
+int 		parse_pipe(t_command **commands, t_token **tokens);
 
+void	print_commands(t_data *data);
 
 #endif

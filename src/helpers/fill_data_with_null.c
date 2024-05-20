@@ -25,4 +25,5 @@ void	fill_data_with_null(t_data *data)
 	data->old_work_dir = NULL;
 	data->input = NULL;
 	data->tokens = NULL;
+	data->commands = NULL;
 }

@@ -1,46 +1,80 @@
 #include "minishell.h"
 
+void print_table_header()
+{
+	printf("=============================================================\n");
+	printf("                 TOKENS                                      \n");
+	printf("=============================================================\n");
+	printf("-------------------------------------------------------------\n");
+	printf("content            | type          | state         | len\n");
+	printf("-------------------------------------------------------------\n");
+}
+
+char	*get_type(t_data *data)
+{
+	int type;
+
+	type = data->tokens->type;
+	if (type == 1)
+		return ("SPACES");
+	else if (type == 2)
+		return ("WORD");
+	else if (type == 3)
+		return ("ENV");
+	else if (type == 4)
+		return ("PIPE");
+	else if (type == 5)
+		return ("INPUT");
+	else if (type == 6)
+		return ("TRUNC");
+	else if (type == 7)
+		return ("HEREDOC");
+	else if (type == 8)
+		return ("APPEND");
+	else if (type == 9)
+		return ("END");
+	return ("UNDEFINED");
+}
+
+char *get_state(t_data *data)
+{
+	int state;
+
+	state = data->tokens->state;
+	if (state == 0)
+		return ("DEFAULT");
+	else if (state == 1)
+		return ("IN_SQUOTES");
+	else if (state == 2)
+		return ("IN_DQUOTES");
+	return ("UNDEFINED");
+}
+
+void print_table_row(t_data *data)
+{
+	t_token 	*temp;
+	char		*type;
+	char		*state;
+
+	temp = data->tokens;
+	type = get_type(data);
+	state = get_state(data);
+	printf("%-18s | %-13s | %-13s | %d\n",temp->content, type, state, temp->len);
+}
+
+
 void	print_tokens(t_data *data)
 {
-	int 		type;
-	int 		state;
 	t_token 	*temp;
 
 	data->tokens = get_first_token(data->tokens);
 	temp = data->tokens;
+	print_table_header();
 	while (data->tokens)
 	{
-		type = data->tokens->type;
-		state = data->tokens->state;
-		printf("content = %s\nlen = %d\n",
-			   data->tokens->content,
-			   data->tokens->len);
-		if (state == 0)
-			printf("state = DEFAULT\n");
-		else if (state == 1)
-			printf("state = IN_SQUOTES\n");
-		else if (state == 2)
-			printf("state = IN_DQUOTES\n");
-		if (type == 1)
-			printf("type = SPACES\n\n");
-		else if (type == 2)
-			printf("type = WORD\n\n");
-		else if (type == 3)
-			printf("type = ENV\n\n");
-		else if (type == 4)
-			printf("type = PIPE\n\n");
-		else if (type == 5)
-			printf("type = INPUT\n\n");
-		else if (type == 6)
-			printf("type = TRUNC\n\n");
-		else if (type == 7)
-			printf("type = HEREDOC\n\n");
-		else if (type == 8)
-			printf("type = APPEND\n\n");
-		else if (type == 9)
-			printf("type = END\n\n");
-
+		print_table_row(data);
 		data->tokens = data->tokens->next;
 	}
+	printf("\n\n");
 	data->tokens = temp;
 }

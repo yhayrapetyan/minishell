@@ -36,7 +36,10 @@ LEXER =		lexer.c \
 			check_separators_consecutives.c \
 			syntax_err.c \
 			handle_quotes.c \
-			remove_quotes.c
+			remove_quotes.c \
+			create_commands.c \
+			command_utils.c \
+			print_commands.c
 
 EXPANSION =	expand_variables.c \
             get_var_key_len.c \
@@ -55,6 +58,10 @@ TOKEN =		add_token.c \
             tokenization_utils.c \
             print_tokens.c
 
+PARSING =	parse_word.c \
+			parse_pipe.c \
+			fill_args.c
+
 HEADERS = 	minishell.h \
 			colors.h \
 			errors.h \
@@ -70,6 +77,7 @@ LEXER_DIR = ./src/lexer/
 TOKEN_DIR = ./src/tokenization/
 GNL_DIR = ./src/GNL/
 EXPANSION_DIR = ./src/expansion/
+PARSING_DIR = ./src/parsing/
 INC = ./includes/
 
 HEADERS := $(addprefix $(INC), $(HEADERS))
@@ -80,6 +88,7 @@ ENV := $(addprefix $(ENV_DIR), $(ENV))
 LEXER := $(addprefix $(LEXER_DIR), $(LEXER))
 TOKEN := $(addprefix $(TOKEN_DIR), $(TOKEN))
 EXPANSION := $(addprefix $(EXPANSION_DIR), $(EXPANSION))
+PARSING := $(addprefix $(PARSING_DIR), $(PARSING))
 GNL := $(addprefix $(GNL_DIR), $(GNL))
 OBJS = $(SRC:.c=.o)
 
@@ -90,6 +99,7 @@ SRC += $(LEXER)
 SRC += $(TOKEN)
 SRC += $(GNL)
 SRC += $(EXPANSION)
+SRC += $(PARSING)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
