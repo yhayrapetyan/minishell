@@ -66,7 +66,8 @@ PARSING =	parse_word.c \
 			fill_args.c \
 			parse_input.c \
 			remove_old_ref.c \
-			parse_trunc.c
+			parse_trunc.c \
+			parse_append.c
 
 HEADERS = 	minishell.h \
 			colors.h \
