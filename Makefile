@@ -2,15 +2,17 @@ SRC =		main.c
 
 HELPERS = 	free_arr.c \
 			ft_arrdup.c \
-			init_export.c \
 			print_arr.c \
-			clean_data.c \
 			ft_error.c \
 			sort_arr.c \
 			strjoin_and_free.c \
-			init_data.c \
+			is_white_space.c
+
+INIT =		clean_data.c \
 			fill_data_with_null.c \
-			is_white_space.c \
+			init_data.c \
+			init_export.c \
+			init_workdir.c
 
 LIBFT = 	ft_strtrim.c \
 			ft_strlen.c \
@@ -81,6 +83,7 @@ TOKEN_DIR = ./src/tokenization/
 GNL_DIR = ./src/GNL/
 EXPANSION_DIR = ./src/expansion/
 PARSING_DIR = ./src/parsing/
+INIT_DIR = ./src/init/
 INC = ./includes/
 
 HEADERS := $(addprefix $(INC), $(HEADERS))
@@ -92,6 +95,7 @@ LEXER := $(addprefix $(LEXER_DIR), $(LEXER))
 TOKEN := $(addprefix $(TOKEN_DIR), $(TOKEN))
 EXPANSION := $(addprefix $(EXPANSION_DIR), $(EXPANSION))
 PARSING := $(addprefix $(PARSING_DIR), $(PARSING))
+INIT := $(addprefix $(INIT_DIR), $(INIT))
 GNL := $(addprefix $(GNL_DIR), $(GNL))
 OBJS = $(SRC:.c=.o)
 
@@ -103,6 +107,7 @@ SRC += $(TOKEN)
 SRC += $(GNL)
 SRC += $(EXPANSION)
 SRC += $(PARSING)
+SRC += $(INIT)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
