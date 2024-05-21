@@ -26,15 +26,14 @@ int	create_commands(t_data *data)
 			status = parse_word(&data->commands, &temp);
 		else if (temp->type == PIPE)
 			status = parse_pipe(&data->commands, &temp);
-//		else if (temp->type == INPUT)
-//			status = parse_input(&data->commands, &temp);
+		else if (temp->type == INPUT)
+			status = parse_input(&data->commands, &temp);
 //		else if (temp->type == TRUNC)
 //			status = parse_trunc(&data->commands, &temp);
 //		else if (temp->type == HEREDOC)
 //			status = parse_heredoc(data, &data->commands, &temp);
 //		else if (temp->type == APPEND)
 //			status = parse_append(&data->commands, &temp);
-
 //		else if (temp->type == END)
 //			break ;
 		if (!status)

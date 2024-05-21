@@ -43,6 +43,18 @@ typedef struct s_token
 	struct s_token	*prev;
 }	t_token;
 
+typedef struct s_io_fds
+{
+	char	*infile;
+	char	*outfile;
+	char	*delimiter;
+	// bool	heredoc_quotes;
+	int		fd_in;
+	int		fd_out;
+	// int		stdin_backup;
+	// int		stdout_backup;
+}	t_io_fds;
+
 typedef struct s_command
 {
 	char				*name;
@@ -50,7 +62,7 @@ typedef struct s_command
 	char				**args;
 //	bool				pipe_output;
 //	int					*pipe_fd;
-//	t_io_fds			*io_fds;
+	t_io_fds			*io_fds;
 	struct s_command	*next;
 	struct s_command	*prev;
 }	t_command;
@@ -69,6 +81,7 @@ typedef struct s_data
 /* INITIALIZATION */
 void		init_data(t_data *data, char **env);
 void		fill_data_with_null(t_data *data);
+int			init_io_fds(t_command	*command);
 int			init_work_dir(t_data *data);
 int			init_export(t_data *data);
 void		sort_arr(char **arr);

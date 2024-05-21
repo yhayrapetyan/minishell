@@ -12,7 +12,8 @@ INIT =		clean_data.c \
 			fill_data_with_null.c \
 			init_data.c \
 			init_export.c \
-			init_workdir.c
+			init_workdir.c \
+			init_io_fds.c
 
 LIBFT = 	ft_strtrim.c \
 			ft_strlen.c \
@@ -62,7 +63,9 @@ TOKEN =		add_token.c \
 
 PARSING =	parse_word.c \
 			parse_pipe.c \
-			fill_args.c
+			fill_args.c \
+			parse_input.c \
+			remove_old_ref.c
 
 HEADERS = 	minishell.h \
 			colors.h \

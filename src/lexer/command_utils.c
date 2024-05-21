@@ -24,7 +24,7 @@ t_command	*empty_command(void)
 	command->args = NULL;
 //	command->pipe_output = 0;
 //	command->pipe_fd = 0;
-//	command->io_fds = NULL;
+	command->io_fds = NULL;
 	command->next = NULL;
 	command->prev = NULL;
 	return (command);
