@@ -22,7 +22,9 @@ int	create_commands(t_data *data)
 	{
 		// printf("command = %s\n", temp->content);
 		if (!temp->prev)
-			data->commands = add_command(data->commands, empty_command());//need to check if allocation failed
+			data->commands = add_command(data->commands, empty_command());
+		if (!data->commands)
+			return (-1);
 		if (temp->type == WORD || temp->type == ENV)
 			status = parse_word(&data->commands, &temp);
 		else if (temp->type == PIPE)
@@ -33,8 +35,8 @@ int	create_commands(t_data *data)
 			status = parse_trunc(&data->commands, &temp);
 		else if (temp->type == APPEND)
 			status = parse_append(&data->commands, &temp);
-//		else if (temp->type == HEREDOC)
-//			status = parse_heredoc(data, &data->commands, &temp);
+		else if (temp->type == HEREDOC)
+			status = parse_heredoc(data, &data->commands, &temp);
 		else if (temp->type == END)
 			break ;
 		if (!status)

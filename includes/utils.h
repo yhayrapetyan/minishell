@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:40:16 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/21 14:31:43 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/21 21:23:10 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 
 # ifndef PATH_MAX
 #  define PATH_MAX 4096
+# endif
+
+# ifndef HEREDOC_NAME
+#  define HEREDOC_NAME "heredoc"
 # endif
 
 # ifndef MINISHELL
