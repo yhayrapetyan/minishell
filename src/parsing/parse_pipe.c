@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_pipe.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/21 14:26:24 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/21 14:26:24 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int parse_pipe(t_command **commands, t_token **tokens)
+int	parse_pipe(t_command **commands, t_token **tokens)
 {
 	t_command	*last_command;
 	t_command	*temp;

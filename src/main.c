@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 12:31:03 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/16 15:21:18 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:51:25 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	start_minishell(t_data *data)
 {
 	while (1)
 	{
-//		data->input = readline(MINISHELL);
+		// data->input = readline(MINISHELL);
 		data->input = get_next_line(0);
 		data->input[ft_strlen(data->input) - 1] = '\0';//temp solution for need for checking memory leaks
 		if (ft_strcmp(data->input, "exit") == 0)
@@ -24,7 +24,7 @@ void	start_minishell(t_data *data)
 		if (lexer(data) < 1)
 		{
 			clean_data(data);
-			rl_clear_history();
+			// rl_clear_history();
 			get_next_line(-1);
 			exit(21);//need to handle error print
 		}

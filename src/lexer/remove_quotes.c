@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   remove_quotes.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/21 14:23:49 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/21 14:23:49 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /* it takes i and count in arguments because of norm */
-static int len_without_quotes(char *content, int i, int count)
+static int	len_without_quotes(char *content, int i, int count)
 {
 	int	status;
 
@@ -17,7 +29,7 @@ static int len_without_quotes(char *content, int i, int count)
 			i++;
 			continue ;
 		}
-		else if ((content[i] == '\'' && status == IN_SQUOTE) ||\
+		else if ((content[i] == '\'' && status == IN_SQUOTE) || \
 				(content[i] == '\"' && status == IN_DQUOTE))
 		{
 			status = DEFAULT;
@@ -39,7 +51,7 @@ static void	change_status(t_token **tokens, int *i)
 	(*i)++;
 }
 
-static int not_opened(t_token **tokens, int i)
+static int	not_opened(t_token **tokens, int i)
 {
 	char	*str;
 
@@ -49,14 +61,14 @@ static int not_opened(t_token **tokens, int i)
 	return (0);
 }
 
-static int getting_closed(t_token **tokens, int *i)
+static int	getting_closed(t_token **tokens, int *i)
 {
-	int 	state;
+	int		state;
 	char	*content;
 
 	content = (*tokens)->content;
 	state = (*tokens)->state;
-	if ((content[*i] == '\'' && state == IN_SQUOTE) ||\
+	if ((content[*i] == '\'' && state == IN_SQUOTE) || \
 		(content[*i] == '"' && state == IN_DQUOTE))
 	{
 		(*tokens)->state = DEFAULT;
@@ -66,7 +78,7 @@ static int getting_closed(t_token **tokens, int *i)
 	return (0);
 }
 
-int remove_quotes(t_token **tokens)
+int	remove_quotes(t_token **tokens)
 {
 	char	*new_content;
 	int		i;

@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   update_content_utils.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/21 14:17:31 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/21 14:17:31 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int erase_variable(t_token **token, char *content, int index)
+int	erase_variable(t_token **token, char *content, int index)
 {
-	int 	i;
-	int 	j;
-	int 	len;
+	int		i;
+	int		j;
+	int		len;
 	char	*new_content;
 
 	i = 0;
@@ -45,9 +57,9 @@ static void	copy_var_value(char *new_content, char *var_value, int *j)
 int	replace_old_content(t_token **tokens, char *var_value, int index)
 {
 	char	*new_content;
-	int 	len;
-	int 	i;
-	int 	j;
+	int		len;
+	int		i;
+	int		j;
 
 	len = ft_strlen((*tokens)->content) - get_var_key_len((*tokens)->content + index) + ft_strlen(var_value);//need to check range
 	new_content = (char *)malloc(sizeof(char) * (len + 1));

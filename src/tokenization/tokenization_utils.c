@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenization_utils.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/21 14:29:00 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/21 14:29:00 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	set_state(char ch, int status)
@@ -13,7 +25,7 @@ int	set_state(char ch, int status)
 	return (status);
 }
 
-int is_separator(char *str, int i)
+int	is_separator(char *str, int i)
 {
 	if (is_white_space(str[i]))
 		return (SPACES);

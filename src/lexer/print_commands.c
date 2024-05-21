@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_commands.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/21 14:23:15 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/21 14:23:15 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static void print_table_header()
+static void	print_table_header(void)
 {
 	printf("=============================================================\n");
 	printf("                        COMMANDS                             \n");
@@ -12,7 +24,7 @@ static void print_table_header()
 
 static void	print_table_row(t_data *data)
 {
-	int i;
+	int	i;
 
 	printf("%-13s | %-19s |", data->commands->name, data->commands->path);
 	if (data->commands->args)
@@ -21,14 +33,9 @@ static void	print_table_row(t_data *data)
 		while (data->commands->args[i])
 		{
 			if (i > 0)
-			{
-				printf("%*s%-s\n",38, "", data->commands->args[i]);
-			}
+				printf("%*s%-s\n", 38, "", data->commands->args[i]);
 			else
-			{
-//				printf("\n");
 				printf(" %s\n", data->commands->args[i]);
-			}
 			i++;
 		}
 	}

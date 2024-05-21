@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_tokens.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/21 14:27:59 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/21 14:27:59 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void print_table_header()
+void	print_table_header(void)
 {
 	printf("=============================================================\n");
 	printf("                 TOKENS                                      \n");
@@ -12,7 +24,7 @@ void print_table_header()
 
 char	*get_type(t_data *data)
 {
-	int type;
+	int	type;
 
 	type = data->tokens->type;
 	if (type == 1)
@@ -36,9 +48,9 @@ char	*get_type(t_data *data)
 	return ("UNDEFINED");
 }
 
-char *get_state(t_data *data)
+char	*get_state(t_data *data)
 {
-	int state;
+	int	state;
 
 	state = data->tokens->state;
 	if (state == 0)
@@ -50,22 +62,23 @@ char *get_state(t_data *data)
 	return ("UNDEFINED");
 }
 
-void print_table_row(t_data *data)
+void	print_table_row(t_data *data)
 {
-	t_token 	*temp;
+	t_token	*temp;
 	char		*type;
 	char		*state;
 
 	temp = data->tokens;
 	type = get_type(data);
 	state = get_state(data);
-	printf("%-18s | %-13s | %-13s | %d\n",temp->content, type, state, temp->len);
+	printf("%-18s | %-13s | %-13s | %d\n", temp->content,
+		type, state, temp->len);
 }
 
 
 void	print_tokens(t_data *data)
 {
-	t_token 	*temp;
+	t_token	*temp;
 
 	data->tokens = get_first_token(data->tokens);
 	temp = data->tokens;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_separators_consecutives.c                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/21 14:20:34 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/21 14:20:34 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	invalid_consecutive(t_token *token)
@@ -19,23 +31,23 @@ static int	invalid_consecutive(t_token *token)
  * 1 => success
  * -1 => syntax err
  */
-int check_separators_consecutive(t_token *tokens)
+int	check_separators_consecutive(t_token *tkn)
 {
-	tokens = get_first_token(tokens);
-	if (tokens->type == PIPE)
-		return (syntax_err(SYNTAX_ERR, tokens->content, 1));
-	while (tokens)
+	tkn = get_first_token(tkn);
+	if (tkn->type == PIPE)
+		return (syntax_err(SYNTAX_ERR, tkn->content, 1));
+	while (tkn)
 	{
-		if (invalid_consecutive(tokens))
+		if (invalid_consecutive(tkn))
 		{
-			if (tokens->type == END && tokens->prev && tokens->prev->type > PIPE)
+			if (tkn->type == END && tkn->prev && tkn->prev->type > PIPE)
 				return (syntax_err(SYNTAX_ERR, "newline", 1));
-			else if (tokens->type == END && tokens->prev)
-				return (syntax_err(SYNTAX_ERR, tokens->prev->content, 1));
+			else if (tkn->type == END && tkn->prev)
+				return (syntax_err(SYNTAX_ERR, tkn->prev->content, 1));
 			else
-				return (syntax_err(SYNTAX_ERR, tokens->content, 1));
+				return (syntax_err(SYNTAX_ERR, tkn->content, 1));
 		}
-		tokens = tokens->next;
+		tkn = tkn->next;
 	}
 	return (1);
 }

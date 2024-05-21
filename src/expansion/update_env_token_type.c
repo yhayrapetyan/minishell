@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   update_env_token_type.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/21 14:19:58 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/21 14:19:58 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void update_env_token_type(t_token **tokens)
+void	update_env_token_type(t_token **tokens)
 {
-	int 	i;
-	t_token *temp;
+	int		i;
+	t_token	*temp;
 
 	if (!tokens)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:05:35 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/16 16:06:11 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:30:24 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,5 @@ int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 char	*ft_itoa(int n);
-
 
 #endif

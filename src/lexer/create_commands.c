@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_commands.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/21 14:22:12 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/21 14:22:12 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int create_commands(t_data *data)
+int	create_commands(t_data *data)
 {
 	t_token	*temp;
-	int 	status;
+	int		status;
 
 	temp = data->tokens;
 	while (temp && temp->next)

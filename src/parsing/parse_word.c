@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_word.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/21 14:26:30 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/21 14:26:30 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static int contain_space(char *content)
+static int	contain_space(char *content)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (content[i])
@@ -17,9 +29,9 @@ static int contain_space(char *content)
 static t_token	*get_new_tokens(char **str)
 {
 	t_token	*new_tokens;
-	t_token *temp;
+	t_token	*temp;
 	char	*temp_content;
-	int 	i;
+	int		i;
 
 	new_tokens = NULL;
 	i = 0;
@@ -41,11 +53,11 @@ static t_token	*get_new_tokens(char **str)
 	return (new_tokens);
 }
 
-static int split_token(t_command *command, char *content)
+static int	split_token(t_command *command, char *content)
 {
 	t_token	*new_tokens;
 	char	**str;
-	int 	status;
+	int		status;
 
 	str = ft_split(content, ' ');
 	if (!str)
@@ -65,7 +77,7 @@ static int split_token(t_command *command, char *content)
 	return (status);
 }
 
-static int fill_name(t_command *last_cmd, t_token **temp_token)
+static int	fill_name(t_command *last_cmd, t_token **temp_token)
 {
 	if ((*temp_token)->type == ENV && contain_space((*temp_token)->content))
 	{
@@ -81,7 +93,7 @@ static int fill_name(t_command *last_cmd, t_token **temp_token)
 	return (1);
 }
 
-int parse_word(t_command **commands, t_token **tokens)
+int	parse_word(t_command **commands, t_token **tokens)
 {
 	t_token		*temp_token;
 	t_command	*last_cmd;
@@ -90,7 +102,8 @@ int parse_word(t_command **commands, t_token **tokens)
 	while (temp_token->type == WORD || temp_token->type == ENV)
 	{
 		last_cmd = get_last_command(*commands);
-		if (temp_token->prev == NULL || (temp_token->prev && temp_token->prev->type == PIPE) ||\
+		if (temp_token->prev == NULL || \
+			(temp_token->prev && temp_token->prev->type == PIPE) || \
 			last_cmd->name == NULL)
 		{
 			if (!fill_name(last_cmd, &temp_token))

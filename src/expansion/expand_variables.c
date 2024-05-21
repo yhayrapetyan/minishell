@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_variables.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/21 14:16:50 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/21 14:16:50 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static int expand(t_data *data)
+static int	expand(t_data *data)
 {
-	int 	i;
-	int 	status;
+	int		i;
+	int		status;
 	char	*var_value;
 
 	i = 0;
@@ -17,7 +29,8 @@ static int expand(t_data *data)
 			free(var_value);
 			if (status == -1)
 				return (0);
-		} else
+		}
+		else
 			i++;
 	}
 	return (1);
@@ -25,7 +38,7 @@ static int expand(t_data *data)
 
 int	expand_variables(t_data *data)
 {
-	t_token *temp;
+	t_token	*temp;
 
 	temp = data->tokens;
 	while (data->tokens)

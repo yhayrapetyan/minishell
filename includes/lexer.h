@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/21 14:29:44 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/21 14:29:44 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LEXER_H
-#define LEXER_H
+# define LEXER_H
 
 typedef enum s_type
 {
@@ -50,7 +62,7 @@ typedef struct s_data
 	char		*work_dir;
 	char		*old_work_dir;
 	char		*input;
-	t_token 	*tokens;
+	t_token		*tokens;
 	t_command	*commands;
 }	t_data;
 
@@ -68,12 +80,12 @@ int			get_env_len(char **env);
 
 /* LEXER */
 int			syntax_err(char *message, char *detail, int quotes);
-int 		check_separators_consecutive(t_token *tokens);
-int 		remove_quotes(t_token **tokens);
-int		 	handle_quotes(t_data *data);
+int			check_separators_consecutive(t_token *tokens);
+int			remove_quotes(t_token **tokens);
+int			handle_quotes(t_data *data);
 int			is_white_space(char ch);
 int			lexer(t_data *data);
 
-void	print_commands(t_data *data);
+void		print_commands(t_data *data);
 
 #endif

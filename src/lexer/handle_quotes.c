@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_quotes.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/21 14:22:34 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/21 14:22:34 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static int have_quotes(char *content)
+static int	have_quotes(char *content)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (content[i])
@@ -14,14 +26,14 @@ static int have_quotes(char *content)
 	return (0);
 }
 
-int handle_quotes(t_data *data)
+int	handle_quotes(t_data *data)
 {
-	t_token *temp;
+	t_token	*temp;
 
 	temp = data->tokens;
 	while (temp)
 	{
-		if (have_quotes(temp->content) &&\
+		if (have_quotes(temp->content) && \
 			(!temp->prev || (temp->prev && temp->prev->type != HEREDOC)))
 		{
 			if (!remove_quotes(&temp))

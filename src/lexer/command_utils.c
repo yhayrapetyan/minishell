@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   command_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/21 14:21:40 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/21 14:21:40 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-t_command *empty_command(void)
+t_command	*empty_command(void)
 {
-	t_command *command;
+	t_command	*command;
 
 	command = (t_command *)malloc(sizeof(t_command));
 	if (!command)
@@ -18,7 +30,7 @@ t_command *empty_command(void)
 	return (command);
 }
 
-t_command *add_command(t_command *old_command, t_command *new_command)
+t_command	*add_command(t_command *old_command, t_command *new_command)
 {
 	if (!new_command)
 		return (NULL);
@@ -29,7 +41,7 @@ t_command *add_command(t_command *old_command, t_command *new_command)
 	return (new_command);
 }
 
-t_command *get_last_command(t_command *command)
+t_command	*get_last_command(t_command *command)
 {
 	if (!command)
 		return (NULL);
@@ -38,7 +50,7 @@ t_command *get_last_command(t_command *command)
 	return (command);
 }
 
-t_command *get_first_command(t_command *command)
+t_command	*get_first_command(t_command *command)
 {
 	if (!command)
 		return (NULL);
@@ -46,5 +58,3 @@ t_command *get_first_command(t_command *command)
 		command = command->prev;
 	return (command);
 }
-
-

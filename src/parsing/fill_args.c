@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fill_args.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/21 14:25:21 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/21 14:25:21 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static int count_proper_size(t_token *token)
+static int	count_proper_size(t_token *token)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (token->type == WORD || token->type == ENV)
@@ -13,11 +25,11 @@ static int count_proper_size(t_token *token)
 	return (i);
 }
 
-int create_args(t_token **tokens, t_command *lst_cmd)
+int	create_args(t_token **tokens, t_command *lst_cmd)
 {
-	t_token *temp;
-	int 	i;
-	int 	nb;
+	t_token	*temp;
+	int		i;
+	int		nb;
 
 	i = 0;
 	temp = *tokens;
@@ -40,10 +52,11 @@ int create_args(t_token **tokens, t_command *lst_cmd)
 	return (1);
 }
 
-static char	**replace_args(t_token **tokens, t_command *lst_cmd, char **new_args, int len)
+static char	**replace_args(t_token **tokens, t_command *lst_cmd,
+		char **new_args, int len)
 {
-	int 	i;
-	t_token *temp;
+	int		i;
+	t_token	*temp;
 
 	i = 0;
 	temp = *tokens;
@@ -64,7 +77,7 @@ static char	**replace_args(t_token **tokens, t_command *lst_cmd, char **new_args
 	return (new_args);
 }
 
-int add_args(t_token **tokens, t_command *lst_cmd)
+int	add_args(t_token **tokens, t_command *lst_cmd)
 {
 	int		i;
 	int		len;
@@ -93,7 +106,7 @@ int add_args(t_token **tokens, t_command *lst_cmd)
 	return (1);
 }
 
-int fill_args(t_token **tokens, t_command *last_command)
+int	fill_args(t_token **tokens, t_command *last_command)
 {
 	if (last_command && (!last_command->args))
 		return (create_args(tokens, last_command));

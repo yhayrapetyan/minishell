@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   save_token.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/21 14:28:39 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/21 14:28:39 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	save_word(t_data *data, int start, int end)
@@ -29,9 +41,9 @@ int	save_word(t_data *data, int start, int end)
 
 int	save_separator(t_data *data, int index, int type)
 {
-	int 	i;
+	int		i;
 	char	*sep;
-	int 	len;
+	int		len;
 	t_token	*temp;
 
 	len = 1;
@@ -57,9 +69,9 @@ int	save_separator(t_data *data, int index, int type)
 	return (1);
 }
 
-int save_token(t_data *data, int start, int *end)
+int	save_token(t_data *data, int start, int *end)
 {
-	int type;
+	int	type;
 
 	type = is_separator(data->input, *end);
 	if (type)
