@@ -20,6 +20,7 @@ int	create_commands(t_data *data)
 	temp = data->tokens;
 	while (temp && temp->next)
 	{
+		// printf("command = %s\n", temp->content);
 		if (!temp->prev)
 			data->commands = add_command(data->commands, empty_command());//need to check if allocation failed
 		if (temp->type == WORD || temp->type == ENV)
@@ -28,8 +29,8 @@ int	create_commands(t_data *data)
 			status = parse_pipe(&data->commands, &temp);
 		else if (temp->type == INPUT)
 			status = parse_input(&data->commands, &temp);
-//		else if (temp->type == TRUNC)
-//			status = parse_trunc(&data->commands, &temp);
+		else if (temp->type == TRUNC)
+			status = parse_trunc(&data->commands, &temp);
 //		else if (temp->type == HEREDOC)
 //			status = parse_heredoc(data, &data->commands, &temp);
 //		else if (temp->type == APPEND)
