@@ -17,7 +17,7 @@ static int	handle_empty_var(t_data *data, int i)
 	char	*var;
 
 	var = ft_substr(data->tokens->content + i + 1, 0,
-			get_var_key_len(data->tokens->content + i + 1));
+			get_var_key_len(data->tokens->content + i));
 	if (!var)
 		return (-1);
 	if (get_env_index(data->env, var) != -1)
