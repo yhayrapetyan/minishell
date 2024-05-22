@@ -24,6 +24,7 @@ int	init_io_fds(t_command	*command)
 		command->io_fds->infile = NULL;
 		command->io_fds->outfile = NULL;
 		command->io_fds->delimiter = NULL;
+		command->io_fds->delim_in_quotes = 0;
 		command->io_fds->fd_in = -1;
 		command->io_fds->fd_out = -1;
 	}

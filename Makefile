@@ -6,7 +6,11 @@ HELPERS = 	free_arr.c \
 			ft_error.c \
 			sort_arr.c \
 			strjoin_and_free.c \
-			is_white_space.c
+			is_white_space.c \
+			print_commands.c \
+            print_tokens.c \
+            arr_join.c
+
 
 INIT =		clean_data.c \
 			fill_data_with_null.c \
@@ -42,7 +46,6 @@ LEXER =		lexer.c \
 			remove_quotes.c \
 			create_commands.c \
 			command_utils.c \
-			print_commands.c
 
 EXPANSION =	expand_variables.c \
             get_var_key_len.c \
@@ -50,7 +53,8 @@ EXPANSION =	expand_variables.c \
             expand_variables_utils.c \
             update_content.c \
             update_content_utils.c \
-            update_env_token_type.c
+            update_env_token_type.c \
+            expand_heredoc.c
 
 TOKEN =		add_token.c \
             clean_tokens.c \
@@ -59,7 +63,6 @@ TOKEN =		add_token.c \
             save_token.c \
             tokenization.c \
             tokenization_utils.c \
-            print_tokens.c
 
 PARSING =	parse_word.c \
 			parse_pipe.c \
@@ -68,7 +71,8 @@ PARSING =	parse_word.c \
 			remove_old_ref.c \
 			parse_trunc.c \
 			parse_append.c \
-			parse_heredoc.c
+			parse_heredoc.c \
+			parse_heredoc_utils.c
 
 HEADERS = 	minishell.h \
 			colors.h \

@@ -22,6 +22,7 @@ int			parse_input(t_command **commands, t_token **tokens);
 int			parse_trunc(t_command **commands, t_token **tokens);
 int			parse_word(t_command **commands, t_token **tokens);
 int			parse_pipe(t_command **commands, t_token **tokens);
+int 		read_heredoc(t_io_fds *io, t_data *data);
 t_command	*get_first_command(t_command *command);
 int			remove_old_ref(t_io_fds *io, int flag);
 t_command	*get_last_command(t_command *command);

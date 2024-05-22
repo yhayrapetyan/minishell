@@ -39,8 +39,8 @@ int	create_commands(t_data *data)
 			status = parse_heredoc(data, &data->commands, &temp);
 		else if (temp->type == END)
 			break ;
-		if (!status)
-			return (-1);
+		if (status < 1)
+			return (status);
 	}
 	return (1);
 }

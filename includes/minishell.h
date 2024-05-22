@@ -26,8 +26,11 @@
 /* HELPERS */
 char	*strjoin_and_free(char const *s1, char const *s2);
 void	ft_error(char *message, int status);
+void	print_commands(t_data *data);
+void	print_tokens(t_data *data);
 void	*clean_data(t_data *data);
 char	**ft_arrdup(char **env);
+char	*arr_join(char ***arr);
 void	print_arr(char **arr);
 void	*free_arr(char **str);
 

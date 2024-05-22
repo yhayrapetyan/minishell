@@ -48,7 +48,7 @@ typedef struct s_io_fds
 	char	*infile;
 	char	*outfile;
 	char	*delimiter;
-	// bool	heredoc_quotes;
+	int		delim_in_quotes;
 	int		fd_in;
 	int		fd_out;
 	// int		stdin_backup;
@@ -99,6 +99,5 @@ int			handle_quotes(t_data *data);
 int			is_white_space(char ch);
 int			lexer(t_data *data);
 
-void		print_commands(t_data *data);
 
 #endif

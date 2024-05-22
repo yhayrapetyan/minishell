@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static char	*gnerate_heredoc_name(void)
+static char	*generate_heredoc_name(void)
 {
 	static int	i;
 	char		*name;
@@ -27,7 +27,7 @@ static char	*gnerate_heredoc_name(void)
 	return (name);
 }
 
-static char	*get_delimiter(char *delim)
+static char	*get_delimiter(char *delim, int *in_quotes)
 {
 	int	len;
 
@@ -35,8 +35,8 @@ static char	*get_delimiter(char *delim)
 	if ((delim[0] == '\"' && delim[len] == '\"')
 		|| (delim[0] == '\'' && delim[len] == '\''))
 	{
-		// *quotes = true;
-		return (ft_strtrim(delim, "\'\""));//fix
+		 *in_quotes = 1;
+		return (ft_strtrim(delim, "\'\""));//fix need to handle like quotes
 	}
 	return (ft_strdup(delim));
 }
@@ -57,9 +57,16 @@ int	parse_heredoc(t_data *data, t_command **commands, t_token **tokens)
 	io->infile = generate_heredoc_name();
 	if (!io->infile)
 		return (0);
-	io->delimiter = get_delimiter(temp->next->content);
-	(void)data;
-	(void)commands;
-	(void)tokens;
+	io->delimiter = get_delimiter(tmp->next->content, &io->delim_in_quotes);
+	if (!io->delimiter)
+		return (0);
+	if (read_heredoc(io, data))//need to check it is allocation fault or what
+		io->fd_in = open(io->infile, O_RDONLY);//need to check open fail
+	else
+		io->fd_in = -1;
+	if (tmp->next->next)
+		*tokens = tmp->next->next;
+	else
+		*tokens = tmp->next;
 	return (1);
 }

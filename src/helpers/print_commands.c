@@ -24,8 +24,10 @@ static void	print_table_header(void)
 
 static void	print_table_row(t_data *data)
 {
-	int	i;
+	int		i;
+	char	*nl;
 
+	nl = NULL;
 	printf("%-13s | %-13s |", data->commands->name, data->commands->path);
 	if (data->commands->io_fds)
 		printf(" %-13s fd = %-3d | %-13s fd = %-3d |", data->commands->io_fds->infile,
@@ -33,7 +35,7 @@ static void	print_table_row(t_data *data)
 			data->commands->io_fds->outfile,
 			data->commands->io_fds->fd_out);
 	else
-		printf(" %-22s | %-22s |", NULL, NULL);
+		printf(" %-22s | %-22s |", nl, nl);
 	if (data->commands->args)
 	{
 		i = 0;
