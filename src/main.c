@@ -32,7 +32,9 @@ void	start_minishell(t_data *data)
 		free(data->input);
 		data->input = NULL;
 		clean_tokens(data->tokens);
+		clean_commands(data->commands);
 		data->tokens = NULL;
+		data->commands = NULL;
 	}
 }
 

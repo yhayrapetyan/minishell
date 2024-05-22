@@ -20,6 +20,6 @@ void	*clean_data(t_data *data)
 	free(data->work_dir);
 	free(data->input);
 	clean_tokens(data->tokens);
-//	clean_commands(data->commands);
+	clean_commands(data->commands);
 	return (NULL);
 }
