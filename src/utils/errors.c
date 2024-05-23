@@ -10,7 +10,7 @@ void	ft_error(char *message, int status)
 	exit(status);
 }
 
-int print_ambigous_err(char *orig_name)
+int parse_err(char *orig_name, char *err_message)
 {
 	char	*temp;
 	char	*message;
@@ -22,11 +22,12 @@ int print_ambigous_err(char *orig_name)
 	free(temp);
 	if (!message)
 		return (0);
-	temp = ft_strjoin(message, AMBIGOUS_REDIR_ERR);
+	temp = ft_strjoin(message, err_message);
 	free(message);
 	if (!temp)
 		return (0);
 	write(2, temp, ft_strlen(temp));//attention
+	write(2, "\n", 1);
 	free(temp);
 	return (1);
 }

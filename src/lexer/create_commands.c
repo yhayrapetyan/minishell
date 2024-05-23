@@ -20,7 +20,7 @@ int	create_commands(t_data *data)
 	temp = data->tokens;
 	while (temp && temp->next)
 	{
-		 printf("command = %s\n", temp->content);
+//		 printf("command = %s\n", temp->content);
 		if (!temp->prev)
 			data->commands = add_command(data->commands, empty_command());
 		if (!data->commands)

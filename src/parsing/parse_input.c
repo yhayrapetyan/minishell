@@ -21,13 +21,17 @@ static	int	open_infile(t_io_fds *io, t_token *token)
 		return (-1);
 	if (token->ambiguous == 1 && (io->infile[0] == '\0' || !is_valid_filename(io->infile)))
 	{
-		if (!print_ambigous_err(token->orig_content))//need to handle correct exit
+		if (!parse_err(token->orig_content, AMBIGOUS_REDIR_ERR))
 			return (-1);
 		return (-6);
 	}
 	io->fd_in = open(io->infile, O_RDONLY);
-	// if (io->fd_in == -1)
-	// 	open_err
+	if (io->fd_in == -1)
+	{
+		if (!parse_err(io->infile, strerror(errno)))
+			return (-1);
+		return (-7);
+	}
 	return (1);
 }
 

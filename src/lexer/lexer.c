@@ -34,6 +34,7 @@ static int	is_input_empty(t_data *data)
  * -4 => readline_err
  * -5 => syntax_err [separators_consecutive]
  * -6 => ambigous redirect
+ * -7 => open err
  * */
 int	lexer(t_data *data)
 {
@@ -60,7 +61,6 @@ int	lexer(t_data *data)
 	status = handle_quotes(data);
 	if (status < 1)
 		return (status);
-	print_tokens(data);
 	status = create_commands(data);
 	if (status < 1)
 		return (status);

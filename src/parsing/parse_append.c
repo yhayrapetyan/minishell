@@ -21,13 +21,17 @@ static int	open_append(t_io_fds *io, t_token *token)
 		return (-1);
 	if (token->ambiguous == 1 && (io->outfile[0] == '\0' || !is_valid_filename(io->outfile)))
 	{
-		if (!print_ambigous_err(token->orig_content))//need to handle correct exit
+		if (!parse_err(token->orig_content, AMBIGOUS_REDIR_ERR))
 			return (-1);
 		return (-6);
 	}
 	io->fd_out = open(io->outfile, O_WRONLY | O_CREAT | O_APPEND, 0664);
-	// if (io->fd_out == -1)
-	// 	open_err
+	if (io->fd_out == -1)
+	{
+		if (!parse_err(io->infile, strerror(errno)))
+			return (-1);
+		return (-7);
+	}
 	return (1);
 }
 

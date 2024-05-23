@@ -31,7 +31,7 @@
 # define SQUOTE_ERR			"Unexpected EOF while looking for matching '\n"
 # define DQUOTE_ERR			"Unexpected EOF while looking for matching \"\n"
 # define SYNTAX_ERR			"syntax error near unexpected token"
-# define AMBIGOUS_REDIR_ERR "ambiguous redirect\n"
+# define AMBIGOUS_REDIR_ERR "ambiguous redirect"
 
 //syntax err exit status 2
 # define WAIT_STAT 			2

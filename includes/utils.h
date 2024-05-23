@@ -16,6 +16,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
+# include <errno.h>
+# include <string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "colors.h"//maybe need to delete
@@ -43,7 +46,7 @@ t_command	*get_last_command(t_command *command);
 t_command	*empty_command(void);
 int			syntax_err(char *message, char *detail, int quotes);
 char		*get_env_value(char **env, char *key);
-int 		print_ambigous_err(char *orig_name);
+int 		parse_err(char *orig_name, char *message);
 int			get_env_index(char **env, char *key);
 void		*clean_commands(t_command *commands);
 void		ft_error(char *message, int status);
