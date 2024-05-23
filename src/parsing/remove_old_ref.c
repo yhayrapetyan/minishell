@@ -21,13 +21,17 @@ int	remove_old_ref(t_io_fds *io, int flag)
 	if (flag == 1 && io->infile)
 	{
 		if (io->fd_in == -1 || (io->outfile && io->fd_out == -1))//idk about 2 condition
+		{
+			printf("false\n");
+			printf("in = %d\tout = %d\toutfile = %s\n", io->fd_in, io->fd_out, io->outfile);
 			return (0);
-		 if (io->delimiter != NULL)
-		 {
-			 free(io->delimiter);
-			 io->delimiter = NULL;
-			 unlink(io->infile);//idk about this
-		 }
+		}
+		if (io->delimiter != NULL)
+		{
+			free(io->delimiter);
+			io->delimiter = NULL;
+			unlink(io->infile);//idk about this
+		}
 		free(io->infile);
 		io->infile = NULL;
 		close(io->fd_in);//need to check close err

@@ -36,5 +36,6 @@ char	*arr_join(char ***arr)
 		}
 		i++;
 	}
+	free_arr(*arr);
 	return (res);
 }

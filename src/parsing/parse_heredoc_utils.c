@@ -6,16 +6,17 @@ static int validate_line(t_data *data, char **line, t_io_fds *io)
 
 	if (!*line)
 	{
-//		error_msg
-		return (0);
+//		error_msg here-document delimited by end-of-file: wanted
+		return (-7);
 	}
 	if (ft_strcmp(*line, io->delimiter) == 0)
 		return (0);
-	if (io->delim_in_quotes && ft_strchr(*line, '$'))
+	if (io->delim_in_quotes == 0 && ft_strchr(*line, '$'))
 	{
 		tmp = expand_heredoc(data, line);
 		if (!tmp)
 			return (-1);//need to check line leaks
+		free(*line);//careful
 		*line = tmp;
 	}
 	return (1);
@@ -40,12 +41,13 @@ int read_heredoc(t_io_fds *io, t_data *data)
 		if (status < 1)
 			break ;
 		write(tmp_fd, line, ft_strlen(line));//change to put_fd
+		write(tmp_fd, "\n", 1);
 		free(line);
 	}
 	free(line);
 	get_next_line(-1);//delete
 	close(tmp_fd);//CLOSE ERR
-	if (status < 1)//maybe before close idk
+	if (status < 0)//maybe before close idk
 		return (status);
 	return (1);
 }
