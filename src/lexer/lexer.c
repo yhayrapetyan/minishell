@@ -33,6 +33,7 @@ static int	is_input_empty(t_data *data)
  * -3 => squote_err
  * -4 => readline_err
  * -5 => syntax_err [separators_consecutive]
+ * -6 => ambigous redirect
  * */
 int	lexer(t_data *data)
 {
@@ -49,6 +50,7 @@ int	lexer(t_data *data)
 //	if (data->tokens->type != END)
 //		return (-11);//idk steal about this
 	update_env_token_type(&data->tokens);//need to find better name
+	prepare_for_ambiguous(data);
 	status = check_separators_consecutive(data->tokens);
 	if (status < 1)
 		return (status);
@@ -61,7 +63,7 @@ int	lexer(t_data *data)
 	status = create_commands(data);
 	if (status < 1)
 		return (status);
-	print_tokens(data);
-	print_commands(data);
+//	print_tokens(data);
+//	print_commands(data);
 	return (1);
 }

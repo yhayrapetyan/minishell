@@ -18,7 +18,7 @@ void	print_table_header(void)
 	printf("                 TOKENS                                      \n");
 	printf("=============================================================\n");
 	printf("-------------------------------------------------------------\n");
-	printf("content            | type          | state         | len\n");
+	printf("orig_content       | content            | type          | state         | len  | ambiguous\n");
 	printf("-------------------------------------------------------------\n");
 }
 
@@ -71,8 +71,9 @@ void	print_table_row(t_data *data)
 	temp = data->tokens;
 	type = get_type(data);
 	state = get_state(data);
-	printf("%-18s | %-13s | %-13s | %d\n", temp->content,
-		type, state, temp->len);
+	printf("%-18s | %-18s | %-13s | %-13s | %-3d | %d\n", temp->orig_content,
+	   	temp->content,
+		type, state, temp->len, temp->ambiguous);
 }
 
 

@@ -25,6 +25,7 @@ void	*clean_tokens(t_token *tokens)
 	{
 		next = tokens->next;
 		free(tokens->content);
+		free(tokens->orig_content);
 		free(tokens);
 		tokens = next;
 	}
@@ -32,6 +33,7 @@ void	*clean_tokens(t_token *tokens)
 	{
 		prev = tmp->prev;
 		free(tmp->content);
+		free(tmp->orig_content);
 		free(tmp);
 		tmp = prev;
 	}

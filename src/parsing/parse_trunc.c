@@ -12,15 +12,19 @@
 
 #include "minishell.h"
 
-static int	open_trunc(t_io_fds *io, char *filename)
+static int	open_trunc(t_io_fds *io, t_token *token)
 {
 	if (!remove_old_ref(io, 0))
 		return (1);
-	io->outfile = ft_strdup(filename);
+	io->outfile = ft_strdup(token->content);
 	if (!io->outfile)
-		return (0);
-	// if (io->outfile[0] == '\0')
-	// 	syntax_err
+		return (-1);
+	if (token->ambiguous == 1 && (io->outfile[0] == '\0' || !is_valid_filename(io->outfile)))
+	{
+		if (!print_ambigous_err(token->orig_content))//need to handle correct exit
+			return (-1);
+		return (-6);
+	}
 	io->fd_out = open(io->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0664);//need to check permission
 	// if (io->fd_out == -1)
 	// 	open_err
@@ -32,13 +36,15 @@ int	parse_trunc(t_command **commands, t_token **tokens)
 {
 	t_command	*lst_cmd;
 	t_token		*tmp;
+	int 		status;
 
 	lst_cmd = get_last_command(*commands);
 	tmp = *tokens;
 	if (!init_io_fds(lst_cmd))
-		return (0);
-	if (!open_trunc(lst_cmd->io_fds, tmp->next->content))
-		return (0);
+		return (-1);
+	status = open_trunc(lst_cmd->io_fds, tmp->next);
+	if (status < 1)
+		return (status);
 	if (tmp->next->next)
 		*tokens = tmp->next->next;
 	else

@@ -22,8 +22,12 @@ t_token	*create_token(char **content, int type, int state)
 	token->next = NULL;
 	token->prev = NULL;
 	token->content = *content;
+	token->orig_content = ft_strdup(*content);
+	if (!token->orig_content)
+		return (NULL);
 	token->type = type;
 	token->state = state;
 	token->len = ft_strlen(*content);
+	token->ambiguous = 0;
 	return (token);
 }

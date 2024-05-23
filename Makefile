@@ -46,6 +46,7 @@ LEXER =		lexer.c \
 			remove_quotes.c \
 			create_commands.c \
 			command_utils.c \
+			prepare_for_ambigous.c
 
 EXPANSION =	expand_variables.c \
             get_var_key_len.c \
@@ -72,7 +73,9 @@ PARSING =	parse_word.c \
 			parse_trunc.c \
 			parse_append.c \
 			parse_heredoc.c \
-			parse_heredoc_utils.c
+			parse_heredoc_utils.c \
+			is_valid_filename.c \
+			print_ambigous_err.c
 
 HEADERS = 	minishell.h \
 			colors.h \

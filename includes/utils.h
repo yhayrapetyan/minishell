@@ -27,6 +27,9 @@
 # ifndef HEREDOC_NAME
 #  define HEREDOC_NAME "heredoc"
 # endif
+# ifndef PROG_NAME
+#  define PROG_NAME "minishell: "
+# endif
 
 # ifndef MINISHELL
 #  define MINISHELL RED"msh$"RESET_COLOR

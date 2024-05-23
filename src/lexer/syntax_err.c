@@ -17,7 +17,7 @@ int	syntax_err(char *message, char *detail, int quotes)
 	char	*error_msg;
 	char	*temp;
 
-	error_msg = ft_strjoin("minishell: ", message);
+	error_msg = ft_strjoin(PROG_NAME, message);
 	if (!error_msg)
 		return (-1);
 	if (quotes)

@@ -35,10 +35,12 @@ typedef enum s_state
 
 typedef struct s_token
 {
+	char			*orig_content;
 	char			*content;
 	int				len;
 	t_type			type;
 	t_state			state;
+	int				ambiguous;
 	struct s_token	*next;
 	struct s_token	*prev;
 }	t_token;
@@ -95,6 +97,7 @@ int			get_env_len(char **env);
 int			syntax_err(char *message, char *detail, int quotes);
 int			check_separators_consecutive(t_token *tokens);
 void		*clean_commands(t_command *commands);//mv to init
+int 		prepare_for_ambiguous(t_data *data);
 int			remove_quotes(t_token **tokens);
 int			handle_quotes(t_data *data);
 int			is_white_space(char ch);

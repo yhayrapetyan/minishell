@@ -26,7 +26,9 @@ int 		read_heredoc(t_io_fds *io, t_data *data);
 t_command	*get_first_command(t_command *command);
 int			remove_old_ref(t_io_fds *io, int flag);
 t_command	*get_last_command(t_command *command);
+int 		print_ambigous_err(char *orig_name);
 int			create_commands(t_data *data);
+int 		is_valid_filename(char *str);
 t_command	*empty_command(void);
 
 #endif
