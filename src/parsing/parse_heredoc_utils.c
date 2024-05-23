@@ -35,6 +35,7 @@ int read_heredoc(t_io_fds *io, t_data *data)
 //		line = readline(">");
 //		SIGNALS
 		line = get_next_line(0);//delete
+		line[ft_strlen(line) - 1] = '\0';
 		status = validate_line(data, &line, io);
 		if (status < 1)
 			break ;

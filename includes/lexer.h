@@ -41,6 +41,7 @@ typedef struct s_token
 	t_type			type;
 	t_state			state;
 	int				ambiguous;
+	int				delim_in_quotes;
 	struct s_token	*next;
 	struct s_token	*prev;
 }	t_token;

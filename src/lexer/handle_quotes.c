@@ -33,9 +33,10 @@ int	handle_quotes(t_data *data)
 	temp = data->tokens;
 	while (temp)
 	{
-		if (have_quotes(temp->content) && \
-			(!temp->prev || (temp->prev && temp->prev->type != HEREDOC)))
+		if (have_quotes(temp->content))
 		{
+			if (temp->prev && temp->prev->type == HEREDOC)
+				temp->delim_in_quotes = 1;
 			if (!remove_quotes(&temp))
 				return (-1);
 			temp->len = ft_strlen(temp->content);

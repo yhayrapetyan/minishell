@@ -58,10 +58,10 @@ static char	*expand(t_data *data, char *str)
 			temp = new_heredoc_content(data, str, &i);
 			if (!temp)
 				return (NULL);
-			if (!flag)
-				flag = 1;
 			if (flag == 1)
 				free(str);
+			if (!flag)
+				flag = 1;
 			str = temp;
 		}
 		else

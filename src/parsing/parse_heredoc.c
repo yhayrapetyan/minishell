@@ -27,20 +27,6 @@ static char	*generate_heredoc_name(void)
 	return (name);
 }
 
-static char	*get_delimiter(char *delim, int *in_quotes)
-{
-	int	len;
-
-	len = ft_strlen(delim) - 1;
-	if ((delim[0] == '\"' && delim[len] == '\"')
-		|| (delim[0] == '\'' && delim[len] == '\''))
-	{
-		 *in_quotes = 1;
-		return (ft_strtrim(delim, "\'\""));//fix need to handle like quotes
-	}
-	return (ft_strdup(delim));
-}
-
 int	parse_heredoc(t_data *data, t_command **commands, t_token **tokens)
 {
 	t_token		*tmp;
@@ -57,7 +43,8 @@ int	parse_heredoc(t_data *data, t_command **commands, t_token **tokens)
 	io->infile = generate_heredoc_name();
 	if (!io->infile)
 		return (0);
-	io->delimiter = get_delimiter(tmp->next->content, &io->delim_in_quotes);
+	io->delimiter = ft_strdup(tmp->next->content);
+	io->delim_in_quotes = tmp->next->delim_in_quotes;
 	if (!io->delimiter)
 		return (0);
 	if (read_heredoc(io, data))//need to check it is allocation fault or what

@@ -60,6 +60,7 @@ int	lexer(t_data *data)
 	status = handle_quotes(data);
 	if (status < 1)
 		return (status);
+	print_tokens(data);
 	status = create_commands(data);
 	if (status < 1)
 		return (status);
