@@ -38,6 +38,7 @@ int	handle_quotes(t_data *data)
 		{
 			if (!remove_quotes(&temp))
 				return (-1);
+			temp->len = ft_strlen(temp->content);
 		}
 		temp = temp->next;
 	}

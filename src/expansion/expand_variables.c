@@ -47,6 +47,7 @@ int	expand_variables(t_data *data)
 		{
 			if (!expand(data))
 				return (-1);
+			data->tokens->len = ft_strlen(data->tokens->content);
 		}
 		data->tokens->state = DEFAULT;
 		data->tokens = data->tokens->next;
