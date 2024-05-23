@@ -19,6 +19,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "colors.h"//maybe need to delete
+# include "lexer.h"//maybe need to delete
 
 # ifndef PATH_MAX
 #  define PATH_MAX 4096
@@ -34,5 +35,21 @@
 # ifndef MINISHELL
 #  define MINISHELL RED"msh$"RESET_COLOR
 # endif
+
+/* UTILS */
+t_command	*add_command(t_command *old_command, t_command *new_command);
+t_command	*get_first_command(t_command *command);
+t_command	*get_last_command(t_command *command);
+t_command	*empty_command(void);
+int			syntax_err(char *message, char *detail, int quotes);
+char		*get_env_value(char **env, char *key);
+int 		print_ambigous_err(char *orig_name);
+int			get_env_index(char **env, char *key);
+void		*clean_commands(t_command *commands);
+void		ft_error(char *message, int status);
+void		print_commands(t_data *data);
+void		print_tokens(t_data *data);
+int			get_env_len(char **env);
+void		print_arr(char **arr);
 
 #endif

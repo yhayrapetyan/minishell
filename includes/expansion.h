@@ -24,6 +24,6 @@ void		update_state(t_token **token, char ch);
 int			is_valid_variable(t_data *data, int i);
 int			expand_variables(t_data *data);
 int			get_var_key_len(char *str);
-int			get_var_len(char *str);
+int			get_var_len(char *str);//idk about this
 
 #endif

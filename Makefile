@@ -2,13 +2,9 @@ SRC =		main.c
 
 HELPERS = 	free_arr.c \
 			ft_arrdup.c \
-			print_arr.c \
-			ft_error.c \
 			sort_arr.c \
 			strjoin_and_free.c \
 			is_white_space.c \
-			print_commands.c \
-            print_tokens.c \
             arr_join.c
 
 
@@ -34,18 +30,22 @@ LIBFT = 	ft_strtrim.c \
 			ft_isalpha.c \
 			ft_isdigit.c
 
-ENV =		env_utils.c
+UTILS =		env_utils.c \
+			print_commands.c \
+			print_arr.c \
+			command_utils.c \
+			clean_commands.c \
+			print_tokens.c \
+			errors.c
 
 GNL =		get_next_line_utils.c \
 			get_next_line.c
 
 LEXER =		lexer.c \
 			check_separators_consecutives.c \
-			syntax_err.c \
 			handle_quotes.c \
 			remove_quotes.c \
 			create_commands.c \
-			command_utils.c \
 			prepare_for_ambigous.c
 
 EXPANSION =	expand_variables.c \
@@ -75,7 +75,6 @@ PARSING =	parse_word.c \
 			parse_heredoc.c \
 			parse_heredoc_utils.c \
 			is_valid_filename.c \
-			print_ambigous_err.c
 
 HEADERS = 	minishell.h \
 			colors.h \
@@ -90,7 +89,7 @@ HEADERS = 	minishell.h \
 SRC_DIR = ./src/
 HELPERS_DIR = ./src/helpers/
 LIBFT_DIR = ./src/libft/
-ENV_DIR = ./src/env/
+UTILS_DIR = ./src/utils/
 LEXER_DIR = ./src/lexer/
 TOKEN_DIR = ./src/tokenization/
 GNL_DIR = ./src/GNL/
@@ -103,7 +102,7 @@ HEADERS := $(addprefix $(INC), $(HEADERS))
 SRC := $(addprefix $(SRC_DIR), $(SRC))
 HELPERS := $(addprefix $(HELPERS_DIR), $(HELPERS))
 LIBFT := $(addprefix $(LIBFT_DIR), $(LIBFT))
-ENV := $(addprefix $(ENV_DIR), $(ENV))
+UTILS := $(addprefix $(UTILS_DIR), $(UTILS))
 LEXER := $(addprefix $(LEXER_DIR), $(LEXER))
 TOKEN := $(addprefix $(TOKEN_DIR), $(TOKEN))
 EXPANSION := $(addprefix $(EXPANSION_DIR), $(EXPANSION))
@@ -114,7 +113,7 @@ OBJS = $(SRC:.c=.o)
 
 SRC += $(HELPERS)
 SRC += $(LIBFT)
-SRC += $(ENV)
+SRC += $(UTILS)
 SRC += $(LEXER)
 SRC += $(TOKEN)
 SRC += $(GNL)

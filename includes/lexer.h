@@ -86,21 +86,14 @@ void		fill_data_with_null(t_data *data);
 int			init_io_fds(t_command	*command);
 int			init_work_dir(t_data *data);
 int			init_export(t_data *data);
-void		sort_arr(char **arr);
-
-/* ENV */
-char		*get_env_value(char **env, char *key);
-int			get_env_index(char **env, char *key);
-int			get_env_len(char **env);
+void		*clean_data(t_data *data);//need to move
 
 /* LEXER */
-int			syntax_err(char *message, char *detail, int quotes);
 int			check_separators_consecutive(t_token *tokens);
-void		*clean_commands(t_command *commands);//mv to init
 int 		prepare_for_ambiguous(t_data *data);
 int			remove_quotes(t_token **tokens);
+int			create_commands(t_data *data);
 int			handle_quotes(t_data *data);
-int			is_white_space(char ch);
 int			lexer(t_data *data);
 
 
