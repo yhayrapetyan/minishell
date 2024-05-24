@@ -22,7 +22,7 @@ int	get_var_key_len(char *str)
 	i = 1;
 	if ((str[i] >= '0' && str[i] <= '9') || str[i] == '?')
 		return (1);
-	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))//need to check this condition
+	while (str[i] && str[i] != '$' && (ft_isalnum(str[i]) || str[i] == '_'))//need to check this condition
 	{
 		count++;
 		i++;

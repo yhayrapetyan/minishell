@@ -53,7 +53,7 @@ int	save_separator(t_data *data, int index, int type)
 	if (!sep)
 		return (0);
 	i = -1;
-	while (i++ < len)//ceck
+	while (++i < len)
 		sep[i] = data->input[index + i];
 	sep[i] = '\0';
 	temp = add_token(data->tokens, &sep, type, DEFAULT);

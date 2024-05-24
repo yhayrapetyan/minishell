@@ -18,7 +18,7 @@ int			replace_old_content(t_token **tokens, char *var_value, int index);
 int			erase_variable(t_token **token, char *content, int index);
 int			update_content(t_data *data, char *var_value, int i);
 char		*get_variable_value(t_data *data, char *str);
-char		*expand_heredoc(t_data *data, char **line);
+char		*expand_heredoc(t_data *data, char *line);
 void		update_env_token_type(t_token **tokens);
 void		update_state(t_token **token, char ch);
 int			is_valid_variable(t_data *data, int i);

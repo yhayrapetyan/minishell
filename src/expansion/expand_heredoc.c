@@ -31,9 +31,7 @@ static t_token	*get_helper_token(t_data *data, char *str, int *index,
 		return (clean_tokens(tmp_token));
 	var_value = get_variable_value(data, str + *index);
 	status = update_content(&tmp_data, var_value, *index);
-	if (!var_value)
-		(*index) += get_var_key_len(str + *index);
-	else
+	if (var_value)
 		(*index) += ft_strlen(var_value);
 	free(var_value);
 	free_arr(tmp_data.env);
@@ -62,7 +60,7 @@ static char	*new_heredoc_content(t_data *data, char *str, int *index)
 	return (res);
 }
 
-static char	*expand(t_data *data, char *str)
+char	*expand_heredoc(t_data *data, char *str)
 {
 	int		i;
 	char	*temp;
@@ -89,27 +87,3 @@ static char	*expand(t_data *data, char *str)
 	return (str);
 }
 
-char	*expand_heredoc(t_data *data, char **line)
-{
-	char	**words;
-	char	*tmp;
-	int		i;
-
-	words = ft_split(*line, ' ');
-	if (!words)
-		return (NULL);
-	i = 0;
-	while (words[i])
-	{
-		if (ft_strchr(words[i], '$'))
-		{
-			tmp = expand(data, words[i]);
-			if (!tmp)
-				return (free_arr(words));
-			free(words[i]);
-			words[i] = tmp;
-		}
-		i++;
-	}
-	return (arr_join(&words));
-}

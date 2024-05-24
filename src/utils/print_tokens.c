@@ -64,15 +64,15 @@ char	*get_state(t_data *data)
 
 void	print_table_row(t_data *data)
 {
-	t_token	*temp;
+	t_token		*temp;
 	char		*type;
 	char		*state;
 
 	temp = data->tokens;
 	type = get_type(data);
 	state = get_state(data);
-	printf("%-18s | %-18s | %-13s | %-13s | %-3d | %-10d | %d\n", temp->orig_content,
-	   	temp->content,
+	printf("%-18s | %-18s | %-13s | %-13s | %-3d | %-10d | %d\n",
+		temp->orig_content, temp->content,
 		type, state, temp->len, temp->ambiguous, temp->delim_in_quotes);
 }
 

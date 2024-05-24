@@ -25,7 +25,7 @@ static int	validate_line(t_data *data, char **line, t_io_fds *io)
 		return (0);
 	if (io->delim_in_quotes == 0 && ft_strchr(*line, '$'))
 	{
-		tmp = expand_heredoc(data, line);
+		tmp = expand_heredoc(data, *line);
 		if (!tmp)
 			return (-1);//need to check line leaks
 		free(*line);//careful
