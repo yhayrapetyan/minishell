@@ -36,8 +36,12 @@ int	create_commands(t_data *data)
 {
 	t_token	*temp;
 	int		status;
+	int		res;
+	int		flag;
 
 	temp = data->tokens;
+	flag = 0;
+	res = 1;
 	while (temp && temp->next)
 	{
 //		 printf("command = %s\n", temp->content);
@@ -45,11 +49,20 @@ int	create_commands(t_data *data)
 			data->commands = add_command(data->commands, empty_command());
 		if (!data->commands)
 			return (-1);
+		if (flag == 0)
+		{
+			status = check_separators_consecutive(temp);
+			if (status < 1)
+				return (status);
+			flag = 1;
+		}
+		if (temp->type == HEREDOC)
+			flag = 0;
 		status = parse(data, &temp);
 		if (temp->type == END)
 			break ;
-		if (status < 1)
-			return (status);
+		if (res == 1 && status < 1)
+			res = status;
 	}
-	return (1);
+	return (res);
 }

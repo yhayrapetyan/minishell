@@ -33,11 +33,12 @@ static int	invalid_consecutive(t_token *token)
  */
 int	check_separators_consecutive(t_token *tkn)
 {
-	tkn = get_first_token(tkn);
-	if (tkn->type == PIPE)
+	if (!tkn->prev && tkn->type == PIPE)
 		return (syntax_err(SYNTAX_ERR, tkn->content, 1));
 	while (tkn)
 	{
+		if (tkn->prev && tkn->prev->type == HEREDOC)
+			break ;
 		if (invalid_consecutive(tkn))
 		{
 			if (tkn->type == END && tkn->prev && tkn->prev->type > PIPE)
@@ -51,3 +52,25 @@ int	check_separators_consecutive(t_token *tkn)
 	}
 	return (1);
 }
+
+/* ORIG */
+// int	check_separators_consecutive(t_token *tkn)
+// {
+// 	tkn = get_first_token(tkn);
+// 	if (tkn->type == PIPE)
+// 		return (syntax_err(SYNTAX_ERR, tkn->content, 1));
+// 	while (tkn)
+// 	{
+// 		if (invalid_consecutive(tkn))
+// 		{
+// 			if (tkn->type == END && tkn->prev && tkn->prev->type > PIPE)
+// 				return (syntax_err(SYNTAX_ERR, "newline", 1));
+// 			else if (tkn->type == END && tkn->prev)
+// 				return (syntax_err(SYNTAX_ERR, tkn->prev->content, 1));
+// 			else
+// 				return (syntax_err(SYNTAX_ERR, tkn->content, 1));
+// 		}
+// 		tkn = tkn->next;
+// 	}
+// 	return (1);
+// }

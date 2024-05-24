@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:04:18 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/24 16:20:57 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/24 19:18:59 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,8 @@ int	lexer(t_data *data)
 		return (status);
 //	if (data->tokens->type != END)
 //		return (-11);//idk steal about this
-	update_env_token_type(&data->tokens);//need to find better name
+	update_env_token_type(&data->tokens);
 	prepare_for_ambiguous(data);
-	status = check_separators_consecutive(data->tokens);
-	if (status < 1)
-		return (status);
 	status = expand_variables(data);
 	if (status < 1)
 		return (status);

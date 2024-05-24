@@ -86,4 +86,3 @@ char	*expand_heredoc(t_data *data, char *str)
 	}
 	return (str);
 }
-
