@@ -12,6 +12,13 @@
 
 #include "minishell.h"
 
+/*
+*	1 => continue
+*	0 => break
+*	-1 => malloc err
+*   -4 => readline err
+*	-7 => open err
+*/
 static int	validate_line(t_data *data, char **line, t_io_fds *io)
 {
 	char	*tmp;
@@ -31,6 +38,12 @@ static int	validate_line(t_data *data, char **line, t_io_fds *io)
 	return (1);
 }
 
+/*
+*	1 => success
+*	-1 => malloc err
+*   -4 => readline err
+*	-7 => open err
+*/
 int	read_heredoc(t_io_fds *io, t_data *data)
 {
 	int		tmp_fd;

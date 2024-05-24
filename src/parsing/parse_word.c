@@ -93,6 +93,10 @@ static int	fill_name(t_command *last_cmd, t_token **temp_token)
 	return (1);
 }
 
+/*
+*	1 => success
+*	-1 => malloc err
+*/
 int	parse_word(t_command **commands, t_token **tokens)
 {
 	t_token		*temp_token;
@@ -107,13 +111,13 @@ int	parse_word(t_command **commands, t_token **tokens)
 			last_cmd->name == NULL)
 		{
 			if (!fill_name(last_cmd, &temp_token))
-				return (0);
+				return (-1);
 			temp_token = temp_token->next;
 		}
 		else
 		{
 			if (!fill_args(&temp_token, last_cmd))
-				return (0);
+				return (-1);
 		}
 	}
 	(*tokens) = temp_token;

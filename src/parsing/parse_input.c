@@ -6,12 +6,18 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 14:53:39 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/24 19:11:17 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/24 20:20:24 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+*	1 => success
+*	-1 => malloc err
+*	-6 => ambigous redir
+*	-7 => open err
+*/
 static	int	open_infile(t_io_fds *io, t_token *token)
 {
 	if (!remove_old_ref(io, 1))
@@ -36,6 +42,12 @@ static	int	open_infile(t_io_fds *io, t_token *token)
 	return (1);
 }
 
+/*
+*	1 => success
+*	-1 => malloc err
+*	-6 => ambigous redir
+*	-7 => open err
+*/
 int	parse_input(t_command **commands, t_token **tokens)
 {
 	t_command	*lst_cmd;

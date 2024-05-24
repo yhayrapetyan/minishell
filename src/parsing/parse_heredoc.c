@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 20:41:27 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/24 13:50:37 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/24 20:17:49 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ static int	get_heredoc(t_io_fds *io, t_token *tmp)
 	return (1);
 }
 
+
+/*
+*	1 => success
+*	-1 => malloc err
+*   -4 => readline err
+*	-7 => open err
+*/
 int	parse_heredoc(t_data *data, t_command **commands, t_token **tokens)
 {
 	t_token		*tmp;
@@ -62,7 +69,15 @@ int	parse_heredoc(t_data *data, t_command **commands, t_token **tokens)
 		return (status);
 	}
 	else
-		io->fd_in = open(io->infile, O_RDONLY, 0644);//need to check open fail
+	{
+		io->fd_in = open(io->infile, O_RDONLY);
+		if (io->fd_in == -1)
+		{
+			if (!parse_err(io->infile, strerror(errno)))
+				return (-1);
+			return (-7);
+		}
+	}
 	if (tmp->next->next)
 		*tokens = tmp->next->next;
 	else

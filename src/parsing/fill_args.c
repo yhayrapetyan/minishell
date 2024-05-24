@@ -25,6 +25,10 @@ static int	count_proper_size(t_token *token)
 	return (i);
 }
 
+/*
+*	0 => fail
+*	1 => success
+*/
 int	create_args(t_token **tokens, t_command *lst_cmd)
 {
 	t_token	*temp;
@@ -52,6 +56,10 @@ int	create_args(t_token **tokens, t_command *lst_cmd)
 	return (1);
 }
 
+/*
+*	NULL => fail
+*	ptr => success
+*/
 static char	**replace_args(t_token **tokens, t_command *lst_cmd,
 		char **new_args, int len)
 {
@@ -77,6 +85,10 @@ static char	**replace_args(t_token **tokens, t_command *lst_cmd,
 	return (new_args);
 }
 
+/*
+*	0 => fail
+*	1 => success
+*/
 int	add_args(t_token **tokens, t_command *lst_cmd)
 {
 	int		i;
@@ -106,6 +118,10 @@ int	add_args(t_token **tokens, t_command *lst_cmd)
 	return (1);
 }
 
+/*
+*	0 => fail
+*	1 => success
+*/
 int	fill_args(t_token **tokens, t_command *last_command)
 {
 	if (last_command && (!last_command->args))
