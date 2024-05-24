@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:36:00 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/21 17:59:52 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/24 13:51:56 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,13 @@ int	remove_old_ref(t_io_fds *io, int flag)
 {
 	if (flag == 1 && io->infile)
 	{
-		if (io->fd_in == -1 || (io->outfile && io->fd_out == -1))//idk about 2 condition
-		{
-			printf("false\n");
-			printf("in = %d\tout = %d\toutfile = %s\n", io->fd_in, io->fd_out, io->outfile);
+		if (io->fd_in == -1 || (io->outfile && io->fd_out == -1))
 			return (0);
-		}
 		if (io->delimiter != NULL)
 		{
 			free(io->delimiter);
 			io->delimiter = NULL;
-			unlink(io->infile);//idk about this
+			unlink(io->infile);
 		}
 		free(io->infile);
 		io->infile = NULL;

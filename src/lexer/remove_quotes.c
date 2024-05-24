@@ -86,7 +86,8 @@ int	remove_quotes(t_token **tokens)
 
 	i = 0;
 	j = 0;
-	new_content = (char *)malloc(sizeof(char) * len_without_quotes((*tokens)->content, 0, 0));
+	new_content = (char *)malloc(sizeof(char) * \
+		len_without_quotes((*tokens)->content, 0, 0));
 	if (!new_content)
 		return (0);
 	while ((*tokens)->content[i])

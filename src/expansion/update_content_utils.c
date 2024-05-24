@@ -54,15 +54,24 @@ static void	copy_var_value(char *new_content, char *var_value, int *j)
 	}
 }
 
+static char	*get_memory(t_token **tokens, char *var_value, int index)
+{
+	int		len;
+	char	*new_content;
+
+	len = ft_strlen((*tokens)->content) - \
+		get_var_key_len((*tokens)->content + index) + ft_strlen(var_value);//need to check range
+	new_content = (char *)malloc(sizeof(char) * (len + 1));
+	return (new_content);
+}
+
 int	replace_old_content(t_token **tokens, char *var_value, int index)
 {
 	char	*new_content;
-	int		len;
 	int		i;
 	int		j;
 
-	len = ft_strlen((*tokens)->content) - get_var_key_len((*tokens)->content + index) + ft_strlen(var_value);//need to check range
-	new_content = (char *)malloc(sizeof(char) * (len + 1));
+	new_content = get_memory(tokens, var_value, index);
 	if (!new_content)
 		return (0);
 	i = 0;

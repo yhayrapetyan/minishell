@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   clean_commands.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/24 13:55:30 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/24 13:55:30 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	*clean_io_fds(t_io_fds *io)
@@ -12,7 +24,7 @@ void	*clean_io_fds(t_io_fds *io)
 
 void	*clean_commands(t_command *commands)
 {
-	t_command *tmp;
+	t_command	*tmp;
 
 	if (!commands)
 		return (NULL);

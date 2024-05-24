@@ -52,12 +52,9 @@ int	save_separator(t_data *data, int index, int type)
 	sep = (char *)malloc(sizeof(char) * (len + 1));
 	if (!sep)
 		return (0);
-	i = 0;
-	while (i < len)
-	{
+	i = -1;
+	while (i++ < len)//ceck
 		sep[i] = data->input[index + i];
-		i++;
-	}
 	sep[i] = '\0';
 	temp = add_token(data->tokens, &sep, type, DEFAULT);
 	if (!temp)

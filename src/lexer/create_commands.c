@@ -12,6 +12,26 @@
 
 #include "minishell.h"
 
+static int	parse(t_data *data, t_token **token)
+{
+	int	status;
+
+	status = 0;
+	if ((*token)->type == WORD || (*token)->type == ENV)
+		status = parse_word(&data->commands, token);
+	else if ((*token)->type == PIPE)
+		status = parse_pipe(&data->commands, token);
+	else if ((*token)->type == INPUT)
+		status = parse_input(&data->commands, token);
+	else if ((*token)->type == TRUNC)
+		status = parse_trunc(&data->commands, token);
+	else if ((*token)->type == APPEND)
+		status = parse_append(&data->commands, token);
+	else if ((*token)->type == HEREDOC)
+		status = parse_heredoc(data, &data->commands, token);
+	return (status);
+}
+
 int	create_commands(t_data *data)
 {
 	t_token	*temp;
@@ -25,19 +45,8 @@ int	create_commands(t_data *data)
 			data->commands = add_command(data->commands, empty_command());
 		if (!data->commands)
 			return (-1);
-		if (temp->type == WORD || temp->type == ENV)
-			status = parse_word(&data->commands, &temp);
-		else if (temp->type == PIPE)
-			status = parse_pipe(&data->commands, &temp);
-		else if (temp->type == INPUT)
-			status = parse_input(&data->commands, &temp);
-		else if (temp->type == TRUNC)
-			status = parse_trunc(&data->commands, &temp);
-		else if (temp->type == APPEND)
-			status = parse_append(&data->commands, &temp);
-		else if (temp->type == HEREDOC)
-			status = parse_heredoc(data, &data->commands, &temp);
-		else if (temp->type == END)
+		status = parse(data, &temp);
+		if (temp->type == END)
 			break ;
 		if (status < 1)
 			return (status);

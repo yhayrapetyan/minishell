@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:09:41 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/21 18:53:19 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/24 13:44:05 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	open_append(t_io_fds *io, t_token *token)
 	io->outfile = ft_strdup(token->content);
 	if (!io->outfile)
 		return (-1);
-	if (token->ambiguous == 1 && (io->outfile[0] == '\0' || !is_valid_filename(io->outfile)))
+	if (token->ambiguous == 1 && \
+		(io->outfile[0] == '\0' || !is_valid_filename(io->outfile)))
 	{
 		if (!parse_err(token->orig_content, AMBIGOUS_REDIR_ERR))
 			return (-1);
@@ -39,7 +40,7 @@ int	parse_append(t_command **commands, t_token **tokens)
 {
 	t_token		*tmp;
 	t_command	*lst_cmd;
-	int 		status;
+	int			status;
 
 	tmp = *tokens;
 	lst_cmd = get_last_command(*commands);

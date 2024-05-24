@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:04:18 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/21 14:12:21 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/24 13:42:18 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	is_input_empty(t_data *data)
  * */
 int	lexer(t_data *data)
 {
-	int status;
+	int	status;
 
 	if (data->input == NULL)
 		return (-4);
@@ -64,7 +64,7 @@ int	lexer(t_data *data)
 	status = create_commands(data);
 	if (status < 1)
 		return (status);
-//	print_tokens(data);
-//	print_commands(data);
+	print_tokens(data);
+	print_commands(data);
 	return (1);
 }

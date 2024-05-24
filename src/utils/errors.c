@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/24 13:55:47 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/24 13:55:47 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	ft_error(char *message, int status)
@@ -10,7 +22,7 @@ void	ft_error(char *message, int status)
 	exit(status);
 }
 
-int parse_err(char *orig_name, char *err_message)
+int	parse_err(char *orig_name, char *err_message)
 {
 	char	*temp;
 	char	*message;

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   arr_join.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/24 13:13:44 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/24 13:13:44 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static int swap(char **tmp,char **str, char ***arr)
+static int	swap(char **tmp, char **str, char ***arr)
 {
 	if (!*tmp)
 	{
@@ -17,7 +29,7 @@ char	*arr_join(char ***arr)
 {
 	char	*tmp;
 	char	*res;
-	int 	i;
+	int		i;
 
 	i = 1;
 	res = ft_strdup((*arr)[0]);

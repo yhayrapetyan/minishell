@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:28:41 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/21 18:06:07 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/24 13:48:11 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	open_trunc(t_io_fds *io, t_token *token)
 	io->outfile = ft_strdup(token->content);
 	if (!io->outfile)
 		return (-1);
-	if (token->ambiguous == 1 && (io->outfile[0] == '\0' || !is_valid_filename(io->outfile)))
+	if (token->ambiguous == 1 && \
+		(io->outfile[0] == '\0' || !is_valid_filename(io->outfile)))
 	{
 		if (!parse_err(token->orig_content, AMBIGOUS_REDIR_ERR))
 			return (-1);
@@ -32,7 +33,7 @@ static int	open_trunc(t_io_fds *io, t_token *token)
 			return (-1);
 		return (-7);
 	}
-	 return (1);
+	return (1);
 }
 
 
@@ -40,7 +41,7 @@ int	parse_trunc(t_command **commands, t_token **tokens)
 {
 	t_command	*lst_cmd;
 	t_token		*tmp;
-	int 		status;
+	int			status;
 
 	lst_cmd = get_last_command(*commands);
 	tmp = *tokens;

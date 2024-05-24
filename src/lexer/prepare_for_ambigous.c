@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   prepare_for_ambigous.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/24 13:41:03 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/24 13:41:03 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static int is_redirection(t_token *token)
+static int	is_redirection(t_token *token)
 {
 	if (token->type == INPUT || token->type == TRUNC)
 		return (1);
@@ -9,9 +21,9 @@ static int is_redirection(t_token *token)
 	return (0);
 }
 
-static int in_dqoutes(char *str)
+static int	in_dqoutes(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -25,7 +37,7 @@ static int in_dqoutes(char *str)
 	return (0);
 }
 
-int prepare_for_ambiguous(t_data *data)
+int	prepare_for_ambiguous(t_data *data)
 {
 	t_token	*tmp;
 

@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:03:38 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/21 20:44:56 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/24 12:49:32 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int			parse_input(t_command **commands, t_token **tokens);
 int			parse_trunc(t_command **commands, t_token **tokens);
 int			parse_word(t_command **commands, t_token **tokens);
 int			parse_pipe(t_command **commands, t_token **tokens);
-int 		read_heredoc(t_io_fds *io, t_data *data);
+int			read_heredoc(t_io_fds *io, t_data *data);
 int			remove_old_ref(t_io_fds *io, int flag);
-int 		is_valid_filename(char *str);
+int			is_valid_filename(char *str);
 
 #endif

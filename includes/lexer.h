@@ -91,11 +91,10 @@ void		*clean_data(t_data *data);//need to move
 
 /* LEXER */
 int			check_separators_consecutive(t_token *tokens);
-int 		prepare_for_ambiguous(t_data *data);
+int			prepare_for_ambiguous(t_data *data);
 int			remove_quotes(t_token **tokens);
 int			create_commands(t_data *data);
 int			handle_quotes(t_data *data);
 int			lexer(t_data *data);
-
 
 #endif

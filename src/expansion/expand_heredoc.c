@@ -1,12 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_heredoc.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/24 12:50:25 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/24 12:50:25 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /* not proud of all of this above */
-static t_token	*get_helper_token(t_data *data, char *str, int *index, char **tmp_content)
+static t_token	*get_helper_token(t_data *data, char *str, int *index,
+	char **tmp_content)
 {
 	char	*var_value;
-	t_token *tmp_token;
-	int 	status;
-	t_data tmp_data;
+	t_token	*tmp_token;
+	int		status;
+	t_data	tmp_data;
 
 	tmp_token = NULL;
 	tmp_token = add_token(tmp_token, tmp_content, ENV, DEFAULT);
@@ -32,7 +45,7 @@ static t_token	*get_helper_token(t_data *data, char *str, int *index, char **tmp
 static char	*new_heredoc_content(t_data *data, char *str, int *index)
 {
 	char	*res;
-	t_token *tmp_token;
+	t_token	*tmp_token;
 	char	*tmp_content;
 
 	tmp_content = ft_strdup(str);
@@ -51,9 +64,9 @@ static char	*new_heredoc_content(t_data *data, char *str, int *index)
 
 static char	*expand(t_data *data, char *str)
 {
-	int 	i;
+	int		i;
 	char	*temp;
-	int 	flag;
+	int		flag;
 
 	i = 0;
 	flag = 0;

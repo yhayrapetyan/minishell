@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_heredoc_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/24 13:44:22 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/24 13:44:22 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static int validate_line(t_data *data, char **line, t_io_fds *io)
+static int	validate_line(t_data *data, char **line, t_io_fds *io)
 {
 	char	*tmp;
 
@@ -22,15 +34,19 @@ static int validate_line(t_data *data, char **line, t_io_fds *io)
 	return (1);
 }
 
-int read_heredoc(t_io_fds *io, t_data *data)
+int	read_heredoc(t_io_fds *io, t_data *data)
 {
-	int 	tmp_fd;
+	int		tmp_fd;
 	char	*line;
-	int 	status;
+	int		status;
 
 	tmp_fd = open(io->infile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-//	if (tmp_fd == -1)
-//		open_err
+	if (tmp_fd == -1)
+	{
+		if (!parse_err(io->infile, strerror(errno)))
+			return (-1);
+		return (-7);
+	}
 	while (1)
 	{
 //		line = readline(">");
