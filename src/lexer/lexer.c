@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:04:18 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/24 19:18:59 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/24 19:33:46 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,12 @@ int	lexer(t_data *data)
 
 	if (data->input == NULL)
 		return (-4);
-	if (is_input_empty(data))//if input = '\0' someone throw error?
+	if (is_input_empty(data))
 		return (1);
 //	add_history(data->input);
 	status = tokenization(data);
 	if (status < 1)
 		return (status);
-//	if (data->tokens->type != END)
-//		return (-11);//idk steal about this
 	update_env_token_type(&data->tokens);
 	prepare_for_ambiguous(data);
 	status = expand_variables(data);

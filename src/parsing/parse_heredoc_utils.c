@@ -27,8 +27,8 @@ static int	validate_line(t_data *data, char **line, t_io_fds *io)
 	{
 		tmp = expand_heredoc(data, *line);
 		if (!tmp)
-			return (-1);//need to check line leaks
-		free(*line);//careful
+			return (-1);
+		free(*line);
 		*line = tmp;
 	}
 	return (1);

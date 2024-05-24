@@ -60,7 +60,7 @@ static char	*get_memory(t_token **tokens, char *var_value, int index)
 	char	*new_content;
 
 	len = ft_strlen((*tokens)->content) - \
-		get_var_key_len((*tokens)->content + index) + ft_strlen(var_value);//need to check range
+		get_var_key_len((*tokens)->content + index) + ft_strlen(var_value);
 	new_content = (char *)malloc(sizeof(char) * (len + 1));
 	return (new_content);
 }
