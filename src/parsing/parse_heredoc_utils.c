@@ -17,10 +17,7 @@ static int	validate_line(t_data *data, char **line, t_io_fds *io)
 	char	*tmp;
 
 	if (!*line)
-	{
-//		error_msg here-document delimited by end-of-file: wanted
-		return (-7);
-	}
+		return (-4);
 	if (ft_strcmp(*line, io->delimiter) == 0)
 		return (0);
 	if (io->delim_in_quotes == 0 && ft_strchr(*line, '$'))

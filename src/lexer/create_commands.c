@@ -61,7 +61,7 @@ int	create_commands(t_data *data)
 		status = parse(data, &temp);
 		if (temp->type == END)
 			break ;
-		if (res == 1 && status < 1)
+		if (res == 1 && status < 1)//if malloc err return if open error wait
 			res = status;
 	}
 	return (res);
