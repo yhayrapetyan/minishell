@@ -64,6 +64,7 @@ typedef struct s_command
 	char				*path;
 	char				**args;
 	char				*err_message;
+	int					err_type;
 //	bool				pipe_output;
 //	int					*pipe_fd;
 	t_io_fds			*io_fds;

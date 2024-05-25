@@ -31,15 +31,16 @@ static int	open_trunc(t_io_fds *io, t_token *token, t_command *cmd)
 		cmd->err_message = parse_err(token->orig_content, AMBIGOUS_REDIR_ERR);
 		if (!cmd->err_message)
 			return (-1);
+		cmd->err_type = -6;
 		return (-6);
 	}
 	io->fd_out = open(io->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (io->fd_out == -1)
 	{
 		cmd->err_message = parse_err(io->infile, strerror(errno));
-		printf("error = %s\n", cmd->err_message);
 		if (!cmd->err_message)
 			return (-1);
+		cmd->err_type = -7;
 		return (-7);
 	}
 	return (1);

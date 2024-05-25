@@ -39,21 +39,23 @@ static int	get_heredoc(t_io_fds *io, t_token *tmp)
 	return (1);
 }
 
-static int handle_error(t_data *data, t_io_fds *io, t_token *tmp)
+static int handle_error(t_data *data, t_io_fds *io, t_token *tmp, t_command *lst_cmd)
 {
 	int status ;
 
 	if (!get_heredoc(io, tmp))
 		return (-1);
-	status = read_heredoc(io, data);
-	if (status < 0)//need to check it is allocation fault or what and if necessary unlink
-	{
-		io->fd_in = -1;
-		return (status);
-	}
+	status = read_heredoc(io, data, lst_cmd);
 	unlink(io->infile);
 	io->fd_in = -1;
-	return (1);
+	return (status);
+//	if (status < 0)//need to check it is allocation fault or what and if necessary unlink
+//	{
+//		io->fd_in = -1;
+//		return (status);
+//	}
+//
+//	return (1);
 }
 
 static int handle_default(t_data *data, t_io_fds *io, t_token *tmp, t_command *lst_cmd)
@@ -62,7 +64,7 @@ static int handle_default(t_data *data, t_io_fds *io, t_token *tmp, t_command *l
 
 	if (!get_heredoc(io, tmp))
 		return (-1);
-	status = read_heredoc(io, data);
+	status = read_heredoc(io, data, lst_cmd);
 	if (status < 0)//need to check it is allocation fault or what
 	{
 		io->fd_in = -1;
@@ -71,10 +73,12 @@ static int handle_default(t_data *data, t_io_fds *io, t_token *tmp, t_command *l
 	else
 	{
 		io->fd_in = open(io->infile, O_RDONLY);
-		if (io->fd_in == -1) {
+		if (io->fd_in == -1)
+		{
 			lst_cmd->err_message = parse_err(io->infile, strerror(errno));
 			if (!lst_cmd->err_message)
 				return (-1);
+			lst_cmd->err_type = -7;
 			return (-7);
 		}
 	}
@@ -100,7 +104,7 @@ int	parse_heredoc(t_data *data, t_command **commands, t_token **tokens)
 		return (-1);
 	io = lst_cmd->io_fds;
 	if (!remove_old_ref(io, 1))
-		status = handle_error(data, io, tmp);
+		status = handle_error(data, io, tmp, lst_cmd);
 	else
 		status = handle_default(data, io, tmp, lst_cmd);
 	if (status < 1)//maybe after ->next

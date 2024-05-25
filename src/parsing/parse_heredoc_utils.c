@@ -17,7 +17,6 @@
 *	0 => break
 *	-1 => malloc err
 *   -4 => readline err
-*	-7 => open err
 */
 static int	validate_line(t_data *data, char **line, t_io_fds *io)
 {
@@ -44,7 +43,7 @@ static int	validate_line(t_data *data, char **line, t_io_fds *io)
 *   -4 => readline err
 *	-7 => open err
 */
-int	read_heredoc(t_io_fds *io, t_data *data)
+int	read_heredoc(t_io_fds *io, t_data *data, t_command *cmd)
 {
 	int		tmp_fd;
 	char	*line;
@@ -53,8 +52,10 @@ int	read_heredoc(t_io_fds *io, t_data *data)
 	tmp_fd = open(io->infile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (tmp_fd == -1)
 	{
-		if (!parse_err(io->infile, strerror(errno)))//fix
+		cmd->err_message = parse_err(io->infile, strerror(errno));
+		if (!cmd->err_message)//fix
 			return (-1);
+		cmd->err_type = -7;
 		return (-7);
 	}
 	while (1)

@@ -12,10 +12,18 @@
 
 #include "minishell.h"
 
-void	print_errors(t_data *data)
+void	print_errors(t_data *data, int status)
 {
 	t_command *cmd;
 
+	if (status == -1)
+		ft_error(MALLOC_ERR, MALLOC_STAT);
+	else if (status == -2)
+		ft_error(DQUOTE_ERR, DQUOTE_STAT);
+	else if (status == -3)
+		ft_error(SQUOTE_ERR, SQUOTE_STAT);
+	else if (status == -4)
+		ft_error(RLINE_ERR, RLINE_STAT);
 	cmd = get_first_command(data->commands);
 	while (cmd)
 	{
@@ -28,6 +36,8 @@ void	print_errors(t_data *data)
 
 void	start_minishell(t_data *data)
 {
+	int status;
+
 	while (1)
 	{
 		// data->input = readline(MINISHELL);
@@ -40,13 +50,14 @@ void	start_minishell(t_data *data)
 			lst_exit_code++;
 			continue;
 		}
-		if (lexer(data) < 1)
+		status = lexer(data);
+		if (status < 1)
 		{
-			print_errors(data);
-			clean_data(data);
+			print_errors(data, status);
+//			clean_data(data);
 			// rl_clear_history();
-			get_next_line(-1);
-			exit(21);//need to handle error print
+//			get_next_line(-1);
+//			exit(21);//need to handle error print
 		}
 //		printf("%s\n", data->input);
 		free(data->input);

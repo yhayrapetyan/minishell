@@ -23,6 +23,7 @@ t_command	*empty_command(void)
 	command->path = NULL;
 	command->args = NULL;
 	command->err_message = NULL;
+	command->err_type = 0;
 //	command->pipe_output = 0;
 //	command->pipe_fd = 0;
 	command->io_fds = NULL;

@@ -31,6 +31,7 @@ static int	open_append(t_io_fds *io, t_token *token, t_command *cmd)
 		cmd->err_message = parse_err(token->orig_content, AMBIGOUS_REDIR_ERR);
 		if (!cmd->err_message)
 			return (-1);
+		cmd->err_type = -6;
 		return (-6);
 	}
 	io->fd_out = open(io->outfile, O_WRONLY | O_CREAT | O_APPEND, 0664);
@@ -39,6 +40,7 @@ static int	open_append(t_io_fds *io, t_token *token, t_command *cmd)
 		cmd->err_message = parse_err(io->infile, strerror(errno));
 		if (!cmd->err_message)
 			return (-1);
+		cmd->err_type = -7;
 		return (-7);
 	}
 	return (1);

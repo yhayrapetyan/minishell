@@ -12,6 +12,15 @@
 
 #include "minishell.h"
 
+/* returns
+ * 1 => success
+ * 0 => END token
+ * -1 => malloc_err
+ * -4 => readline_err
+ * -5 => syntax_err [separators_consecutive]
+ * -6 => ambigous redirect
+ * -7 => open err
+ * */
 static int	parse(t_data *data, t_token **token)
 {
 	int	status;
@@ -32,6 +41,14 @@ static int	parse(t_data *data, t_token **token)
 	return (status);
 }
 
+/* returns
+ *  1 => success
+ * -1 => malloc_err
+ * -4 => readline_err
+ * -5 => syntax_err [separators_consecutive]
+ * -6 => ambigous redirect
+ * -7 => open err
+ * */
 int	create_commands(t_data *data)
 {
 	t_token	*temp;
@@ -61,6 +78,8 @@ int	create_commands(t_data *data)
 		status = parse(data, &temp);
 		if (temp->type == END)
 			break ;
+		if (status == -1 || status == -4)
+			return (status);
 		if (res == 1 && status < 1)//if malloc err return if open error wait
 			res = status;
 	}
