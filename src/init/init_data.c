@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+int lst_exit_code = 0;
+
 void	init_data(t_data *data, char **env)
 {
 	data->env = ft_arrdup(env);//need to increment shell level or set to 1

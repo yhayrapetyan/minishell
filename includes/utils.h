@@ -39,6 +39,8 @@
 #  define MINISHELL RED"msh$"RESET_COLOR
 # endif
 
+extern int	lst_exit_code;
+
 /* UTILS */
 t_command	*add_command(t_command *old_command, t_command *new_command);
 t_command	*get_first_command(t_command *command);

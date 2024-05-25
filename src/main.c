@@ -21,6 +21,11 @@ void	start_minishell(t_data *data)
 		data->input[ft_strlen(data->input) - 1] = '\0';//temp solution for need for checking memory leaks
 		if (ft_strcmp(data->input, "exit") == 0)
 			break ;
+		if (ft_strcmp(data->input, "add") == 0)
+		{
+			lst_exit_code++;
+			continue;
+		}
 		if (lexer(data) < 1)
 		{
 			clean_data(data);
