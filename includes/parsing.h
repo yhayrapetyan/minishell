@@ -23,6 +23,7 @@ int			parse_word(t_command **commands, t_token **tokens);
 int			parse_pipe(t_command **commands, t_token **tokens);
 int			read_heredoc(t_io_fds *io, t_data *data);
 int			remove_old_ref(t_io_fds *io, int flag);
+int			remove_old_ref_heredoc(t_io_fds *io);
 int			is_valid_filename(char *str);
 
 #endif

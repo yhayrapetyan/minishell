@@ -53,7 +53,7 @@ int	read_heredoc(t_io_fds *io, t_data *data)
 	tmp_fd = open(io->infile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (tmp_fd == -1)
 	{
-		if (!parse_err(io->infile, strerror(errno)))
+		if (!parse_err(io->infile, strerror(errno)))//fix
 			return (-1);
 		return (-7);
 	}

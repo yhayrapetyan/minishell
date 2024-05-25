@@ -18,7 +18,7 @@
 *	-6 => ambigous redir
 *	-7 => open err
 */
-static int	open_trunc(t_io_fds *io, t_token *token)
+static int	open_trunc(t_io_fds *io, t_token *token, t_command *cmd)
 {
 	if (!remove_old_ref(io, 0))
 		return (1);
@@ -28,14 +28,17 @@ static int	open_trunc(t_io_fds *io, t_token *token)
 	if (token->ambiguous == 1 && \
 		(io->outfile[0] == '\0' || !is_valid_filename(io->outfile)))
 	{
-		if (!parse_err(token->orig_content, AMBIGOUS_REDIR_ERR))
+		cmd->err_message = parse_err(token->orig_content, AMBIGOUS_REDIR_ERR);
+		if (!cmd->err_message)
 			return (-1);
 		return (-6);
 	}
 	io->fd_out = open(io->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (io->fd_out == -1)
 	{
-		if (!parse_err(io->infile, strerror(errno)))
+		cmd->err_message = parse_err(io->infile, strerror(errno));
+		printf("error = %s\n", cmd->err_message);
+		if (!cmd->err_message)
 			return (-1);
 		return (-7);
 	}
@@ -58,7 +61,7 @@ int	parse_trunc(t_command **commands, t_token **tokens)
 	tmp = *tokens;
 	if (!init_io_fds(lst_cmd))
 		return (-1);
-	status = open_trunc(lst_cmd->io_fds, tmp->next);
+	status = open_trunc(lst_cmd->io_fds, tmp->next, lst_cmd);
 	if (status < 1)
 		return (status);
 	if (tmp->next->next)

@@ -34,6 +34,7 @@ void	*clean_commands(t_command *commands)
 		tmp = commands->next;
 		free(commands->name);
 		free(commands->path);
+		free(commands->err_message);
 		free_arr(commands->args);
 		clean_io_fds(commands->io_fds);
 		free(commands->io_fds);

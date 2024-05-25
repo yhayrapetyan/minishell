@@ -18,7 +18,7 @@
 *	-6 => ambigous redir
 *	-7 => open err
 */
-static	int	open_infile(t_io_fds *io, t_token *token)
+static	int	open_infile(t_io_fds *io, t_token *token, t_command *cmd)
 {
 	if (!remove_old_ref(io, 1))
 		return (1);
@@ -28,14 +28,16 @@ static	int	open_infile(t_io_fds *io, t_token *token)
 	if (token->ambiguous == 1 && \
 		(io->infile[0] == '\0' || !is_valid_filename(io->infile)))
 	{
-		if (!parse_err(token->orig_content, AMBIGOUS_REDIR_ERR))
+		cmd->err_message = parse_err(token->orig_content, AMBIGOUS_REDIR_ERR);
+		if (!cmd->err_message)
 			return (-1);
 		return (-6);
 	}
 	io->fd_in = open(io->infile, O_RDONLY);
 	if (io->fd_in == -1)
 	{
-		if (!parse_err(io->infile, strerror(errno)))
+		cmd->err_message = parse_err(io->infile, strerror(errno));
+		if (!cmd->err_message)
 			return (-1);
 		return (-7);
 	}
@@ -58,7 +60,7 @@ int	parse_input(t_command **commands, t_token **tokens)
 	tmp = *tokens;
 	if (!init_io_fds(lst_cmd))
 		return (-1);
-	status = open_infile(lst_cmd->io_fds, tmp->next);
+	status = open_infile(lst_cmd->io_fds, tmp->next, lst_cmd);
 	if (status < 1)
 		return (status);
 	if (tmp->next->next)

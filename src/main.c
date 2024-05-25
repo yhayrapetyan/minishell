@@ -12,6 +12,20 @@
 
 #include "minishell.h"
 
+void	print_errors(t_data *data)
+{
+	t_command *cmd;
+
+	cmd = get_first_command(data->commands);
+	while (cmd)
+	{
+//		printf("%s", cmd->err_message);
+		if (cmd->err_message)
+			printf("%s\n", cmd->err_message);
+		cmd = cmd->next;
+	}
+}
+
 void	start_minishell(t_data *data)
 {
 	while (1)
@@ -28,6 +42,7 @@ void	start_minishell(t_data *data)
 		}
 		if (lexer(data) < 1)
 		{
+			print_errors(data);
 			clean_data(data);
 			// rl_clear_history();
 			get_next_line(-1);
