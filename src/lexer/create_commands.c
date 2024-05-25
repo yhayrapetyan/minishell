@@ -41,6 +41,31 @@ static int	parse(t_data *data, t_token **token)
 	return (status);
 }
 
+static int	handle_no_args(t_data *data)
+{
+	t_command *cmd;
+
+	if (!data->commands)
+		return (1);//maybe no
+	cmd = get_first_command(data->commands);
+	while (cmd && cmd->name)
+	{
+		if (!cmd->args)
+		{
+			cmd->args = malloc(sizeof(char *) * 2);
+			cmd->args[0] = ft_strdup(cmd->name);
+			if (!cmd->args)
+			{
+				free_arr(cmd->args);
+				return (-1);
+			}
+			cmd->args[1] = NULL;
+		}
+		cmd = cmd->next;
+	}
+	return (1);
+}
+
 /* returns
  *  1 => success
  * -1 => malloc_err
@@ -83,5 +108,8 @@ int	create_commands(t_data *data)
 		if (res == 1 && status < 1)//if malloc err return if open error wait
 			res = status;
 	}
+	status = handle_no_args(data);
+	if (status < 1)
+		return (status);
 	return (res);
 }
