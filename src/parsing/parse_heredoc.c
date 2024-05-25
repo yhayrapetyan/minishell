@@ -99,7 +99,7 @@ int	parse_heredoc(t_data *data, t_command **commands, t_token **tokens)
 	if (!init_io_fds(lst_cmd))
 		return (-1);
 	io = lst_cmd->io_fds;
-	if (!remove_old_ref_heredoc(io))
+	if (!remove_old_ref(io, 1))
 		status = handle_error(data, io, tmp);
 	else
 		status = handle_default(data, io, tmp, lst_cmd);
