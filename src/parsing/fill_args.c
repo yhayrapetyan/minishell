@@ -70,7 +70,9 @@ static char	**replace_args(t_token **tokens, t_command *lst_cmd,
 	temp = *tokens;
 	while (i < len)
 	{
-		new_args[i] = lst_cmd->args[i];
+		new_args[i] = ft_strdup(lst_cmd->args[i]);
+		if (!new_args[i])
+			return (free_arr(new_args));
 		i++;
 	}
 	while (temp->type == WORD || temp->type == ENV)
