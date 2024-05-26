@@ -124,6 +124,13 @@ int	add_args(t_token **tokens, t_command *lst_cmd)
 */
 int	fill_args(t_token **tokens, t_command *last_command)
 {
+	if (!ft_strcmp(last_cmd->name, "echo"))
+	{
+		if (!(last_cmd->args))
+			return (create_echo_args(token_node, last_cmd));
+		else
+			return (add_echo_args(token_node, last_cmd));
+	}
 	if (last_command && (!last_command->args))
 		return (create_args(tokens, last_command));
 	else

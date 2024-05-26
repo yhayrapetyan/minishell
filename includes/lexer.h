@@ -42,6 +42,7 @@ typedef struct s_token
 	t_state			state;
 	int				ambiguous;
 	int				delim_in_quotes;
+	int				join;
 	struct s_token	*next;
 	struct s_token	*prev;
 }	t_token;
@@ -54,8 +55,6 @@ typedef struct s_io_fds
 	int		delim_in_quotes;
 	int		fd_in;
 	int		fd_out;
-	// int		stdin_backup;
-	// int		stdout_backup;
 }	t_io_fds;
 
 typedef struct s_command

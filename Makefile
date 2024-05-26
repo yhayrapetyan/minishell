@@ -75,6 +75,8 @@ PARSING =	parse_word.c \
 			parse_heredoc.c \
 			parse_heredoc_utils.c \
 			is_valid_filename.c \
+			fill_echo_args_utils.c \
+			fill_echo_args.c
 
 HEADERS = 	minishell.h \
 			colors.h \

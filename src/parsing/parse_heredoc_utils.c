@@ -86,4 +86,3 @@ int	read_heredoc(t_io_fds *io, t_data *data, t_command *cmd)
 		return (status);
 	return (1);
 }
-

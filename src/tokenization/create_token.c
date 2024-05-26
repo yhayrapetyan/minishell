@@ -30,5 +30,6 @@ t_token	*create_token(char **content, int type, int state)
 	token->len = ft_strlen(*content);
 	token->ambiguous = 0;
 	token->delim_in_quotes = 0;
+	token->join = 0;
 	return (token);
 }
