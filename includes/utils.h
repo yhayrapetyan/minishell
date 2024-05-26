@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:40:16 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/24 12:49:42 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/26 12:45:26 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@
 #  define MINISHELL RED"msh$"RESET_COLOR
 # endif
 
-extern int	lst_exit_code;
+extern int	g_lst_exit_status;
 
 /* UTILS */
 t_command	*add_command(t_command *old_command, t_command *new_command);
 t_command	*get_first_command(t_command *command);
 t_command	*get_last_command(t_command *command);
 t_command	*empty_command(void);
-int			syntax_err(char *message, char *detail, int quotes);
+char		*syntax_err(char *message, char *detail, int quotes);
 char		*get_env_value(char **env, char *key);
 char		*parse_err(char *orig_name, char *message);
 int			get_env_index(char **env, char *key);

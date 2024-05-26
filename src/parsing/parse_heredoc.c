@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 20:41:27 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/24 20:17:49 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/26 12:54:19 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,25 @@ static int	get_heredoc(t_io_fds *io, t_token *tmp)
 	return (1);
 }
 
-static int handle_error(t_data *data, t_io_fds *io, t_token *tmp, t_command *lst_cmd)
+static int	handle_error(t_data *data, t_io_fds *io, t_token *tmp,
+	t_command *lst_cmd)
 {
-	int status ;
+	int	status ;
 
+	if (io->infile)
+		free(io->infile);
 	if (!get_heredoc(io, tmp))
 		return (-1);
 	status = read_heredoc(io, data, lst_cmd);
 	unlink(io->infile);
 	io->fd_in = -1;
 	return (status);
-//	if (status < 0)//need to check it is allocation fault or what and if necessary unlink
-//	{
-//		io->fd_in = -1;
-//		return (status);
-//	}
-//
-//	return (1);
 }
 
-static int handle_default(t_data *data, t_io_fds *io, t_token *tmp, t_command *lst_cmd)
+static int	handle_default(t_data *data, t_io_fds *io, t_token *tmp,
+	t_command *lst_cmd)
 {
-	int status;
+	int	status;
 
 	if (!get_heredoc(io, tmp))
 		return (-1);

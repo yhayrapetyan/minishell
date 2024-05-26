@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 12:31:03 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/24 16:28:29 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/26 12:47:30 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_errors(t_data *data, int status)
 {
-	t_command *cmd;
+	t_command	*cmd;
 
 	if (status == -1)
 		ft_error(MALLOC_ERR, MALLOC_STAT);
@@ -27,7 +27,6 @@ void	print_errors(t_data *data, int status)
 	cmd = get_first_command(data->commands);
 	while (cmd)
 	{
-//		printf("%s", cmd->err_message);
 		if (cmd->err_message)
 			printf("%s\n", cmd->err_message);
 		cmd = cmd->next;
@@ -36,7 +35,7 @@ void	print_errors(t_data *data, int status)
 
 void	start_minishell(t_data *data)
 {
-	int status;
+	int	status;
 
 	while (1)
 	{
@@ -47,8 +46,8 @@ void	start_minishell(t_data *data)
 			break ;
 		if (ft_strcmp(data->input, "add") == 0)
 		{
-			lst_exit_code++;
-			continue;
+			g_lst_exit_status++;
+			continue ;
 		}
 		status = lexer(data);
 		if (status < 1)

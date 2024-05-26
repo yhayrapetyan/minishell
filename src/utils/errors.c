@@ -29,46 +29,44 @@ char	*parse_err(char *orig_name, char *err_message)
 
 	temp = ft_strjoin(PROG_NAME, orig_name);
 	if (!temp)
-		return (0);
+		return (NULL);
 	message = ft_strjoin(temp, ": ");
 	free(temp);
 	if (!message)
-		return (0);
+		return (NULL);
 	temp = ft_strjoin(message, err_message);
 	free(message);
 	if (!temp)
-		return (0);
+		return (NULL);
 	return (temp);
 }
 
-int	syntax_err(char *message, char *detail, int quotes)
+/* check memory leaks*/
+char	*syntax_err(char *message, char *detail, int quotes)
 {
 	char	*error_msg;
 	char	*temp;
 
 	error_msg = ft_strjoin(PROG_NAME, message);
 	if (!error_msg)
-		return (-1);
+		return (NULL);
 	if (quotes)
 		temp = ft_strjoin(error_msg, " `");
 	else
 		temp = ft_strjoin(error_msg, ": ");
 	free(error_msg);
 	if (!temp)
-		return (-1);
+		return (NULL);
 	error_msg = temp;
 	temp = ft_strjoin(error_msg, detail);
 	free(error_msg);
 	if (!temp)
-		return (-1);
+		return (NULL);
 	error_msg = temp;
 	if (quotes)
 		temp = ft_strjoin(error_msg, "'");
 	free(error_msg);
 	if (!temp)
-		return (-1);
-	error_msg = temp;
-	printf("%s\n", error_msg);//need change to write in stderr_fileno
-	free(error_msg);
-	return (-5);
+		return (NULL);
+	return (temp);
 }

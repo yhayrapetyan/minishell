@@ -92,7 +92,7 @@ int			init_export(t_data *data);
 void		*clean_data(t_data *data);//need to move
 
 /* LEXER */
-int			check_separators_consecutive(t_token *tokens);
+int			check_separators_consecutive(t_token *tokens, t_command *cmd);
 int			prepare_for_ambiguous(t_data *data);
 int			remove_quotes(t_token **tokens);
 int			create_commands(t_data *data);

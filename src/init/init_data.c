@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int lst_exit_code = 0;
+int	g_lst_exit_status = 0;
 
 void	init_data(t_data *data, char **env)
 {

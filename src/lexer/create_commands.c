@@ -43,7 +43,7 @@ static int	parse(t_data *data, t_token **token)
 
 static int	handle_no_args(t_data *data)
 {
-	t_command *cmd;
+	t_command	*cmd;
 
 	if (!data->commands)
 		return (1);//maybe no
@@ -93,9 +93,13 @@ int	create_commands(t_data *data)
 			return (-1);
 		if (flag == 0)
 		{
-			status = check_separators_consecutive(temp);
+			status = check_separators_consecutive(temp, data->commands);
 			if (status < 1)
+			{
+				if (!data->commands->err_message)
+					return (-1);
 				return (status);
+			}
 			flag = 1;
 		}
 		if (temp->type == HEREDOC)
