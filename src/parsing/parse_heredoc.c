@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 20:41:27 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/26 13:54:43 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/26 14:04:18 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	parse_heredoc(t_data *data, t_command **commands, t_token **tokens)
 		status = handle_error(data, io, tmp, lst_cmd);
 	else
 		status = handle_default(data, io, tmp, lst_cmd);
-	if (status < 1)//maybe after ->next
+	if (status < 1)
 		return (status);
 	if (tmp->next->next)
 		*tokens = tmp->next->next;

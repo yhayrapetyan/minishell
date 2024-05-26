@@ -57,7 +57,7 @@ static int	loop(t_data *data, t_io_fds *io)
 	}
 	free(line);
 	get_next_line(-1);//delete
-	close(tmp_fd);//CLOSE ERR
+	close(tmp_fd);
 	return (status);
 }
 

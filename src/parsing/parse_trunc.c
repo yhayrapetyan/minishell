@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:28:41 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/24 20:21:39 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/26 14:01:55 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,3 @@ int	parse_trunc(t_command **commands, t_token **tokens)
 		*tokens = tmp->next;
 	return (1);
 }
-
