@@ -37,27 +37,11 @@ static int	validate_line(t_data *data, char **line, t_io_fds *io)
 	return (1);
 }
 
-/*
-*	1 => success
-*	-1 => malloc err
-*   -4 => readline err
-*	-7 => open err
-*/
-int	read_heredoc(t_io_fds *io, t_data *data, t_command *cmd)
+static int	loop(t_data *data, t_io_fds *io)
 {
-	int		tmp_fd;
-	char	*line;
 	int		status;
+	char	*line;
 
-	tmp_fd = open(io->infile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (tmp_fd == -1)
-	{
-		cmd->err_message = parse_err(io->infile, strerror(errno));
-		if (!cmd->err_message)//fix
-			return (-1);
-		cmd->err_type = -7;
-		return (-7);
-	}
 	while (1)
 	{
 //		line = readline(">");
@@ -67,14 +51,38 @@ int	read_heredoc(t_io_fds *io, t_data *data, t_command *cmd)
 		status = validate_line(data, &line, io);
 		if (status < 1)
 			break ;
-		write(tmp_fd, line, ft_strlen(line));//change to put_fd
+		write(tmp_fd, line, ft_strlen(line));
 		write(tmp_fd, "\n", 1);
 		free(line);
 	}
 	free(line);
 	get_next_line(-1);//delete
 	close(tmp_fd);//CLOSE ERR
-	if (status < 0)//maybe before close idk
+	return (status);
+}
+
+/*
+*	1 => success
+*	-1 => malloc err
+*   -4 => readline err
+*	-7 => open err
+*/
+int	read_heredoc(t_io_fds *io, t_data *data, t_command *cmd)
+{
+	int		tmp_fd;
+	int		status;
+
+	tmp_fd = open(io->infile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (tmp_fd == -1)
+	{
+		cmd->err_message = parse_err(io->infile, strerror(errno));
+		if (!cmd->err_message)
+			return (-1);
+		cmd->err_type = -7;
+		return (-7);
+	}
+	status = loop(data, io);
+	if (status < 0)
 		return (status);
 	return (1);
 }

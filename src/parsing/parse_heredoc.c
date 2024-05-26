@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 20:41:27 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/26 12:54:19 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/26 13:54:43 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	handle_default(t_data *data, t_io_fds *io, t_token *tmp,
 	if (!get_heredoc(io, tmp))
 		return (-1);
 	status = read_heredoc(io, data, lst_cmd);
-	if (status < 0)//need to check it is allocation fault or what
+	if (status < 0)
 	{
 		io->fd_in = -1;
 		return (status);

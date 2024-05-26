@@ -29,7 +29,7 @@ static int	invalid_consecutive(t_token *token)
 /*
  * returns
  * 1 => success
- * -1 => syntax err
+ * -5 => syntax err
  */
 int	check_separators_consecutive(t_token *tkn, t_command *cmd)
 {
