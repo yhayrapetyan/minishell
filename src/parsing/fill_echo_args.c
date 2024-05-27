@@ -27,7 +27,7 @@ int	create_echo_args(t_token **tokens, t_command *last_cmd)
 	i = 0;
 	last_cmd->args[i++] = ft_strdup(last_cmd->name);
 	if (!last_cmd->args[i - 1])
-		return (-1);
+		return (0);
 	while (tmp->type == WORD || tmp->type == ENV)
 	{
 		if (tmp->join == 1)

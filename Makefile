@@ -1,6 +1,4 @@
 SRC =		main.c \
-			get_path.c \
-			get_path_utils.c
 
 HELPERS = 	free_arr.c \
 			ft_arrdup.c \
@@ -8,6 +6,11 @@ HELPERS = 	free_arr.c \
 			strjoin_and_free.c \
 			is_white_space.c \
             arr_join.c
+
+EXECUTION = create_pipes.c \
+			execute.c \
+			get_path.c \
+			get_path_utils.c
 
 LIBFT = 	ft_strtrim.c \
 			ft_strlen.c \
@@ -80,7 +83,8 @@ HEADERS = 	minishell.h \
 			utils.h \
 			tokenization.h \
 			expansion.h \
-			lexer.h
+			lexer.h \
+			execution.h
 
 SRC_DIR = ./src/
 HELPERS_DIR = ./src/helpers/
@@ -91,6 +95,7 @@ TOKEN_DIR = ./src/tokenization/
 GNL_DIR = ./src/GNL/
 EXPANSION_DIR = ./src/expansion/
 PARSING_DIR = ./src/parsing/
+EXECUTION_DIR = ./src/execution/
 INC = ./includes/
 
 HEADERS := $(addprefix $(INC), $(HEADERS))
@@ -102,6 +107,7 @@ LEXER := $(addprefix $(LEXER_DIR), $(LEXER))
 TOKEN := $(addprefix $(TOKEN_DIR), $(TOKEN))
 EXPANSION := $(addprefix $(EXPANSION_DIR), $(EXPANSION))
 PARSING := $(addprefix $(PARSING_DIR), $(PARSING))
+EXECUTION := $(addprefix $(EXECUTION_DIR), $(EXECUTION))
 GNL := $(addprefix $(GNL_DIR), $(GNL))
 OBJS = $(SRC:.c=.o)
 
@@ -113,6 +119,7 @@ SRC += $(TOKEN)
 SRC += $(GNL)
 SRC += $(EXPANSION)
 SRC += $(PARSING)
+SRC += $(EXECUTION)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror

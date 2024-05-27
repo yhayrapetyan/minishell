@@ -64,8 +64,8 @@ typedef struct s_command
 	char				**args;
 	char				*err_message;
 	int					err_type;
-//	bool				pipe_output;
-//	int					*pipe_fd;
+	int					pipe_flag;
+	int					*pipe_fd;
 	t_io_fds			*io_fds;
 	struct s_command	*next;
 	struct s_command	*prev;
@@ -78,6 +78,7 @@ typedef struct s_data
 	char		*work_dir;
 	char		*old_work_dir;
 	char		*input;
+	pid_t		pid;//check
 	t_token		*tokens;
 	t_command	*commands;
 }	t_data;

@@ -24,13 +24,15 @@ void	print_errors(t_data *data, int status)
 		ft_error(SQUOTE_ERR, SQUOTE_STAT);
 	else if (status == -4)
 		ft_error(RLINE_ERR, RLINE_STAT);
-	cmd = get_first_command(data->commands);
-	while (cmd)
-	{
-		if (cmd->err_message)
-			printf("%s\n", cmd->err_message);
-		cmd = cmd->next;
-	}
+	(void)cmd;
+	(void)data;
+//	cmd = get_first_command(data->commands);
+//	while (cmd)
+//	{
+//		if (cmd->err_message)
+//			printf("%s\n", cmd->err_message);
+//		cmd = cmd->next;
+//	}
 }
 
 void	start_minishell(t_data *data)
@@ -59,13 +61,7 @@ void	start_minishell(t_data *data)
 //			exit(21);//need to handle error print
 		}
 //		printf("%s\n", data->input);
-		t_command *tmp = data->commands;
-		while (tmp)
-		{
-			tmp->path = get_path(data, tmp->name);
-			tmp = tmp->next;
-		}
-		print_commands(data);
+		g_lst_exit_status = execute(data);
 		free(data->input);
 		data->input = NULL;
 		clean_tokens(data->tokens);
