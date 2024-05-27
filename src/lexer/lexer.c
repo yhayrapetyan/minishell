@@ -59,7 +59,7 @@ int	lexer(t_data *data)
 	status = create_commands(data);
 	if (status < 1)
 		return (status);
-	print_tokens(data);
-	print_commands(data);
+//	print_tokens(data);
+//	print_commands(data);
 	return (1);
 }

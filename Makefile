@@ -1,4 +1,6 @@
-SRC =		main.c
+SRC =		main.c \
+			get_path.c \
+			get_path_utils.c
 
 HELPERS = 	free_arr.c \
 			ft_arrdup.c \

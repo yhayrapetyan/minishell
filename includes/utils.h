@@ -58,4 +58,9 @@ void		print_tokens(t_data *data);
 int			get_env_len(char **env);
 void		print_arr(char **arr);
 
+/* DELETE */
+char	*get_path(t_data *data,char *cmd);
+int is_builtin(char *cmd);
+int	is_relative_path(char *cmd_name);
+
 #endif

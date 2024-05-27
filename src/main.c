@@ -59,6 +59,13 @@ void	start_minishell(t_data *data)
 //			exit(21);//need to handle error print
 		}
 //		printf("%s\n", data->input);
+		t_command *tmp = data->commands;
+		while (tmp)
+		{
+			tmp->path = get_path(data, tmp->name);
+			tmp = tmp->next;
+		}
+		print_commands(data);
 		free(data->input);
 		data->input = NULL;
 		clean_tokens(data->tokens);
