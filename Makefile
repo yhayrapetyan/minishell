@@ -7,14 +7,6 @@ HELPERS = 	free_arr.c \
 			is_white_space.c \
             arr_join.c
 
-
-INIT =		clean_data.c \
-			fill_data_with_null.c \
-			init_data.c \
-			init_export.c \
-			init_workdir.c \
-			init_io_fds.c
-
 LIBFT = 	ft_strtrim.c \
 			ft_strlen.c \
 			ft_strdup.c \
@@ -36,7 +28,10 @@ UTILS =		env_utils.c \
 			command_utils.c \
 			clean_commands.c \
 			print_tokens.c \
-			errors.c
+			errors.c \
+			clean_data.c \
+			init.c \
+			init_export.c
 
 GNL =		get_next_line_utils.c \
 			get_next_line.c
@@ -57,13 +52,10 @@ EXPANSION =	expand_variables.c \
             update_env_token_type.c \
             expand_heredoc.c
 
-TOKEN =		add_token.c \
-            clean_tokens.c \
-            create_token.c \
-            get_first_token.c \
-            save_token.c \
-            tokenization.c \
+TOKEN =		tokenization.c \
             tokenization_utils.c \
+            save_token.c \
+            token_list_utils.c
 
 PARSING =	parse_word.c \
 			parse_pipe.c \
@@ -97,7 +89,6 @@ TOKEN_DIR = ./src/tokenization/
 GNL_DIR = ./src/GNL/
 EXPANSION_DIR = ./src/expansion/
 PARSING_DIR = ./src/parsing/
-INIT_DIR = ./src/init/
 INC = ./includes/
 
 HEADERS := $(addprefix $(INC), $(HEADERS))
@@ -109,7 +100,6 @@ LEXER := $(addprefix $(LEXER_DIR), $(LEXER))
 TOKEN := $(addprefix $(TOKEN_DIR), $(TOKEN))
 EXPANSION := $(addprefix $(EXPANSION_DIR), $(EXPANSION))
 PARSING := $(addprefix $(PARSING_DIR), $(PARSING))
-INIT := $(addprefix $(INIT_DIR), $(INIT))
 GNL := $(addprefix $(GNL_DIR), $(GNL))
 OBJS = $(SRC:.c=.o)
 
@@ -121,7 +111,6 @@ SRC += $(TOKEN)
 SRC += $(GNL)
 SRC += $(EXPANSION)
 SRC += $(PARSING)
-SRC += $(INIT)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror

@@ -37,7 +37,7 @@ static int	validate_line(t_data *data, char **line, t_io_fds *io)
 	return (1);
 }
 
-static int	loop(t_data *data, t_io_fds *io)
+static int	loop(t_data *data, t_io_fds *io, int tmp_fd)
 {
 	int		status;
 	char	*line;
@@ -81,7 +81,7 @@ int	read_heredoc(t_io_fds *io, t_data *data, t_command *cmd)
 		cmd->err_type = -7;
 		return (-7);
 	}
-	status = loop(data, io);
+	status = loop(data, io, tmp_fd);
 	if (status < 0)
 		return (status);
 	return (1);
