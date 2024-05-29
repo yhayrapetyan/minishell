@@ -3,7 +3,7 @@
 static int dup2_and_close(int fd1, int fd2)
 {
 	if (dup2(fd1, fd2) == -1)
-		return (-10);//need to change
+		return (-10);
 	close(fd1);
 	return (1);
 }

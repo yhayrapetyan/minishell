@@ -55,6 +55,7 @@ int			get_env_index(char **env, char *key);
 void		*clean_commands(t_command *commands);
 void		ft_error(char *message, int status);
 void		print_commands(t_data *data);
+void		system_errors(int status);
 void		print_tokens(t_data *data);
 int			get_env_len(char **env);
 void		print_arr(char **arr);

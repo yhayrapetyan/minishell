@@ -25,29 +25,6 @@
  * -10	=> dup2 err
  * -11 => waitpid err
  * */
-void	print_errors(t_data *data, int status)
-{
-	t_command	*cmd;
-
-	if (status == -1)
-		ft_error(MALLOC_ERR, MALLOC_STAT);
-	else if (status == -2)
-		ft_error(DQUOTE_ERR, DQUOTE_STAT);
-	else if (status == -3)
-		ft_error(SQUOTE_ERR, SQUOTE_STAT);
-	else if (status == -4)
-		ft_error(RLINE_ERR, RLINE_STAT);
-	(void)cmd;
-	(void)data;
-//	cmd = get_first_command(data->commands);
-//	while (cmd)
-//	{
-//		if (cmd->err_message)
-//			printf("%s\n", cmd->err_message);
-//		cmd = cmd->next;
-//	}
-}
-
 void	start_minishell(t_data *data)
 {
 	int	status;
@@ -60,9 +37,9 @@ void	start_minishell(t_data *data)
 		if (ft_strcmp(data->input, "exit") == 0)
 			break ;
 		status = lexer(data);
-		if (status < 1)
+		if (status > -5 && status < 0)
 		{
-			print_errors(data, status);
+			system_errors(status);
 //			clean_data(data);
 			// rl_clear_history();
 //			get_next_line(-1);
@@ -70,6 +47,9 @@ void	start_minishell(t_data *data)
 		}
 //		printf("%s\n", data->input);
 		g_lst_exit_status = execute(data);
+		printf("exit status = %d\n", g_lst_exit_status);
+		if (g_lst_exit_status < 0)
+			system_errors(g_lst_exit_status);
 		free(data->input);
 		data->input = NULL;
 		clean_tokens(data->tokens);

@@ -22,6 +22,35 @@ void	ft_error(char *message, int status)
 	exit(status);
 }
 
+/*
+ * -1 	=> malloc_err
+ * -2 	=> dquote_err
+ * -3 	=> squote_err
+ * -4 	=> readline_err
+ * -5 	=> syntax_err [separators_consecutive]
+ * -6 	=> ambigous redirect
+ * -7 	=> open err
+ * -8 	=> pipe err
+ * -9 	=> fork err
+ * -10	=> dup2 err
+ * -11 => waitpid err
+ * */
+void	system_errors(int status)
+{
+	if (status == -1)
+		ft_error(MALLOC_ERR, MALLOC_STAT);
+	else if (status == -2)
+		ft_error(DQUOTE_ERR, DQUOTE_STAT);
+	else if (status == -3)
+		ft_error(SQUOTE_ERR, SQUOTE_STAT);
+	else if (status == -4)
+		ft_error(RLINE_ERR, RLINE_STAT);
+	else if (status == -8)
+		ft_error(PIPE_CREATE_ERR, PIPE_CREATE_STAT);
+	else if (status == -9)
+		ft_error(FORK_CREATE_ERR, FORK_CREATE_STAT);
+}
+
 char	*parse_err(char *orig_name, char *err_message)
 {
 	char	*temp;
