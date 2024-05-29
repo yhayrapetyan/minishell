@@ -20,16 +20,12 @@ static int handle_pipe_fds(t_command *cmd)
 		if (status < 1)
 			return (status);
 	}
-	else if (!cmd->next && cmd->prev)
-	{
-		close(cmd->pipe_fd[1]);
-		status = dup2_and_close(cmd->pipe_fd[0], STDIN_FILENO);
-		if (status < 1)
-			return (status);
-	}
 	else
 	{
-		status = dup2_and_close(cmd->pipe_fd[0], STDIN_FILENO);
+		close(cmd->prev->pipe_fd[1]);
+		close(cmd->pipe_fd[0]);
+//		close(cmd->prev->pipe_fd[0]);// if rm this line data transfer but yes | yes | head fail
+		status = dup2_and_close(cmd->prev->pipe_fd[0], STDIN_FILENO);//cmd->prev
 		if (status < 1)
 			return (status);
 		status = dup2_and_close(cmd->pipe_fd[1], STDOUT_FILENO);
@@ -70,5 +66,12 @@ int handle_descriptors(t_command *cmd)
 	}
 	else if (cmd->pipe_fd)
 		status = handle_pipe_fds(cmd);
+	else if (cmd->prev && cmd->prev->pipe_flag == 1)
+	{
+		close(cmd->prev->pipe_fd[1]);
+		status = dup2_and_close(cmd->prev->pipe_fd[0], STDIN_FILENO);
+		if (status < 1)
+			return (status);
+	}
 	return (status);
 }

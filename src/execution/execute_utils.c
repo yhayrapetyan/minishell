@@ -8,7 +8,8 @@ int create_pipes(t_data *data)
 	tmp_cmd = get_first_command(data->commands);
 	while (tmp_cmd)
 	{
-		if (tmp_cmd->pipe_flag == 1 || (tmp_cmd->prev != NULL  && tmp_cmd->prev->pipe_flag == 1))
+		// || (tmp_cmd->prev != NULL  && tmp_cmd->prev->pipe_flag == 1))
+		if (tmp_cmd->pipe_flag == 1)
 		{
 			fd = malloc(sizeof(int) * 2);
 			if (!fd)
@@ -24,9 +25,20 @@ int create_pipes(t_data *data)
 
 static int	wait_for_childes(t_data *data)
 {
-	int i;
-	int status;
+	int 		i;
+	int 		status;
+	t_command	*cmd;
 
+	cmd = get_first_command(data->commands);
+	while (cmd)
+	{
+		if (cmd->pipe_fd)
+		{
+			close(cmd->pipe_fd[0]);
+			close(cmd->pipe_fd[1]);
+		}
+		cmd = cmd->next;
+	}
 	i = 0;
 	while (i < data->commands_count)
 	{
@@ -62,24 +74,10 @@ static void	do_parent_staff(t_command *cmd)
 {
 	if (cmd->is_input_heredoc)
 		unlink(cmd->io_fds->infile);
-	if (cmd->pipe_fd)
+	if (cmd->prev)
 	{
-		if (!cmd->prev && cmd->next)
-		{
-			close(cmd->pipe_fd[0]);
-//			dup2(cmd->pipe_fd[1], STDOUT_FILENO);
-
-		}
-		else if (!cmd->next && cmd->prev)
-		{
-			close(cmd->pipe_fd[1]);
-//			dup2(cmd->pipe_fd[0], STDIN_FILENO);
-		}
-		else
-		{
-			close(cmd->pipe_fd[0]);
-			close(cmd->pipe_fd[1]);
-		}
+		close(cmd->prev->pipe_fd[0]);
+		close(cmd->prev->pipe_fd[1]);
 	}
 }
 

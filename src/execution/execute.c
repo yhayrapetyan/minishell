@@ -58,6 +58,7 @@ int execute(t_data *data)
 
 	if (!data->commands)
 		return (0);
+	data->commands = get_first_command(data->commands);
 	status = create_pipes(data);
 	if (status < 1)
 		return (status);
