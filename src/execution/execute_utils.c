@@ -58,6 +58,17 @@ static int allocate_childes_pid(t_data *data)
 	return (1);
 }
 
+static void	do_parent_staff(t_command *cmd)
+{
+	if (cmd->is_input_heredoc)
+		unlink(cmd->io_fds->infile);
+	if (cmd->pipe_fd)
+	{
+		close(cmd->pipe_fd[1]);
+		close(cmd->pipe_fd[0]);
+	}
+}
+
 int create_processes(t_data *data)
 {
 	t_command	*cmd;
@@ -76,13 +87,7 @@ int create_processes(t_data *data)
 		if (data->pid == 0)
 			execute_command(data, cmd);
 		else
-		{
-			if (cmd->pipe_fd)
-			{
-				close(cmd->pipe_fd[1]);
-				close(cmd->pipe_fd[0]);
-			}
-		}
+			do_parent_staff(cmd);
 		cmd = cmd->next;
 	}
 	return (wait_for_childes(data));

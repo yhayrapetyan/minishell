@@ -70,6 +70,7 @@ static int	handle_default(t_data *data, t_io_fds *io, t_token *tmp,
 	else
 	{
 		io->fd_in = open(io->infile, O_RDONLY);
+		lst_cmd->is_input_heredoc = 1;
 		if (io->fd_in == -1)
 		{
 			lst_cmd->err_message = parse_err(io->infile, strerror(errno));

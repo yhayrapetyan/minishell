@@ -65,6 +65,7 @@ typedef struct s_command
 	char				*err_message;
 	int					err_type;
 	int					pipe_flag;
+	int					is_input_heredoc;
 	int					*pipe_fd;
 	t_io_fds			*io_fds;
 	struct s_command	*next;
