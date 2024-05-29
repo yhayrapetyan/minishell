@@ -1,7 +1,6 @@
 #include "minishell.h"
 
-static
-int get_exit_status(int err_type)
+static int get_exit_status(int err_type)
 {
 	if (err_type == -5)
 		return (SYNTAX_STAT);
@@ -12,14 +11,28 @@ int get_exit_status(int err_type)
 	return (0);
 }
 
+/* idk how to call this function */
+static void	exit_helper(char *cmd_name, char *err_message)
+{
+	char	*err_msg;
+
+	err_msg = parse_err(cmd_name, err_message);
+	if (!err_msg)
+		exit (1);//fix
+	write(2, err_msg, ft_strlen(err_msg));
+	write(2, "\n", 1);
+	free(err_msg);
+	exit(CMD_NOT_FOUND_STAT);
+}
+
 int	execute_command(t_data *data, t_command *cmd)
 {
 	int		status;
-	char	*err_msg;
 
 	if (cmd->err_message)
 	{
-		printf("%s\n", cmd->err_message);//write(2,...)
+		write(2, cmd->err_message, ft_strlen(cmd->err_message));
+		write(2, "\n", 1);
 		exit(get_exit_status(cmd->err_type));
 	}
 	status = handle_descriptors(cmd);
@@ -29,21 +42,9 @@ int	execute_command(t_data *data, t_command *cmd)
 	if (status < 1)
 		exit(1);
 	if (cmd->path == NULL)
-	{
-		err_msg = parse_err(cmd->name, CMD_NOT_FOUND_ERR);
-		if (!err_msg)
-			exit (1);//fix
-		printf("%s", err_msg);//write(2, ...)
-		exit(CMD_NOT_FOUND_STAT);
-	}
+		exit_helper(cmd->name, CMD_NOT_FOUND_ERR);
 	if (execve(cmd->path, cmd->args, data->env) == -1)
-	{
-		err_msg = parse_err(cmd->name, CMD_NOT_FOUND_ERR);
-		if (!err_msg)
-			exit (1);//fix
-		printf("%s", err_msg);//write(2, ...)
-		exit(1);//fix
-	}
+		exit_helper(cmd->name, strerror(errno));
 	return (1);
 }
 

@@ -1,5 +1,27 @@
 #include "minishell.h"
 
+int create_pipes(t_data *data)
+{
+	int 		*fd;
+	t_command	*tmp_cmd;
+
+	tmp_cmd = data->commands;
+	while (tmp_cmd)
+	{
+		if (tmp_cmd->pipe_flag || (tmp_cmd->prev && tmp_cmd->prev->pipe_flag))
+		{
+			fd = malloc(sizeof(int) * 2);
+			if (!fd)
+				return (-1);
+			if (pipe(fd) == -1)
+				return (-8);
+			tmp_cmd->pipe_fd = fd;
+		}
+		tmp_cmd = tmp_cmd->next;
+	}
+	return (1);
+}
+
 static int	wait_for_childes(t_data *data)
 {
 	int i;
@@ -39,13 +61,11 @@ static int allocate_childes_pid(t_data *data)
 int create_processes(t_data *data)
 {
 	t_command	*cmd;
-	int 		status;
 	int 		i;
 
 	cmd = get_first_command(data->commands);
-	status = allocate_childes_pid(data);
-	if (status < 1)
-		return (status);
+	if (allocate_childes_pid(data) < 1)
+		return (-1);
 	i = 0;
 	while (data->pid != 0 && cmd)
 	{

@@ -7,8 +7,7 @@ HELPERS = 	free_arr.c \
 			is_white_space.c \
             arr_join.c
 
-EXECUTION = create_pipes.c \
-			execute.c \
+EXECUTION = execute.c \
 			get_path.c \
 			get_path_utils.c \
 			handle_descriptors.c \
@@ -38,7 +37,8 @@ UTILS =		env_utils.c \
 			errors.c \
 			clean_data.c \
 			init.c \
-			init_export.c
+			init_export.c \
+			start_minishell.c
 
 GNL =		get_next_line_utils.c \
 			get_next_line.c

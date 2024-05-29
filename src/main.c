@@ -12,53 +12,6 @@
 
 #include "minishell.h"
 
-/*
- * -1 	=> malloc_err
- * -2 	=> dquote_err
- * -3 	=> squote_err
- * -4 	=> readline_err
- * -5 	=> syntax_err [separators_consecutive]
- * -6 	=> ambigous redirect
- * -7 	=> open err
- * -8 	=> pipe err
- * -9 	=> fork err
- * -10	=> dup2 err
- * -11 => waitpid err
- * */
-void	start_minishell(t_data *data)
-{
-	int	status;
-
-	while (1)
-	{
-		// data->input = readline(MINISHELL);
-		data->input = get_next_line(0);
-		data->input[ft_strlen(data->input) - 1] = '\0';//temp solution for need for checking memory leaks
-		if (ft_strcmp(data->input, "exit") == 0)
-			break ;
-		status = lexer(data);
-		if (status > -5 && status < 0)
-		{
-			system_errors(status);
-//			clean_data(data);
-			// rl_clear_history();
-//			get_next_line(-1);
-//			exit(21);//need to handle error print
-		}
-//		printf("%s\n", data->input);
-		g_lst_exit_status = execute(data);
-		printf("exit status = %d\n", g_lst_exit_status);
-		if (g_lst_exit_status < 0)
-			system_errors(g_lst_exit_status);
-		free(data->input);
-		data->input = NULL;
-		clean_tokens(data->tokens);
-		clean_commands(data->commands);
-		data->tokens = NULL;
-		data->commands = NULL;
-	}
-}
-
 int	main(int ac, char **av, char **env)
 {
 	t_data	data;
@@ -66,7 +19,7 @@ int	main(int ac, char **av, char **env)
 	fill_data_with_null(&data);
 	init_data(&data, env);
 	start_minishell(&data);
-	get_next_line(-1);
+	get_next_line(-1);//delete
 	clean_data(&data);
 	system("leaks minishell");
 	(void)ac;
