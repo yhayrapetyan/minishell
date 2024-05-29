@@ -78,4 +78,5 @@ void	init_data(t_data *data, char **env)
 	}
 	data->childes_pid = NULL;
 	data->commands_count = 0;
+	data->pid = -1;
 }

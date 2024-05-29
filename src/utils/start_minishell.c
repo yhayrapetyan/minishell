@@ -3,11 +3,13 @@
 static void	clean_loop(t_data *data)
 {
 	free(data->input);
+	free(data->childes_pid);
 	clean_tokens(data->tokens);
 	clean_commands(data->commands);
 	data->input = NULL;
 	data->tokens = NULL;
 	data->commands = NULL;
+	data->childes_pid = NULL;
 }
 
 /*
@@ -33,7 +35,10 @@ void	start_minishell(t_data *data)
 		data->input = get_next_line(0);
 		data->input[ft_strlen(data->input) - 1] = '\0';//temp solution for need for checking memory leaks
 		if (ft_strcmp(data->input, "exit") == 0)
+		{
+			get_next_line(-1);
 			break ;
+		}
 		status = lexer(data);
 		if (status > -5 && status < 0)
 		{
@@ -42,7 +47,7 @@ void	start_minishell(t_data *data)
 		}
 //		printf("%s\n", data->input);
 		g_lst_exit_status = execute(data);
-		printf("exit status = %d\n", g_lst_exit_status);
+//		printf("exit status = %d\n", g_lst_exit_status);
 		if (g_lst_exit_status < 0)
 		{
 			clean_data(data);

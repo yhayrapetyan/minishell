@@ -22,7 +22,6 @@ static int check_builtins(char **builtins, char **our_builtins, char *cmd)
 		i++;
 	}
 	return (0);
-
 }
 
 /*

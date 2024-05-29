@@ -28,19 +28,23 @@ static void	exit_helper(char *cmd_name, char *err_message)
 int	execute_command(t_data *data, t_command *cmd)
 {
 	int		status;
+	int 	err_type;
 
 	if (cmd->err_message)
 	{
 		write(2, cmd->err_message, ft_strlen(cmd->err_message));
 		write(2, "\n", 1);
-		exit(get_exit_status(cmd->err_type));
+		err_type = cmd->err_type;
+		clean_data(data);
+		get_next_line(-1);//delete needed for valgrind
+		exit(get_exit_status(err_type));
 	}
 	status = handle_descriptors(cmd);
 	if (status < 1)
 		exit(1 );//fix
 	status = get_path(data, cmd);
 	if (status < 1)
-		exit(1);
+		exit(1);//fix
 	if (cmd->path == NULL)
 		exit_helper(cmd->name, CMD_NOT_FOUND_ERR);
 	if (execve(cmd->path, cmd->args, data->env) == -1)
