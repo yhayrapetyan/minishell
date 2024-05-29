@@ -10,7 +10,9 @@ HELPERS = 	free_arr.c \
 EXECUTION = create_pipes.c \
 			execute.c \
 			get_path.c \
-			get_path_utils.c
+			get_path_utils.c \
+			handle_descriptors.c \
+			execute_utils.c
 
 LIBFT = 	ft_strtrim.c \
 			ft_strlen.c \

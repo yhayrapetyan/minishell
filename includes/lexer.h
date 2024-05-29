@@ -78,7 +78,9 @@ typedef struct s_data
 	char		*work_dir;
 	char		*old_work_dir;
 	char		*input;
+	pid_t		*childes_pid;
 	pid_t		pid;//check
+	int			commands_count;
 	t_token		*tokens;
 	t_command	*commands;
 }	t_data;

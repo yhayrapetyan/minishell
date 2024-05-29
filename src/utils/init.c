@@ -76,4 +76,6 @@ void	init_data(t_data *data, char **env)
 		clean_data(data);
 		ft_error(WDIR_INIT_ERR, WDIR_INIT_STAT);
 	}
+	data->childes_pid = NULL;
+	data->commands_count = 0;
 }

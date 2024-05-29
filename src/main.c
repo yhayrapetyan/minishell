@@ -12,6 +12,19 @@
 
 #include "minishell.h"
 
+/*
+ * -1 	=> malloc_err
+ * -2 	=> dquote_err
+ * -3 	=> squote_err
+ * -4 	=> readline_err
+ * -5 	=> syntax_err [separators_consecutive]
+ * -6 	=> ambigous redirect
+ * -7 	=> open err
+ * -8 	=> pipe err
+ * -9 	=> fork err
+ * -10	=> dup2 err
+ * -11 => waitpid err
+ * */
 void	print_errors(t_data *data, int status)
 {
 	t_command	*cmd;
@@ -46,11 +59,6 @@ void	start_minishell(t_data *data)
 		data->input[ft_strlen(data->input) - 1] = '\0';//temp solution for need for checking memory leaks
 		if (ft_strcmp(data->input, "exit") == 0)
 			break ;
-		if (ft_strcmp(data->input, "add") == 0)
-		{
-			g_lst_exit_status++;
-			continue ;
-		}
 		status = lexer(data);
 		if (status < 1)
 		{

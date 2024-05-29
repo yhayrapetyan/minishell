@@ -19,6 +19,7 @@ void	*clean_data(t_data *data)
 	free(data->old_work_dir);
 	free(data->work_dir);
 	free(data->input);
+	free(data->childes_pid);
 	clean_tokens(data->tokens);
 	clean_commands(data->commands);
 	return (NULL);

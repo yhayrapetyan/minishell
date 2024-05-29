@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-char	*check_command_access(char **bin_paths, char *cmd)
+static int	check_command_access(char **bin_paths, t_command *cmd)
 {
 	char	*cmd_path;
 	char	*temp;
@@ -11,86 +11,91 @@ char	*check_command_access(char **bin_paths, char *cmd)
 	{
 		temp = ft_strjoin(bin_paths[i], "/");
 		if (temp == NULL)
-			return (NULL);//malloc err
-		cmd_path = ft_strjoin(temp,cmd);
+			return (-1);
+		cmd_path = ft_strjoin(temp,cmd->name);
 		free(temp);
 		if (cmd_path == NULL)
-			return (NULL);//malloc err
-		if (access(cmd_path, F_OK) == 0)// maybe we should also check permission
-			return (cmd_path);
+			return (-1);
+		if (access(cmd_path, F_OK) == 0)
+		{
+			cmd->path = cmd_path;
+			return (1);
+		}
 		free(cmd_path);
 		i++;
 	}
-	return (NULL);
+	return (1);
 }
 
-char	*get_bin_path(t_data *data, char *cmd)
+static int	get_bin_path(t_data *data, t_command *cmd)
 {
-	char	*command_path;
 	char	**bin_paths;
 	int		i;
+	int 	status;
 
 	i = get_env_index(data->env, "PATH");
 	bin_paths = ft_split(data->env[i] + 5, ':');
 	if (bin_paths == NULL)
-		return (NULL);//malloc err
-	command_path = check_command_access(bin_paths, cmd);
+		return (-1);
+	status = check_command_access(bin_paths, cmd);
 	free_arr(bin_paths);
-	return (command_path);
+	return (status);
 }
 
-char	*get_path_with_env(t_data *data, char *cmd)
+static int	get_path_with_env(t_data *data, t_command *cmd)
 {
-	char	*path;
+	int status;
 
-	path = NULL;
-	if (ft_strncmp(cmd, "./", 2) == 0 || ft_strncmp(cmd, "/", 1) == 0)
+	status = 1;
+	if (ft_strncmp(cmd->name, "./", 2) == 0 || ft_strncmp(cmd->name, "/", 1) == 0)
 	{
-		path = ft_strdup(cmd);
-		if (!path)
-			return (NULL);//malloc err
+		cmd->path = ft_strdup(cmd->name);
+		if (!cmd->path)
+			return (-1);
 	}
 	else
-		path = get_bin_path(data, cmd);
-	if (path == NULL && is_relative_path(cmd) && \
-		access(cmd, F_OK) == 0)
+		status = get_bin_path(data, cmd);
+	if (status < 1)
+		return (status);
+	if (cmd->path == NULL && is_relative_path(cmd->name) && \
+		access(cmd->name, F_OK) == 0)
 	{
-		path = ft_strdup(cmd);
-		if (!path)
-			return (NULL);//malloc err
+		cmd->path = ft_strdup(cmd->name);
+		if (!cmd->path)
+			return (-1);
 	}
-	return (path);
+	return (1);
 }
 
-char	*get_path(t_data *data, char *cmd)
+int	get_path(t_data *data, t_command *cmd)
 {
-	char	*path;
 	int 	status;
 
-	path = NULL;
-	status = is_builtin(cmd);
-	if (status == 1)
-		printf("OUR BUILTIN\n");//need to handle our builtin
-	else if (status == -1)
-		ft_error("NOT our problem :-)\n", 111);//need to change error handling
+	if (!cmd->name)
+		return (1);//fix
+//	status = is_builtin(cmd->name);
+//	if (status == 1)
+//		printf("OUR BUILTIN\n");//need to handle our builtin
+//	else if (status == -1)
+//		ft_error("NOT our problem :-)\n", 111);//need to change error handling
+	status = 1;
 	if (get_env_index(data->env, "PATH") != -1)
-		path = get_path_with_env(data, cmd);
+		status = get_path_with_env(data, cmd);
 	else
 	{
-		if ((ft_strncmp(cmd, "./", 2) == 0  || ft_strncmp(cmd, "/", 1) ) && \
-			access(cmd, F_OK) == 0)
+		if ((ft_strncmp(cmd->name, "./", 2) == 0  || ft_strncmp(cmd->name, "/", 1) ) && \
+			access(cmd->name, F_OK) == 0)
 		{
-			path = ft_strdup(cmd);
-			if (!path)
-				return (NULL);//malloc err
+			cmd->path = ft_strdup(cmd->name);
+			if (!cmd->path)
+				return (-1);
 		}
-		else if (access(cmd, F_OK) == 0)
+		else if (access(cmd->name, F_OK) == 0)
 		{
-			path = ft_strdup(cmd);
-			if (!path)
-				return (NULL);//malloc err
+			cmd->path = ft_strdup(cmd->name);
+			if (!cmd->path)
+				return (-1);
 		}
 	}
-	//need to check path null because it's not found or malloc err if not malloc err and path == NULL error => command not found
-	return (path);
+	return (status);
 }
