@@ -19,6 +19,17 @@ static int handle_pipe_fds(t_command *cmd)
 		status = dup2_and_close(cmd->pipe_fd[1], STDOUT_FILENO);
 		if (status < 1)
 			return (status);
+		t_command *temp = cmd;
+		cmd = get_first_command(cmd);
+		while (cmd)
+		{
+			if (cmd != temp && cmd->pipe_fd)
+			{
+				close(cmd->pipe_fd[0]);
+				close(cmd->pipe_fd[1]);
+			}
+			cmd = cmd->next;
+		}
 	}
 	else
 	{
@@ -31,6 +42,17 @@ static int handle_pipe_fds(t_command *cmd)
 		status = dup2_and_close(cmd->pipe_fd[1], STDOUT_FILENO);
 		if (status < 1)
 			return (status);
+		t_command *temp = cmd;
+		cmd = get_first_command(cmd);
+		while (cmd)
+		{
+			if (cmd != temp && cmd->pipe_fd)
+			{
+				close(cmd->pipe_fd[0]);
+				close(cmd->pipe_fd[1]);
+			}
+			cmd = cmd->next;
+		}
 	}
 	return (1);
 }
@@ -72,6 +94,17 @@ int handle_descriptors(t_command *cmd)
 		status = dup2_and_close(cmd->prev->pipe_fd[0], STDIN_FILENO);
 		if (status < 1)
 			return (status);
+		t_command *temp = cmd;
+		cmd = get_first_command(cmd);
+		while (cmd)
+		{
+			if (cmd != temp && cmd->pipe_fd)
+			{
+				close(cmd->pipe_fd[0]);
+				close(cmd->pipe_fd[1]);
+			}
+			cmd = cmd->next;
+		}
 	}
 	return (status);
 }

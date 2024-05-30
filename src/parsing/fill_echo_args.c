@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:33:08 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/26 14:43:53 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/30 20:05:24 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	create_echo_args(t_token **tokens, t_command *last_cmd)
 	return (1);
 }
 
-static char	**replace_echo_args(t_token **tokens, t_command *lst_cmd,
-							  char **new_args, int len)
+static char	**replace_echo_args(t_token **tokens, t_command *lst_cmd, \
+	char **new_args, int len)
 {
 	int		i;
 	t_token	*temp;
@@ -76,9 +76,9 @@ static char	**replace_echo_args(t_token **tokens, t_command *lst_cmd,
 
 int	add_echo_args(t_token **tokens, t_command *lst_cmd)
 {
-	t_token *tmp;
-	int 	nb_args;
-	int 	len;
+	t_token	*tmp;
+	int		nb_args;
+	int		len;
 	char	**new_args;
 
 	remove_empty_var(tokens);

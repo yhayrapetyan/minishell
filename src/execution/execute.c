@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/30 20:08:06 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/30 20:08:06 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static int get_exit_status(int err_type)
+static int	get_exit_status(int err_type)
 {
 	if (err_type == -5)
 		return (SYNTAX_STAT);
@@ -28,7 +40,7 @@ static void	exit_helper(char *cmd_name, char *err_message)
 int	execute_command(t_data *data, t_command *cmd)
 {
 	int		status;
-	int 	err_type;
+	int		err_type;
 
 	if (cmd->err_message)
 	{
@@ -52,7 +64,7 @@ int	execute_command(t_data *data, t_command *cmd)
 	return (1);
 }
 
-int execute(t_data *data)
+int	execute(t_data *data)
 {
 	int	status;
 

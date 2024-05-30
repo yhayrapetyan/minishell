@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_path_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/30 20:09:18 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/30 20:09:18 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static int check_builtins(char **builtins, char **our_builtins, char *cmd)
+static int	check_builtins(char **builtins, char **our_builtins, char *cmd)
 {
-	int 		i;
-	int 		j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (builtins[i])
@@ -28,8 +40,9 @@ static int check_builtins(char **builtins, char **our_builtins, char *cmd)
  *  1 => our_builtin
  *  -1 => other_builtin
  *  0 => not_builtin
+ * rm our_from
  */
-int is_builtin(char *cmd)
+int	is_builtin(char *cmd)
 {
 	char	*builtins[] = {
 			".", ":", "[", "alias", "bg", "bind", "break", "builtin",
@@ -45,6 +58,7 @@ int is_builtin(char *cmd)
 	char	*our_builtins[] = {
 			"echo", "pwd", "cd", "unset", "export", "env", "exit", NULL
 	};
+
 	return (check_builtins(builtins, our_builtins, cmd));
 }
 

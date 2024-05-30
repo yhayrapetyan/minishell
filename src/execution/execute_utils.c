@@ -1,14 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/30 20:06:35 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/30 20:06:35 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int create_pipes(t_data *data)
+int	create_pipes(t_data *data)
 {
-	int 		*fd;
+	int			*fd;
 	t_command	*tmp_cmd;
 
 	tmp_cmd = get_first_command(data->commands);
 	while (tmp_cmd)
 	{
-		// || (tmp_cmd->prev != NULL  && tmp_cmd->prev->pipe_flag == 1))
 		if (tmp_cmd->pipe_flag == 1)
 		{
 			fd = malloc(sizeof(int) * 2);
@@ -25,8 +36,8 @@ int create_pipes(t_data *data)
 
 static int	wait_for_childes(t_data *data)
 {
-	int 		i;
-	int 		status;
+	int			i;
+	int			status;
 	t_command	*cmd;
 
 	cmd = get_first_command(data->commands);
@@ -51,10 +62,10 @@ static int	wait_for_childes(t_data *data)
 	return (0);
 }
 
-static int allocate_childes_pid(t_data *data)
+static int	allocate_childes_pid(t_data *data)
 {
 	t_command	*cmd;
-	int 		i;
+	int			i;
 
 	i = 0;
 	cmd = get_first_command(data->commands);
@@ -81,10 +92,10 @@ static void	do_parent_staff(t_command *cmd)
 	}
 }
 
-int create_processes(t_data *data)
+int	create_processes(t_data *data)
 {
 	t_command	*cmd;
-	int 		i;
+	int			i;
 
 	cmd = get_first_command(data->commands);
 	if (allocate_childes_pid(data) < 1)
