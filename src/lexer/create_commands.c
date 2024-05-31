@@ -46,7 +46,7 @@ static int	handle_no_args(t_data *data)
 	t_command	*cmd;
 
 	if (!data->commands)
-		return (1);//maybe no
+		return (1);
 	cmd = get_first_command(data->commands);
 	while (cmd && cmd->name)
 	{

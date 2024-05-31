@@ -85,7 +85,7 @@ int	get_path(t_data *data, t_command *cmd)
 	int	status;
 
 	if (!cmd->name)
-		return (1);//fix
+		return (1);
 	status = 1;
 	if (get_env_index(data->env, "PATH") != -1)
 		status = get_path_with_env(data, cmd);

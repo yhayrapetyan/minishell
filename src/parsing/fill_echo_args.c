@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:33:08 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/31 16:18:41 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/31 16:23:42 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	create(t_token **tmp, t_command *last_cmd)
 		if (!last_cmd->args[i])
 			return (0);
 		i++;
-		tmp = (*tmp)->next;
+		(*tmp) = (*tmp)->next;
 	}
 	last_cmd->args[i] = NULL;
 	return (1);
