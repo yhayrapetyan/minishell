@@ -6,16 +6,38 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:33:08 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/30 20:05:24 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/31 16:18:41 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static int	create(t_token **tmp, t_command *last_cmd)
+{
+	int	i;
+
+	i = 1;
+	last_cmd->args[0] = ft_strdup(last_cmd->name);
+	if (!last_cmd->args[0])
+		return (0);
+	while ((*tmp)->type == WORD || (*tmp)->type == ENV)
+	{
+		if ((*tmp)->join == 1)
+			last_cmd->args[i] = join_vars(tmp);
+		else
+			last_cmd->args[i] = ft_strdup((*tmp)->content);
+		if (!last_cmd->args[i])
+			return (0);
+		i++;
+		tmp = (*tmp)->next;
+	}
+	last_cmd->args[i] = NULL;
+	return (1);
+}
+
 int	create_echo_args(t_token **tokens, t_command *last_cmd)
 {
 	t_token	*tmp;
-	int		i;
 	int		nb_args;
 
 	remove_empty_var(tokens);
@@ -24,22 +46,8 @@ int	create_echo_args(t_token **tokens, t_command *last_cmd)
 	last_cmd->args = malloc(sizeof(char *) * (nb_args + 2));
 	if (!last_cmd->args)
 		return (0);
-	i = 0;
-	last_cmd->args[i++] = ft_strdup(last_cmd->name);
-	if (!last_cmd->args[i - 1])
+	if (!create(&tmp, last_cmd))
 		return (0);
-	while (tmp->type == WORD || tmp->type == ENV)
-	{
-		if (tmp->join == 1)
-			last_cmd->args[i] = join_vars(&tmp);
-		else
-			last_cmd->args[i] = ft_strdup(tmp->content);
-		if (!last_cmd->args[i])
-			return (0);
-		i++;
-		tmp = tmp->next;
-	}
-	last_cmd->args[i] = NULL;
 	*tokens = tmp;
 	return (1);
 }
@@ -50,14 +58,13 @@ static char	**replace_echo_args(t_token **tokens, t_command *lst_cmd, \
 	int		i;
 	t_token	*temp;
 
-	i = 0;
+	i = -1;
 	temp = *tokens;
-	while (i < len)
+	while (++i < len)
 	{
 		new_args[i] = ft_strdup(lst_cmd->args[i]);
 		if (!new_args[i])
 			return (free_arr(new_args));
-		i++;
 	}
 	while (temp->type == WORD || temp->type == ENV)
 	{
@@ -71,6 +78,7 @@ static char	**replace_echo_args(t_token **tokens, t_command *lst_cmd, \
 		temp = temp->next;
 	}
 	new_args[i] = NULL;
+	*tokens = temp;
 	return (new_args);
 }
 
@@ -90,7 +98,7 @@ int	add_echo_args(t_token **tokens, t_command *lst_cmd)
 	new_args = (char **)malloc(sizeof(char *) * (nb_args + len + 1));
 	if (!new_args)
 		return (0);
-	new_args = replace_echo_args(tokens, lst_cmd, new_args, len);
+	new_args = replace_echo_args(&tmp, lst_cmd, new_args, len);
 	if (!new_args)
 		return (0);
 	free_arr(lst_cmd->args);
