@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_path.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/31 12:30:26 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/31 12:30:26 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	check_command_access(char **bin_paths, t_command *cmd)
@@ -12,7 +24,7 @@ static int	check_command_access(char **bin_paths, t_command *cmd)
 		temp = ft_strjoin(bin_paths[i], "/");
 		if (temp == NULL)
 			return (-1);
-		cmd_path = ft_strjoin(temp,cmd->name);
+		cmd_path = ft_strjoin(temp, cmd->name);
 		free(temp);
 		if (cmd_path == NULL)
 			return (-1);
@@ -31,7 +43,7 @@ static int	get_bin_path(t_data *data, t_command *cmd)
 {
 	char	**bin_paths;
 	int		i;
-	int 	status;
+	int		status;
 
 	i = get_env_index(data->env, "PATH");
 	bin_paths = ft_split(data->env[i] + 5, ':');
@@ -44,10 +56,11 @@ static int	get_bin_path(t_data *data, t_command *cmd)
 
 static int	get_path_with_env(t_data *data, t_command *cmd)
 {
-	int status;
+	int	status;
 
 	status = 1;
-	if (ft_strncmp(cmd->name, "./", 2) == 0 || ft_strncmp(cmd->name, "/", 1) == 0)
+	if (ft_strncmp(cmd->name, "./", 2) == 0 || \
+		ft_strncmp(cmd->name, "/", 1) == 0)
 	{
 		cmd->path = ft_strdup(cmd->name);
 		if (!cmd->path)
@@ -69,21 +82,17 @@ static int	get_path_with_env(t_data *data, t_command *cmd)
 
 int	get_path(t_data *data, t_command *cmd)
 {
-	int 	status;
+	int	status;
 
 	if (!cmd->name)
 		return (1);//fix
-//	status = is_builtin(cmd->name);
-//	if (status == 1)
-//		printf("OUR BUILTIN\n");//need to handle our builtin
-//	else if (status == -1)
-//		ft_error("NOT our problem :-)\n", 111);//need to change error handling
 	status = 1;
 	if (get_env_index(data->env, "PATH") != -1)
 		status = get_path_with_env(data, cmd);
 	else
 	{
-		if ((ft_strncmp(cmd->name, "./", 2) == 0  || ft_strncmp(cmd->name, "/", 1) ) && \
+		if ((ft_strncmp(cmd->name, "./", 2) == 0 || \
+			ft_strncmp(cmd->name, "/", 1)) && \
 			access(cmd->name, F_OK) == 0)
 		{
 			cmd->path = ft_strdup(cmd->name);

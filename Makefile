@@ -11,7 +11,8 @@ EXECUTION = execute.c \
 			get_path.c \
 			get_path_utils.c \
 			handle_descriptors.c \
-			execute_utils.c
+			execute_utils.c \
+			pipe_utils.c
 
 LIBFT = 	ft_strtrim.c \
 			ft_strlen.c \

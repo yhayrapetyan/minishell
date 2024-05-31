@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   start_minishell.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/31 13:03:00 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/05/31 13:03:00 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void	clean_loop(t_data *data)
@@ -45,9 +57,7 @@ void	start_minishell(t_data *data)
 			clean_data(data);
 			system_errors(status);
 		}
-//		printf("%s\n", data->input);
 		g_lst_exit_status = execute(data);
-//		printf("exit status = %d\n", g_lst_exit_status);
 		if (g_lst_exit_status < 0)
 		{
 			clean_data(data);

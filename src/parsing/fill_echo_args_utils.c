@@ -6,13 +6,13 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:35:56 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/26 14:36:03 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:10:38 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int count_echo_args(t_token *temp)
+int	count_echo_args(t_token *temp)
 {
 	int	i;
 
@@ -32,12 +32,11 @@ int count_echo_args(t_token *temp)
 		}
 	}
 	return (i);
-
 }
 
-static int in_dquotes(char *str)
+static int	in_dquotes(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -58,7 +57,8 @@ int	remove_empty_var(t_token **tokens)
 	tmp = *tokens;
 	while (tmp->type == WORD || tmp->type == ENV)
 	{
-		if (tmp->type == ENV && tmp->content[0] == '\0' && !in_dquotes(tmp->orig_content))
+		if (tmp->type == ENV && tmp->content[0] == '\0' && \
+			!in_dquotes(tmp->orig_content))
 		{
 			tmp = tmp->next;
 			if (tmp == (*tokens)->next)
@@ -81,8 +81,8 @@ char	*join_vars(t_token **tokens)
 	str = ft_strdup(temp->content);
 	if (!str)
 		return (NULL);
-	while (temp->type == ENV && temp->next->type == ENV
-		   && temp->next->join == 1)
+	while (temp->type == ENV && temp->next->type == ENV && \
+		temp->next->join == 1)
 	{
 		temp_content = ft_strjoin(str, temp->next->content);
 		free(str);

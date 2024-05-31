@@ -23,7 +23,7 @@ static int	get_exit_status(int err_type)
 	return (0);
 }
 
-/* idk how to call this function */
+/* idk how to name this function */
 static void	exit_helper(char *cmd_name, char *err_message)
 {
 	char	*err_msg;
@@ -54,6 +54,12 @@ int	execute_command(t_data *data, t_command *cmd)
 	status = handle_descriptors(cmd);
 	if (status < 1)
 		exit(1 );//fix
+//	status = is_builtin(cmd->name);
+//	if (status == 1)
+//		printf("OUR BUILTIN\n");//need to handle our builtin
+//	else if (status == -1) // i think we should not implement this just throw command not found
+//		ft_error("NOT our problem :-)\n", 111);//need to change error handling
+//	else
 	status = get_path(data, cmd);
 	if (status < 1)
 		exit(1);//fix
