@@ -44,10 +44,9 @@ static int	loop(t_data *data, t_io_fds *io, int tmp_fd)
 
 	while (1)
 	{
-//		line = readline(">");
-//		SIGNALS
-		line = get_next_line(0);//delete
-		line[ft_strlen(line) - 1] = '\0';
+		set_signals_interactive();
+		line = readline(GREEN ">" RESET_COLOR);
+		set_signals_noninteractive();
 		status = validate_line(data, &line, io);
 		if (status < 1)
 			break ;
@@ -56,7 +55,6 @@ static int	loop(t_data *data, t_io_fds *io, int tmp_fd)
 		free(line);
 	}
 	free(line);
-	get_next_line(-1);//delete
 	close(tmp_fd);
 	return (status);
 }

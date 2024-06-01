@@ -19,7 +19,6 @@ int	main(int ac, char **av, char **env)
 	fill_data_with_null(&data);
 	init_data(&data, env);
 	start_minishell(&data);
-	get_next_line(-1);//delete
 	clean_data(&data);
 	system("leaks minishell");
 	(void)ac;

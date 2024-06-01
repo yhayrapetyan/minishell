@@ -13,7 +13,7 @@
 #ifndef EXECUTION_H
 # define EXECUTION_H
 
-/* DELETE */
+/* EXECUTION */
 int		close_pipes(t_command *cmd, t_command *exception);
 int		execute_command(t_data *data, t_command *cmd);
 int		get_path(t_data *data, t_command *cmd);

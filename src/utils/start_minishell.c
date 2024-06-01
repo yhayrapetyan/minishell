@@ -43,12 +43,12 @@ void	start_minishell(t_data *data)
 
 	while (1)
 	{
-		// data->input = readline(MINISHELL);
-		data->input = get_next_line(0);
-		data->input[ft_strlen(data->input) - 1] = '\0';//temp solution for need for checking memory leaks
-		if (ft_strcmp(data->input, "exit") == 0)
+		set_signals_interactive();
+		data->input = readline(RED PROMPT RESET_COLOR);
+		set_signals_noninteractive();
+		if (data->input && ft_strcmp(data->input, "exit") == 0)
 		{
-			get_next_line(-1);
+			rl_clear_history();
 			break ;
 		}
 		status = lexer(data);

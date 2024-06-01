@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <string.h>
+# include <signal.h>
 # include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -37,8 +38,8 @@
 #  define PROG_NAME "minishell: "
 # endif
 
-# ifndef MINISHELL
-#  define MINISHELL RED"msh$"RESET_COLOR
+# ifndef PROMPT
+#  define PROMPT "msh$"
 # endif
 
 extern int	g_lst_exit_status;
@@ -54,6 +55,8 @@ char		*get_env_value(char **env, char *key);
 int			get_env_index(char **env, char *key);
 void		*clean_commands(t_command *commands);
 void		ft_error(char *message, int status);
+void		set_signals_noninteractive(void);
+void		set_signals_interactive(void);
 void		start_minishell(t_data *data);
 void		print_commands(t_data *data);
 void		print_tokens(t_data *data);

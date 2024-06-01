@@ -27,7 +27,8 @@ LIBFT = 	ft_strtrim.c \
 			ft_substr.c \
 			ft_isalnum.c \
 			ft_isalpha.c \
-			ft_isdigit.c
+			ft_isdigit.c \
+			ft_memset.c
 
 UTILS =		env_utils.c \
 			print_commands.c \
@@ -39,7 +40,8 @@ UTILS =		env_utils.c \
 			clean_data.c \
 			init.c \
 			init_export.c \
-			start_minishell.c
+			start_minishell.c \
+			signals.c
 
 GNL =		get_next_line_utils.c \
 			get_next_line.c
