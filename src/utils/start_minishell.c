@@ -36,6 +36,7 @@ static void	clean_loop(t_data *data)
  * -9 	=> fork err
  * -10	=> dup2 err
  * -11 => waitpid err
+ * -12 => here-document delimited by end-of-file
  * */
 void	start_minishell(t_data *data)
 {
@@ -46,6 +47,12 @@ void	start_minishell(t_data *data)
 		set_signals_interactive();
 		data->input = readline(RED PROMPT RESET_COLOR);
 		set_signals_noninteractive();
+		if (!data->input)
+		{
+			clean_data(data);
+			printf("exit\n");
+			exit(0);
+		}
 		if (data->input && ft_strcmp(data->input, "exit") == 0)
 		{
 			rl_clear_history();

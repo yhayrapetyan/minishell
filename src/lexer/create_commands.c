@@ -20,6 +20,7 @@
  * -5 => syntax_err [separators_consecutive]
  * -6 => ambigous redirect
  * -7 => open err
+ * - 12 => here-document delimited by end-of-file
  * */
 static int	parse(t_data *data, t_token **token)
 {
@@ -107,7 +108,7 @@ static int	loop(t_data *data, t_token *temp)
 		status = parse(data, &temp);
 		if (temp->type == END)
 			break ;
-		if (status == -1 || status == -4)
+		if (status == -1 || status == -4 || status == -12)
 			return (status);
 		if (res == 1 && status < 1)
 			res = status;

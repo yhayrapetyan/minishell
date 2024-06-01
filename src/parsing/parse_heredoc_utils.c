@@ -23,7 +23,18 @@ static int	validate_line(t_data *data, char **line, t_io_fds *io)
 	char	*tmp;
 
 	if (!*line)
-		return (-4);
+	{
+		unlink(io->infile);
+		tmp = parse_err("warning", "here-document delimited by end-of-file: wanted ");
+		if (!tmp)
+			return (-1);
+		get_last_command(data->commands)->err_message = ft_strjoin(tmp, io->delimiter);
+		free(tmp);
+		if (!get_last_command(data->commands)->err_message)
+			return (-1);
+		get_last_command(data->commands)->err_type = -6;//temp
+		return (-12);
+	}
 	if (ft_strcmp(*line, io->delimiter) == 0)
 		return (0);
 	if (io->delim_in_quotes == 0 && ft_strchr(*line, '$'))

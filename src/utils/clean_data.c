@@ -22,5 +22,6 @@ void	*clean_data(t_data *data)
 	free(data->childes_pid);
 	clean_tokens(data->tokens);
 	clean_commands(data->commands);
+	fill_data_with_null(data);
 	return (NULL);
 }

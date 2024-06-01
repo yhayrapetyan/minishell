@@ -44,7 +44,7 @@ int	lexer(t_data *data)
 		return (-4);
 	if (is_input_empty(data))
 		return (1);
-//	add_history(data->input);
+	add_history(data->input);
 	status = tokenization(data);
 	if (status < 1)
 		return (status);

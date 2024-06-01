@@ -26,6 +26,7 @@ void	fill_data_with_null(t_data *data)
 	data->input = NULL;
 	data->tokens = NULL;
 	data->commands = NULL;
+	data->childes_pid = NULL;
 }
 
 int	init_io_fds(t_command	*command)
