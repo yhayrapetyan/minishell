@@ -76,6 +76,19 @@ PARSING =	parse_word.c \
 			parse_heredoc_utils.c \
 			is_valid_filename.c \
 
+BUILTIN = 	builtin_utils.c \
+			builtin.c \
+			cd_utils.c \
+			cd_validation.c \
+			cd.c \
+			echo.c \
+			env.c \
+			export_utils.c \
+			export_validation.c \
+			export.c \
+			pwd.c \
+			unset.c \
+
 HEADERS = 	minishell.h \
 			colors.h \
 			errors.h \
@@ -84,7 +97,8 @@ HEADERS = 	minishell.h \
 			utils.h \
 			tokenization.h \
 			expansion.h \
-			lexer.h
+			lexer.h \
+			builtin.h \
 
 SRC_DIR = ./src/
 HELPERS_DIR = ./src/helpers/
@@ -96,6 +110,7 @@ GNL_DIR = ./src/GNL/
 EXPANSION_DIR = ./src/expansion/
 PARSING_DIR = ./src/parsing/
 INIT_DIR = ./src/init/
+BUILTIN_DIR = ./src/builtin/
 INC = ./includes/
 
 HEADERS := $(addprefix $(INC), $(HEADERS))
@@ -109,6 +124,7 @@ EXPANSION := $(addprefix $(EXPANSION_DIR), $(EXPANSION))
 PARSING := $(addprefix $(PARSING_DIR), $(PARSING))
 INIT := $(addprefix $(INIT_DIR), $(INIT))
 GNL := $(addprefix $(GNL_DIR), $(GNL))
+BUILTIN := $(addprefix $(BUILTIN_DIR), $(BUILTIN))
 OBJS = $(SRC:.c=.o)
 
 SRC += $(HELPERS)
@@ -120,10 +136,10 @@ SRC += $(GNL)
 SRC += $(EXPANSION)
 SRC += $(PARSING)
 SRC += $(INIT)
+SRC += $(BUILTIN)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-READLINE_LIB = -lreadline
 NAME = minishell
 RM = rm -f
 
@@ -142,13 +158,13 @@ SRC_PCT = $(shell expr 100 \* $(SRC_COUNT) / $(SRC_COUNT_TOT))
 all: print_info $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(READLINE_LIB) -o $(NAME)
+	@$(CC) $(OBJS) -o $(NAME)
 	@printf "%b" "$(BLUE)\n$@ $(GREEN)[✓]\n"
 
 $(OBJS): $(HEADERS) Makefile
 
 sanitize: fclean print_info $(OBJS)
-	@cc $(OBJS) $(READLINE_LIB) -fsanitize=address -o $(NAME)
+	@cc $(OBJS) -fsanitize=address -o $(NAME)
 
 .c.o:
 	@$(eval SRC_COUNT = $(shell expr $(SRC_COUNT) + 1))

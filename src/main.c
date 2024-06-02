@@ -47,7 +47,7 @@ void	start_minishell(t_data *data)
 			break ;
 		if (ft_strcmp(data->input, "add") == 0)
 		{
-			lst_exit_code++;
+			g_exit_status++;
 			continue;
 		}
 		status = lexer(data);
@@ -59,6 +59,22 @@ void	start_minishell(t_data *data)
 //			get_next_line(-1);
 //			exit(21);//need to handle error print
 		}
+
+
+
+
+		printf("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+		if (builtin_run(data) == NOT_FOUND) // this means that command was not builtin
+		{
+			// EXECVE command here Yura jan
+		}
+		printf("EXIT_STATUS: %d\n", g_exit_status);
+
+
+
+
+
+
 //		printf("%s\n", data->input);
 		free(data->input);
 		data->input = NULL;
@@ -75,6 +91,7 @@ int	main(int ac, char **av, char **env)
 
 	fill_data_with_null(&data);
 	init_data(&data, env);
+	// must set status of program to SUCCESS
 	start_minishell(&data);
 	get_next_line(-1);
 	clean_data(&data);

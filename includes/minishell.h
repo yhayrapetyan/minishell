@@ -23,6 +23,8 @@
 # include "tokenization.h"
 # include "get_next_line.h"
 
+# include "builtin.h"
+
 /* HELPERS */
 char	*strjoin_and_free(char const *s1, char const *s2);
 char	**ft_arrdup(char **env);

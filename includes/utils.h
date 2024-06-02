@@ -19,8 +19,8 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+// # include <readline/readline.h>
+// # include <readline/history.h>
 # include "colors.h"//maybe need to delete
 # include "lexer.h"//maybe need to delete
 
@@ -40,7 +40,7 @@
 #  define MINISHELL RED"msh$"RESET_COLOR
 # endif
 
-extern int	lst_exit_code;
+extern int	g_exit_status;
 
 /* UTILS */
 t_command	*add_command(t_command *old_command, t_command *new_command);
