@@ -64,6 +64,14 @@ void	start_minishell(t_data *data)
 
 
 		printf("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+		if (ft_strlen(data->commands->name) == 4)
+		{
+			if (ft_strncmp(data->commands->name, "exit", 4) == 0)
+			{
+				// or free here Yura jan
+				// exit(g_exit_status);
+			}
+		}
 		if (builtin_run(data) == NOT_FOUND) // this means that command was not builtin
 		{
 			// EXECVE command here Yura jan

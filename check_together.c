@@ -10,3 +10,5 @@
 // Ask also that I always write in STDOUT_FILENO right ?
 
 // Ask Yura if he is using getcwd() for work_dir ?
+
+// Tell Yura that he must add his delete functions in EXIT

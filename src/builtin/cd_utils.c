@@ -21,7 +21,7 @@ char	*get_value_from_env(char **env, char *key)
 	return (NULL);
 }
 
-int	change_current_and_old_workdir(t_data *data, char *new_path)
+int	cd_update_workdirs(t_data *data, char *new_path)
 {
 	if (!data)
 	{

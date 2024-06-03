@@ -85,7 +85,7 @@ int	add_new_export_variable(t_data *data, char *line)
 	new_export[i + 1] = NULL;
 	free(data->export);
 	data->export = new_export;
-	// SORT EXPORT HERE !
+	data_sort_export(data); // SORT EXPORT HERE !
 	return (EXIT_SUCCESS);
 }
 

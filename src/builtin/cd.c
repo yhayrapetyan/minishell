@@ -1,5 +1,6 @@
 #include "../../includes/builtin.h"
 
+// cd -
 static int	cd_previous_move_case(t_data *data)
 {
 	char	*oldpwd_value;
@@ -23,9 +24,10 @@ static int	cd_previous_move_case(t_data *data)
 	write(STDOUT_FILENO, oldpwd_value, ft_strlen(oldpwd_value));
 	write(STDOUT_FILENO, "\n", 1);
 	// Here I could just do swap, cause it's more logical, but why change the structure right :) ?
-	return (change_current_and_old_workdir(data, oldpwd_value));
+	return (cd_update_workdirs(data, oldpwd_value));
 }
 
+// cd ..
 static int	cd_parent_move_case(t_data *data)
 {
 	char	cwd[PATH_MAX];
@@ -45,9 +47,10 @@ static int	cd_parent_move_case(t_data *data)
 		minishell_error("cd", NULL, "getcwd error\n");
 		return (EXIT_FAILURE);
 	}
-	return (change_current_and_old_workdir(data, cwd));
+	return (cd_update_workdirs(data, cwd));
 }
 
+// cd 'path'
 static int	cd_path_move_case(t_data *data, char *path)
 {
 	if (!data)
@@ -60,9 +63,10 @@ static int	cd_path_move_case(t_data *data, char *path)
 		minishell_error("cd", path, "No such file or directory\n");
 		return (EXIT_FAILURE);
 	}
-	return (change_current_and_old_workdir(data, path));
+	return (cd_update_workdirs(data, path));
 }
 
+// cd
 static int	cd_home_move_case(t_data *data)
 {
 	char	*home_value;
@@ -83,7 +87,7 @@ static int	cd_home_move_case(t_data *data)
 		minishell_error("cd", home_value, "No such file or directory\n");
 		return (EXIT_FAILURE);
 	}
-	return (change_current_and_old_workdir(data, home_value));
+	return (cd_update_workdirs(data, home_value));
 }
 
 static int	change_directory(t_data *data, char *arg)
@@ -125,7 +129,6 @@ int	builtin_cd(t_data *data)
 		status = change_directory(data, data->commands->args[1]);
 	if (status == EXIT_FAILURE) // chdir() failed
 		return (EXIT_FAILURE);
-	status = cd_update_env_values(data);
 	if (cd_update_env_values(data) == EXIT_FAILURE ||
 		cd_update_export_values(data) == EXIT_FAILURE)
 	{

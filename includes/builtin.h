@@ -12,11 +12,8 @@
 
 # define ERROR_VALUE -1
 # define NOT_FOUND -2
-# define NOT_VALID -3
-
-
-// # define CD_LENGTH 2
-// # define EXIT_LENGTH 4
+# define NOT_NUMERIC_ERROR 2
+# define CHAR_SIZE_COMBINATIONS 255
 
 /*
 	BUILTINS
@@ -36,6 +33,8 @@ int		split_size(char **split);
 void	minishell_error(char *cmd, char *arg, char *msg);
 int		find_env_variable_position(char **env, char *arg);
 int		find_export_variable_position(char **export, char *arg);
+void	data_sort_export(t_data *data);
+int		ft_atoi(const char *str);
 
 /*
 	export functions
@@ -55,6 +54,11 @@ int		builtin_cd_validation(t_data *data);
 char	*get_value_from_env(char **env, char *key);
 int		cd_update_env_values(t_data *data);
 int		cd_update_export_values(t_data *data);
-int		change_current_and_old_workdir(t_data *data, char *new_path);
+int		cd_update_workdirs(t_data *data, char *new_path);
+
+/*
+	exit functions
+*/
+int		builtin_exit_validation(char *arg);
 
 # endif

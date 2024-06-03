@@ -28,7 +28,7 @@ LIBFT = 	ft_strtrim.c \
 			ft_substr.c \
 			ft_isalnum.c \
 			ft_isalpha.c \
-			ft_isdigit.c
+			ft_isdigit.c \
 
 UTILS =		env_utils.c \
 			print_commands.c \
@@ -83,6 +83,8 @@ BUILTIN = 	builtin_utils.c \
 			cd.c \
 			echo.c \
 			env.c \
+			exit_validation.c \
+			exit.c \
 			export_utils.c \
 			export_validation.c \
 			export.c \
