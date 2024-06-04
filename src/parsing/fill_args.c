@@ -70,7 +70,9 @@ static char	**replace_args(t_token **tokens, t_command *lst_cmd,
 	temp = *tokens;
 	while (i < len)
 	{
-		new_args[i] = lst_cmd->args[i];
+		new_args[i] = ft_strdup(lst_cmd->args[i]);
+		if (!new_args[i])
+			return (free_arr(new_args));
 		i++;
 	}
 	while (temp->type == WORD || temp->type == ENV)
@@ -124,8 +126,18 @@ int	add_args(t_token **tokens, t_command *lst_cmd)
 */
 int	fill_args(t_token **tokens, t_command *last_command)
 {
-	if (last_command && (!last_command->args))
-		return (create_args(tokens, last_command));
+	if (!ft_strcmp(last_command->name, "echo"))
+	{
+		if (!(last_command->args))
+			return (create_echo_args(tokens, last_command));
+		else
+			return (add_echo_args(tokens, last_command));
+	}
 	else
-		return (add_args(tokens, last_command));
+	{
+		if (last_command && (!last_command->args))
+			return (create_args(tokens, last_command));
+		else
+			return (add_args(tokens, last_command));
+	}
 }

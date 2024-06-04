@@ -12,8 +12,10 @@
 
 #include "minishell.h"
 
-/* it takes i and count in arguments because of norm */
-static int	len_without_quotes(char *content, int i, int count)
+/* it takes i and count in arguments because of norm
+* function name => len without quotes
+*/
+static int	lwq(char *content, int i, int count)
 {
 	int	status;
 
@@ -86,8 +88,7 @@ int	remove_quotes(t_token **tokens)
 
 	i = 0;
 	j = 0;
-	new_content = (char *)malloc(sizeof(char) * \
-		len_without_quotes((*tokens)->content, 0, 0));
+	new_content = (char *)malloc(sizeof(char) * lwq((*tokens)->content, 0, 0));
 	if (!new_content)
 		return (0);
 	while ((*tokens)->content[i])
@@ -103,6 +104,7 @@ int	remove_quotes(t_token **tokens)
 	}
 	new_content[j] = '\0';
 	free((*tokens)->content);
-	(*tokens)->content = new_content;//(*tokens)->join = true
+	(*tokens)->content = new_content;
+	(*tokens)->join = 1;
 	return (1);
 }

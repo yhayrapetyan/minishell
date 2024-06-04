@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 20:41:27 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/24 20:17:49 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/26 14:04:18 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,33 +39,30 @@ static int	get_heredoc(t_io_fds *io, t_token *tmp)
 	return (1);
 }
 
-static int handle_error(t_data *data, t_io_fds *io, t_token *tmp, t_command *lst_cmd)
+static int	handle_error(t_data *data, t_io_fds *io, t_token *tmp,
+	t_command *lst_cmd)
 {
-	int status ;
+	int	status ;
 
+	if (io->infile)
+		free(io->infile);
 	if (!get_heredoc(io, tmp))
 		return (-1);
 	status = read_heredoc(io, data, lst_cmd);
 	unlink(io->infile);
 	io->fd_in = -1;
 	return (status);
-//	if (status < 0)//need to check it is allocation fault or what and if necessary unlink
-//	{
-//		io->fd_in = -1;
-//		return (status);
-//	}
-//
-//	return (1);
 }
 
-static int handle_default(t_data *data, t_io_fds *io, t_token *tmp, t_command *lst_cmd)
+static int	handle_default(t_data *data, t_io_fds *io, t_token *tmp,
+	t_command *lst_cmd)
 {
-	int status;
+	int	status;
 
 	if (!get_heredoc(io, tmp))
 		return (-1);
 	status = read_heredoc(io, data, lst_cmd);
-	if (status < 0)//need to check it is allocation fault or what
+	if (status < 0)
 	{
 		io->fd_in = -1;
 		return (status);
@@ -73,6 +70,7 @@ static int handle_default(t_data *data, t_io_fds *io, t_token *tmp, t_command *l
 	else
 	{
 		io->fd_in = open(io->infile, O_RDONLY);
+		lst_cmd->is_input_heredoc = 1;
 		if (io->fd_in == -1)
 		{
 			lst_cmd->err_message = parse_err(io->infile, strerror(errno));
@@ -107,7 +105,7 @@ int	parse_heredoc(t_data *data, t_command **commands, t_token **tokens)
 		status = handle_error(data, io, tmp, lst_cmd);
 	else
 		status = handle_default(data, io, tmp, lst_cmd);
-	if (status < 1)//maybe after ->next
+	if (status < 1)
 		return (status);
 	if (tmp->next->next)
 		*tokens = tmp->next->next;

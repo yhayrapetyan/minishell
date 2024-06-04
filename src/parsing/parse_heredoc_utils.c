@@ -23,7 +23,18 @@ static int	validate_line(t_data *data, char **line, t_io_fds *io)
 	char	*tmp;
 
 	if (!*line)
-		return (-4);
+	{
+		unlink(io->infile);
+		tmp = parse_err("warning", "here-document delimited by end-of-file: wanted ");
+		if (!tmp)
+			return (-1);
+		get_last_command(data->commands)->err_message = ft_strjoin(tmp, io->delimiter);
+		free(tmp);
+		if (!get_last_command(data->commands)->err_message)
+			return (-1);
+		get_last_command(data->commands)->err_type = -6;//temp
+		return (-12);
+	}
 	if (ft_strcmp(*line, io->delimiter) == 0)
 		return (0);
 	if (io->delim_in_quotes == 0 && ft_strchr(*line, '$'))
@@ -37,6 +48,28 @@ static int	validate_line(t_data *data, char **line, t_io_fds *io)
 	return (1);
 }
 
+static int	loop(t_data *data, t_io_fds *io, int tmp_fd)
+{
+	int		status;
+	char	*line;
+
+	while (1)
+	{
+		set_signals_interactive();
+		line = readline(GREEN ">" RESET_COLOR);
+		set_signals_noninteractive();
+		status = validate_line(data, &line, io);
+		if (status < 1)
+			break ;
+		write(tmp_fd, line, ft_strlen(line));
+		write(tmp_fd, "\n", 1);
+		free(line);
+	}
+	free(line);
+	close(tmp_fd);
+	return (status);
+}
+
 /*
 *	1 => success
 *	-1 => malloc err
@@ -46,36 +79,19 @@ static int	validate_line(t_data *data, char **line, t_io_fds *io)
 int	read_heredoc(t_io_fds *io, t_data *data, t_command *cmd)
 {
 	int		tmp_fd;
-	char	*line;
 	int		status;
 
 	tmp_fd = open(io->infile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (tmp_fd == -1)
 	{
 		cmd->err_message = parse_err(io->infile, strerror(errno));
-		if (!cmd->err_message)//fix
+		if (!cmd->err_message)
 			return (-1);
 		cmd->err_type = -7;
 		return (-7);
 	}
-	while (1)
-	{
-//		line = readline(">");
-//		SIGNALS
-		line = get_next_line(0);//delete
-		line[ft_strlen(line) - 1] = '\0';
-		status = validate_line(data, &line, io);
-		if (status < 1)
-			break ;
-		write(tmp_fd, line, ft_strlen(line));//change to put_fd
-		write(tmp_fd, "\n", 1);
-		free(line);
-	}
-	free(line);
-	get_next_line(-1);//delete
-	close(tmp_fd);//CLOSE ERR
-	if (status < 0)//maybe before close idk
+	status = loop(data, io, tmp_fd);
+	if (status < 0)
 		return (status);
 	return (1);
 }
-

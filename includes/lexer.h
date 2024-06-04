@@ -13,6 +13,8 @@
 #ifndef LEXER_H
 # define LEXER_H
 
+# include <stdlib.h>
+
 typedef enum s_type
 {
 	SPACES = 1,
@@ -42,6 +44,7 @@ typedef struct s_token
 	t_state			state;
 	int				ambiguous;
 	int				delim_in_quotes;
+	int				join;
 	struct s_token	*next;
 	struct s_token	*prev;
 }	t_token;
@@ -54,8 +57,6 @@ typedef struct s_io_fds
 	int		delim_in_quotes;
 	int		fd_in;
 	int		fd_out;
-	// int		stdin_backup;
-	// int		stdout_backup;
 }	t_io_fds;
 
 typedef struct s_command
@@ -65,8 +66,9 @@ typedef struct s_command
 	char				**args;
 	char				*err_message;
 	int					err_type;
-//	bool				pipe_output;
-//	int					*pipe_fd;
+	int					pipe_flag;
+	int					is_input_heredoc;
+	int					*pipe_fd;
 	t_io_fds			*io_fds;
 	struct s_command	*next;
 	struct s_command	*prev;
@@ -79,6 +81,9 @@ typedef struct s_data
 	char		*work_dir;
 	char		*old_work_dir;
 	char		*input;
+	pid_t		*childes_pid;
+	pid_t		pid;//check
+	int			commands_count;
 	t_token		*tokens;
 	t_command	*commands;
 }	t_data;
@@ -92,7 +97,7 @@ int			init_export(t_data *data);
 void		*clean_data(t_data *data);//need to move
 
 /* LEXER */
-int			check_separators_consecutive(t_token *tokens);
+int			check_separators_consecutive(t_token *tokens, t_command *cmd);
 int			prepare_for_ambiguous(t_data *data);
 int			remove_quotes(t_token **tokens);
 int			create_commands(t_data *data);

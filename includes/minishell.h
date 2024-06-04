@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 12:32:01 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/24 17:37:41 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:16:36 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 # include "parsing.h"
 # include "expansion.h"
 # include "tokenization.h"
+# include "builtin.h"
 # include "get_next_line.h"
+# include "execution.h"
 
 /* HELPERS */
 char	*strjoin_and_free(char const *s1, char const *s2);

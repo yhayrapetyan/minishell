@@ -34,22 +34,24 @@
 # define AMBIGOUS_REDIR_ERR "ambiguous redirect"
 
 //syntax err exit status 2
-# define WAIT_STAT 			2
-# define MALLOC_STAT 		3
-# define ARG_STAT			4
-# define WRT_PERM_STAT		1
-# define FILE_OPEN_STAT		6
-# define PIPE_CLOSE_STAT	7
-# define PIPE_CREATE_STAT	8
-# define FORK_CREATE_STAT	9
-# define DUP_STAT			10
-# define ENV_INIT_STAT		11
-# define EXPORT_INIT_STAT	12
-# define WDIR_INIT_STAT		13
-# define RLINE_STAT			14
-# define SQUOTE_STAT		15
-# define DQUOTE_STAT		16
-# define EXEC_STAT			126
-# define CMD_NOT_FOUND_STAT	127
+# define WAIT_STAT 				2
+# define MALLOC_STAT 			3
+# define ARG_STAT				4
+# define WRT_PERM_STAT			1
+# define FILE_OPEN_STAT			6
+# define PIPE_CLOSE_STAT		7
+# define PIPE_CREATE_STAT		8
+# define FORK_CREATE_STAT		9
+# define DUP_STAT				10
+# define ENV_INIT_STAT			11
+# define EXPORT_INIT_STAT		12
+# define WDIR_INIT_STAT			13
+# define RLINE_STAT				14
+# define SQUOTE_STAT			15
+# define DQUOTE_STAT			16
+# define AMBIGOUS_REDIR_STAT	17
+# define SYNTAX_STAT			2
+# define EXEC_STAT				126
+# define CMD_NOT_FOUND_STAT		127
 
 #endif

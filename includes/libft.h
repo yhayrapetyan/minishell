@@ -19,6 +19,7 @@ char	*ft_substr(char *s, int start, int len);
 int		ft_strlcpy(char *dst, const char *src, int dstsize);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strjoin(char const *s1, char const *s2);
+void	*ft_memset(void *b, int c, size_t len);
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
 int		ft_strcmp(char *s1, char *s2);

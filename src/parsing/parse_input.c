@@ -22,6 +22,7 @@ static	int	open_infile(t_io_fds *io, t_token *token, t_command *cmd)
 {
 	if (!remove_old_ref(io, 1))
 		return (1);
+	cmd->is_input_heredoc = 0;
 	io->infile = ft_strdup(token->content);
 	if (!io->infile)
 		return (-1);

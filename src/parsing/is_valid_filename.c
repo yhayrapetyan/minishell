@@ -20,7 +20,7 @@ int	is_valid_filename(char *str)
 
 	i = 0;
 	flag = 0;
-	while (str[i] && is_white_space(str[i]))//maybe just space
+	while (str[i] && is_white_space(str[i]))
 		i++;
 	if (!str[i])
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:03:38 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/24 12:49:32 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/26 14:35:18 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 /* PARSING */
 int			parse_heredoc(t_data *data, t_command **commands, t_token **tokens);
 int			read_heredoc(t_io_fds *io, t_data *data, t_command *cmd);
+int			create_echo_args(t_token **tokens, t_command *last_cmd);
+int			add_echo_args(t_token **tokens, t_command *last_cmd);
 int			fill_args(t_token **tokens, t_command *last_command);
 int			parse_append(t_command **commands, t_token **tokens);
 int			parse_input(t_command **commands, t_token **tokens);
@@ -23,6 +25,9 @@ int			parse_trunc(t_command **commands, t_token **tokens);
 int			parse_word(t_command **commands, t_token **tokens);
 int			parse_pipe(t_command **commands, t_token **tokens);
 int			remove_old_ref(t_io_fds *io, int flag);
+int			remove_empty_var(t_token **tokens);
+int			count_echo_args(t_token *temp);
 int			is_valid_filename(char *str);
+char		*join_vars(t_token **tokens);
 
 #endif

@@ -23,6 +23,7 @@ t_token		*get_first_token(t_token *token);
 int			set_state(char ch, int status);
 int			is_separator(char *str, int i);
 void		*clean_tokens(t_token *tokens);
+void		delete_token(t_token *token);
 int			tokenization(t_data *data);
 
 #endif

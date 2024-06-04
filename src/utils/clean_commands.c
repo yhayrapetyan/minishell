@@ -38,6 +38,7 @@ void	*clean_commands(t_command *commands)
 		free_arr(commands->args);
 		clean_io_fds(commands->io_fds);
 		free(commands->io_fds);
+		free(commands->pipe_fd);
 		free(commands);
 		commands = tmp;
 	}

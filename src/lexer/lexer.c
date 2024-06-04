@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:04:18 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/24 19:33:46 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/31 16:28:32 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	lexer(t_data *data)
 		return (-4);
 	if (is_input_empty(data))
 		return (1);
-//	add_history(data->input);
+	add_history(data->input);
 	status = tokenization(data);
 	if (status < 1)
 		return (status);
@@ -59,7 +59,5 @@ int	lexer(t_data *data)
 	status = create_commands(data);
 	if (status < 1)
 		return (status);
-	print_tokens(data);
-	print_commands(data);
 	return (1);
 }

@@ -1,4 +1,4 @@
-SRC =		main.c
+SRC =		main.c \
 
 HELPERS = 	free_arr.c \
 			ft_arrdup.c \
@@ -8,12 +8,27 @@ HELPERS = 	free_arr.c \
             arr_join.c
 
 
-INIT =		clean_data.c \
-			fill_data_with_null.c \
-			init_data.c \
-			init_export.c \
-			init_workdir.c \
-			init_io_fds.c
+BUILTIN = 	builtin_utils.c \
+			builtin.c \
+			cd_utils.c \
+			cd_validation.c \
+			cd.c \
+			echo.c \
+			env.c \
+			exit_validation.c \
+			exit.c \
+			export_utils.c \
+			export_validation.c \
+			export.c \
+			pwd.c \
+			unset.c
+
+EXECUTION = execute.c \
+			get_path.c \
+			get_path_utils.c \
+			handle_descriptors.c \
+			execute_utils.c \
+			pipe_utils.c
 
 LIBFT = 	ft_strtrim.c \
 			ft_strlen.c \
@@ -28,7 +43,8 @@ LIBFT = 	ft_strtrim.c \
 			ft_substr.c \
 			ft_isalnum.c \
 			ft_isalpha.c \
-			ft_isdigit.c
+			ft_isdigit.c \
+			ft_memset.c
 
 UTILS =		env_utils.c \
 			print_commands.c \
@@ -36,7 +52,12 @@ UTILS =		env_utils.c \
 			command_utils.c \
 			clean_commands.c \
 			print_tokens.c \
-			errors.c
+			errors.c \
+			clean_data.c \
+			init.c \
+			init_export.c \
+			start_minishell.c \
+			signals.c
 
 GNL =		get_next_line_utils.c \
 			get_next_line.c
@@ -57,13 +78,10 @@ EXPANSION =	expand_variables.c \
             update_env_token_type.c \
             expand_heredoc.c
 
-TOKEN =		add_token.c \
-            clean_tokens.c \
-            create_token.c \
-            get_first_token.c \
-            save_token.c \
-            tokenization.c \
+TOKEN =		tokenization.c \
             tokenization_utils.c \
+            save_token.c \
+            token_list_utils.c
 
 PARSING =	parse_word.c \
 			parse_pipe.c \
@@ -75,6 +93,8 @@ PARSING =	parse_word.c \
 			parse_heredoc.c \
 			parse_heredoc_utils.c \
 			is_valid_filename.c \
+			fill_echo_args_utils.c \
+			fill_echo_args.c
 
 HEADERS = 	minishell.h \
 			colors.h \
@@ -84,7 +104,9 @@ HEADERS = 	minishell.h \
 			utils.h \
 			tokenization.h \
 			expansion.h \
-			lexer.h
+			lexer.h \
+			execution.h \
+			builtin.h
 
 SRC_DIR = ./src/
 HELPERS_DIR = ./src/helpers/
@@ -95,7 +117,8 @@ TOKEN_DIR = ./src/tokenization/
 GNL_DIR = ./src/GNL/
 EXPANSION_DIR = ./src/expansion/
 PARSING_DIR = ./src/parsing/
-INIT_DIR = ./src/init/
+EXECUTION_DIR = ./src/execution/
+BUILTIN_DIR = ./src/builtin/
 INC = ./includes/
 
 HEADERS := $(addprefix $(INC), $(HEADERS))
@@ -107,7 +130,8 @@ LEXER := $(addprefix $(LEXER_DIR), $(LEXER))
 TOKEN := $(addprefix $(TOKEN_DIR), $(TOKEN))
 EXPANSION := $(addprefix $(EXPANSION_DIR), $(EXPANSION))
 PARSING := $(addprefix $(PARSING_DIR), $(PARSING))
-INIT := $(addprefix $(INIT_DIR), $(INIT))
+EXECUTION := $(addprefix $(EXECUTION_DIR), $(EXECUTION))
+BUILTIN := $(addprefix $(BUILTIN_DIR), $(BUILTIN))
 GNL := $(addprefix $(GNL_DIR), $(GNL))
 OBJS = $(SRC:.c=.o)
 
@@ -119,11 +143,14 @@ SRC += $(TOKEN)
 SRC += $(GNL)
 SRC += $(EXPANSION)
 SRC += $(PARSING)
-SRC += $(INIT)
+SRC += $(EXECUTION)
+SRC += $(BUILTIN)
+
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-READLINE_LIB = -lreadline
+CFLAGS = -Wall -Wextra -Werror -I ./readline_yuhayrap_skedikia/include
+# READLINE_LIB = -lreadline
+READLINE_LIB =  -Lreadline_yuhayrap_skedikia/lib -lreadline
 NAME = minishell
 RM = rm -f
 
@@ -154,6 +181,10 @@ sanitize: fclean print_info $(OBJS)
 	@$(eval SRC_COUNT = $(shell expr $(SRC_COUNT) + 1))
 	@printf "\r%18s\r$(YELLOW)[ %d/%d (%d%%) ]$(NO_COLOR)" "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
 	@$(CC) $(CFLAGS) -I $(INC) -c  $< -o $(<:.c=.o)
+
+config:
+	mkdir -p readline_yuhayrap_skedikia
+	./readline_config.sh readline_yuhayrap_skedikia
 
 clean: print_name
 	@$(RM) $(OBJS) $(BONUS_OBJS)

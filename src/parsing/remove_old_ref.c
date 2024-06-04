@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:36:00 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/24 13:51:56 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/05/26 14:05:21 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	handle_infile(t_io_fds *io)
 	}
 	free(io->infile);
 	io->infile = NULL;
-	close(io->fd_in);//need to check close err
+	close(io->fd_in);
 }
 
 /*
@@ -50,7 +50,7 @@ int	remove_old_ref(t_io_fds *io, int flag)
 				return (0);
 			free(io->outfile);
 			io->outfile = NULL;
-			close(io->fd_out);//need to check close err
+			close(io->fd_out);
 		}
 		else if (io->infile && io->fd_in == -1)
 			return (0);

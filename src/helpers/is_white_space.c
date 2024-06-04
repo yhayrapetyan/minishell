@@ -14,7 +14,7 @@
 
 int	is_white_space(char ch)
 {
-	if ((ch > 8 && ch < 14) || ch == 32)//need to check range
+	if ((ch > 8 && ch < 14) || ch == 32)
 		return (1);
 	return (0);
 }
