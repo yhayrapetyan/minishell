@@ -7,6 +7,22 @@ HELPERS = 	free_arr.c \
 			is_white_space.c \
             arr_join.c
 
+
+BUILTIN = 	builtin_utils.c \
+			builtin.c \
+			cd_utils.c \
+			cd_validation.c \
+			cd.c \
+			echo.c \
+			env.c \
+			exit_validation.c \
+			exit.c \
+			export_utils.c \
+			export_validation.c \
+			export.c \
+			pwd.c \
+			unset.c
+
 EXECUTION = execute.c \
 			get_path.c \
 			get_path_utils.c \
@@ -89,7 +105,8 @@ HEADERS = 	minishell.h \
 			tokenization.h \
 			expansion.h \
 			lexer.h \
-			execution.h
+			execution.h \
+			builtin.h
 
 SRC_DIR = ./src/
 HELPERS_DIR = ./src/helpers/
@@ -101,6 +118,7 @@ GNL_DIR = ./src/GNL/
 EXPANSION_DIR = ./src/expansion/
 PARSING_DIR = ./src/parsing/
 EXECUTION_DIR = ./src/execution/
+BUILTIN_DIR = ./src/builtin/
 INC = ./includes/
 
 HEADERS := $(addprefix $(INC), $(HEADERS))
@@ -113,6 +131,7 @@ TOKEN := $(addprefix $(TOKEN_DIR), $(TOKEN))
 EXPANSION := $(addprefix $(EXPANSION_DIR), $(EXPANSION))
 PARSING := $(addprefix $(PARSING_DIR), $(PARSING))
 EXECUTION := $(addprefix $(EXECUTION_DIR), $(EXECUTION))
+BUILTIN := $(addprefix $(BUILTIN_DIR), $(BUILTIN))
 GNL := $(addprefix $(GNL_DIR), $(GNL))
 OBJS = $(SRC:.c=.o)
 
@@ -125,10 +144,13 @@ SRC += $(GNL)
 SRC += $(EXPANSION)
 SRC += $(PARSING)
 SRC += $(EXECUTION)
+SRC += $(BUILTIN)
+
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-READLINE_LIB = -lreadline
+CFLAGS = -Wall -Wextra -Werror -I ./readline_yuhayrap_skedikia/include
+# READLINE_LIB = -lreadline
+READLINE_LIB =  -Lreadline_yuhayrap_skedikia/lib -lreadline
 NAME = minishell
 RM = rm -f
 
@@ -159,6 +181,10 @@ sanitize: fclean print_info $(OBJS)
 	@$(eval SRC_COUNT = $(shell expr $(SRC_COUNT) + 1))
 	@printf "\r%18s\r$(YELLOW)[ %d/%d (%d%%) ]$(NO_COLOR)" "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
 	@$(CC) $(CFLAGS) -I $(INC) -c  $< -o $(<:.c=.o)
+
+config:
+	mkdir -p readline_yuhayrap_skedikia
+	./readline_config.sh readline_yuhayrap_skedikia
 
 clean: print_name
 	@$(RM) $(OBJS) $(BONUS_OBJS)

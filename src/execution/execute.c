@@ -30,7 +30,7 @@ static void	exit_helper(char *cmd_name, char *err_message)
 
 	err_msg = parse_err(cmd_name, err_message);
 	if (!err_msg)
-		exit (1);//fix
+		exit (1);
 	write(2, err_msg, ft_strlen(err_msg));
 	write(2, "\n", 1);
 	free(err_msg);
@@ -48,21 +48,14 @@ int	execute_command(t_data *data, t_command *cmd)
 		write(2, "\n", 1);
 		err_type = cmd->err_type;
 		clean_data(data);
-		get_next_line(-1);//delete needed for valgrind
 		exit(get_exit_status(err_type));
 	}
 	status = handle_descriptors(cmd);
 	if (status < 1)
-		exit(1 );//fix
-//	status = is_builtin(cmd->name);
-//	if (status == 1)
-//		printf("OUR BUILTIN\n");//need to handle our builtin
-//	else if (status == -1) // i think we should not implement this just throw command not found
-//		ft_error("NOT our problem :-)\n", 111);//need to change error handling
-//	else
+		exit(1);
 	status = get_path(data, cmd);
 	if (status < 1)
-		exit(1);//fix
+		exit(1);
 	if (cmd->path == NULL)
 		exit_helper(cmd->name, CMD_NOT_FOUND_ERR);
 	if (execve(cmd->path, cmd->args, data->env) == -1)

@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:40:16 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/26 12:45:26 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:38:45 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 #  define PROMPT "msh$"
 # endif
 
-extern int	g_lst_exit_status;
+extern int	g_exit_status;
 
 /* UTILS */
 t_command	*add_command(t_command *old_command, t_command *new_command);

@@ -13,6 +13,8 @@
 #ifndef LEXER_H
 # define LEXER_H
 
+# include <stdlib.h>
+
 typedef enum s_type
 {
 	SPACES = 1,

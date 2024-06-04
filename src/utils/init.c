@@ -72,7 +72,7 @@ int	init_work_dir(t_data *data)
 	return (1);
 }
 
-int	g_lst_exit_status = 0;
+int	g_exit_status = 0;
 
 void	init_data(t_data *data, char **env)
 {

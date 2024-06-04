@@ -64,11 +64,11 @@ void	start_minishell(t_data *data)
 			clean_data(data);
 			system_errors(status);
 		}
-		g_lst_exit_status = execute(data);
-		if (g_lst_exit_status < 0)
+		g_exit_status = execute(data);
+		if (g_exit_status < 0)
 		{
 			clean_data(data);
-			system_errors(g_lst_exit_status);
+			system_errors(g_exit_status);
 		}
 		clean_loop(data);
 	}
