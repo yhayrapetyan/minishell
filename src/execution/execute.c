@@ -53,6 +53,12 @@ int	execute_command(t_data *data, t_command *cmd)
 	status = handle_descriptors(cmd);
 	if (status < 1)
 		exit(1);
+	if (is_builtin(cmd->name))
+	{
+		data->commands = cmd;//need to check
+		builtin_run(data);
+		exit(g_exit_status);
+	}
 	status = get_path(data, cmd);
 	if (status < 1)
 		exit(1);
@@ -73,6 +79,9 @@ int	execute(t_data *data)
 	status = create_pipes(data);
 	if (status < 1)
 		return (status);
-	status = create_processes(data);
+	if (!data->commands->prev && !data->commands->pipe_fd && is_builtin(data->commands->name))
+		builtin_run(data);
+	else
+		status = create_processes(data);
 	return (status);
 }
