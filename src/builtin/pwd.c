@@ -1,6 +1,18 @@
-#include "../../includes/builtin.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pwd.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 14:29:02 by skedikia          #+#    #+#             */
+/*   Updated: 2024/06/04 14:29:03 by skedikia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	builtin_pwd(t_data *data) // actually I don't need data, but maybe we could use pwd in future for something else, so I let it be here.
+#include "builtin.h"
+
+int	builtin_pwd(t_data *data)
 {
 	char	cwd[PATH_MAX];
 

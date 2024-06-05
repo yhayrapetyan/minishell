@@ -1,4 +1,16 @@
-#include "../../includes/builtin.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 14:33:39 by skedikia          #+#    #+#             */
+/*   Updated: 2024/06/04 14:34:20 by skedikia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "builtin.h"
 
 int	builtin_env(t_data *data)
 {
@@ -17,7 +29,7 @@ int	builtin_env(t_data *data)
 	i = 0;
 	while (data->env[i])
 	{
-		if (ft_strchr(data->env[i], '=') != NULL) // We add this check, so keys with no '=' character will not display on the screen, but I think it's not necessary
+		if (ft_strchr(data->env[i], '=') != NULL)
 		{
 			write(STDOUT_FILENO, data->env[i], ft_strlen(data->env[i]));
 			write(STDOUT_FILENO, "\n", 1);
@@ -25,4 +37,4 @@ int	builtin_env(t_data *data)
 		++i;
 	}
 	return (EXIT_SUCCESS);
-} 
+}

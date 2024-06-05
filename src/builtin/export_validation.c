@@ -1,4 +1,16 @@
-#include "../../includes/builtin.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_validation.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 14:28:14 by skedikia          #+#    #+#             */
+/*   Updated: 2024/06/04 14:28:24 by skedikia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "builtin.h"
 
 int	builtin_export_validation(char *arg)
 {
@@ -19,7 +31,7 @@ int	builtin_export_validation(char *arg)
 	{
 		if (!ft_isalnum(arg[i]))
 		{
-			if (arg[i] == '=') // When we meet first '=', we just quit with SUCCESS
+			if (arg[i] == '=')
 				return (EXIT_SUCCESS);
 			minishell_error("export", arg, "not a valid identifier\n");
 			return (EXIT_FAILURE);

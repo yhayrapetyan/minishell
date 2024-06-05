@@ -1,4 +1,16 @@
-#include "../../includes/builtin.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 13:38:26 by skedikia          #+#    #+#             */
+/*   Updated: 2024/06/04 13:40:18 by skedikia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "builtin.h"
 
 int	split_size(char **split)
 {
@@ -41,68 +53,22 @@ void	data_sort_export(t_data *data)
 	if (!data)
 		return ;
 	declare_x_len = ft_strlen("declare -x ");
-	i = 0;
-	while (data->export[i])
+	i = -1;
+	while (data->export[++i])
 	{
-		j = 1;
-		while (data->export[j])
+		j = 0;
+		while (data->export[++j])
 		{
 			if (ft_strncmp(data->export[j - 1] + declare_x_len,
-						  data->export[j] + declare_x_len,
-						  ft_strlen(data->export[j] + declare_x_len)) > 0)
+					data->export[j] + declare_x_len,
+					ft_strlen(data->export[j] + declare_x_len)) > 0)
 			{
 				temp = data->export[j - 1];
 				data->export[j - 1] = data->export[j];
 				data->export[j] = temp;
 			}
-			++j;
 		}
-		++i;
 	}
-}
-
-int	find_env_variable_position(char **env, char *key)
-{
-	int	i;
-	int	key_len;
-
-	if (!env || !key)
-		return (NOT_FOUND);
-	key_len = ft_strlen(key);
-	i = 0;
-	while (env[i])
-	{
-		if (ft_strncmp(env[i], key, key_len) == 0)
-		{
-			if (env[i][key_len] == '=')
-				return (i);
-		}
-		++i;
-	}
-	return (NOT_FOUND);
-}
-
-int	find_export_variable_position(char **export, char *key)
-{
-	int	i;
-	int	key_len;
-	int	declare_x_len;
-
-	if (!export || !key)
-		return (NOT_FOUND);
-	key_len = ft_strlen(key);
-	declare_x_len = ft_strlen("declare -x ");
-	i = 0;
-	while (export[i])
-	{
-		if (ft_strncmp(export[i] + declare_x_len, key, key_len) == 0)
-		{
-			if (export[i][declare_x_len + key_len] == '=' || export[i][declare_x_len + key_len] == '\0')
-				return (i);
-		}
-		++i;
-	}
-	return (NOT_FOUND);
 }
 
 static int	is_space(char c)

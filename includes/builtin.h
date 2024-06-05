@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 13:29:30 by skedikia          #+#    #+#             */
+/*   Updated: 2024/06/04 13:30:24 by skedikia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
@@ -39,13 +51,17 @@ int		ft_atoi(const char *str);
 /*
 	export functions
 */
-int		update_env_variables(t_data *data, char *key, char *value, char *line);
-int		update_export_variables(t_data *data, char *key, char *value, char *line);
+int		update_env_variables(t_data *data, char *key,
+			char *value, char *line);
+int		update_export_variables(t_data *data, char *key,
+			char *value, char *line);
 int		add_new_env_variable(t_data *data, char *line);
 int		add_new_export_variable(t_data *data, char *line);
 char	*create_env_variable(char *key, char *value);
 char	*create_export_variable(char *key, char *value);
 int		builtin_export_validation(char *arg);
+char	*separate_key(char *line);
+char	*separate_value(char *line);
 
 /*
 	cd functions
@@ -55,10 +71,11 @@ char	*get_value_from_env(char **env, char *key);
 int		cd_update_env_values(t_data *data);
 int		cd_update_export_values(t_data *data);
 int		cd_update_workdirs(t_data *data, char *new_path);
+int		change_directory(t_data *data, char *arg);
 
 /*
 	exit functions
 */
 int		builtin_exit_validation(char *arg);
 
-# endif
+#endif

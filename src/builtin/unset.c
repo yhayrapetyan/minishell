@@ -1,6 +1,19 @@
-#include "../../includes/builtin.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 14:30:14 by skedikia          #+#    #+#             */
+/*   Updated: 2024/06/04 14:30:28 by skedikia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static void	move_split_elements_except_one(char **split_1, char **split_2, int pos)
+#include "builtin.h"
+
+static void	move_split_elements_except_one(char **split_1,
+		char **split_2, int pos)
 {
 	int	i;
 	int	j;
@@ -36,7 +49,7 @@ static int	delete_from_export(t_data *data, char *arg)
 	pos = find_export_variable_position(data->export, arg);
 	if (pos == NOT_FOUND)
 		return (EXIT_SUCCESS);
-	new_export = (char **)malloc(sizeof(char *) * (split_size(data->export))); // We dont do 'size - 1' for NULL terminator.
+	new_export = (char **)malloc(sizeof(char *) * (split_size(data->export)));
 	if (!new_export)
 		return (EXIT_FAILURE);
 	move_split_elements_except_one(new_export, data->export, pos);
@@ -58,9 +71,9 @@ static int	delete_from_env(t_data *data, char *arg)
 	pos = find_env_variable_position(data->env, arg);
 	if (pos == NOT_FOUND)
 		return (EXIT_SUCCESS);
-	new_env = (char **)malloc(sizeof(char *) * (split_size(data->env))); // We dont do 'size - 1' for NULL terminator.
+	new_env = (char **)malloc(sizeof(char *) * (split_size(data->env)));
 	if (!new_env)
-		return (EXIT_FAILURE);
+		return (ERROR_VALUE);
 	move_split_elements_except_one(new_env, data->env, pos);
 	free(data->env[pos]);
 	free(data->env);
@@ -70,19 +83,23 @@ static int	delete_from_env(t_data *data, char *arg)
 
 static int	delete_variable(t_data *data, char *arg)
 {
+	int	status;
+
 	if (!data)
 		return (EXIT_FAILURE);
 	if (!arg)
 		return (EXIT_SUCCESS);
-	if (delete_from_env(data, arg) == EXIT_FAILURE)
+	status = delete_from_env(data, arg);
+	if (status != EXIT_SUCCESS)
 	{
 		minishell_error("unset", "NULL", "env delete error\n");
-		return (EXIT_FAILURE);
+		return (status);
 	}
-	if (delete_from_export(data, arg) == EXIT_FAILURE)
+	status = delete_from_export(data, arg);
+	if (status != EXIT_SUCCESS)
 	{
 		minishell_error("unset", "NULL", "export delete error\n");
-		return (EXIT_FAILURE);
+		return (status);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -98,11 +115,10 @@ int	builtin_unset(t_data *data)
 		return (EXIT_FAILURE);
 	}
 	if (!data->commands->args)
-		return (EXIT_SUCCESS); // no arguments, nothing to unset
-	i = 1; // args[0] is command name
+		return (EXIT_SUCCESS);
+	i = 1;
 	while (data->commands->args[i])
 	{
-		// We can do validation check for argument, but I decided not :), it won't effect on result, but could optimize it
 		status = delete_variable(data, data->commands->args[i]);
 		++i;
 	}

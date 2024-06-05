@@ -8,8 +8,10 @@ HELPERS = 	free_arr.c \
             arr_join.c
 
 
-BUILTIN = 	builtin_utils.c \
+BUILTIN =	builtin_utils_norm.c \
+			builtin_utils.c \
 			builtin.c \
+			cd_norm.c \
 			cd_utils.c \
 			cd_validation.c \
 			cd.c \
@@ -17,11 +19,13 @@ BUILTIN = 	builtin_utils.c \
 			env.c \
 			exit_validation.c \
 			exit.c \
+			export_norm.c \
+			export_utils_norm.c \
 			export_utils.c \
 			export_validation.c \
 			export.c \
 			pwd.c \
-			unset.c
+			unset.c \
 
 EXECUTION = execute.c \
 			get_path.c \
