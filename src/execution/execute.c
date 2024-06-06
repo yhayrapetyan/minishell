@@ -84,6 +84,7 @@ int	execute(t_data *data)
 	status = create_pipes(data);
 	if (status < 1)
 		return (status);
+	status = 0;
 	if (!data->commands->prev && !data->commands->pipe_fd && is_builtin(data->commands->name))
 	{
 		if (data->commands->err_message)
