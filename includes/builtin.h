@@ -37,6 +37,7 @@ int		builtin_unset(t_data *data);
 int		builtin_cd(t_data *data);
 int		builtin_export(t_data *data);
 int		builtin_echo(t_data *data);
+int		builtin_exit(t_data *data);
 
 /*
 	builtin_utils.c functions

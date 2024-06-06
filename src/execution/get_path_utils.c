@@ -60,6 +60,8 @@ int	is_builtin(char *cmd)
 		"echo", "pwd", "cd", "unset", "export", "env", "exit", NULL
 	};
 
+	if (!cmd)
+		return (0);
 	return (check_builtins(builtins, our_builtins, cmd));
 }
 

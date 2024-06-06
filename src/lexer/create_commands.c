@@ -27,6 +27,8 @@ static int	parse(t_data *data, t_token **token)
 	int	status;
 
 	status = 0;
+	if (data->commands->err_message)
+		return (1);
 	if ((*token)->type == WORD || (*token)->type == ENV)
 		status = parse_word(&data->commands, token);
 	else if ((*token)->type == PIPE)
@@ -88,13 +90,12 @@ static int	check_syntax_err(t_token *temp, t_command *cmd, int *flag)
 	return (1);
 }
 
-static int	loop(t_data *data, t_token *temp)
+static int	loop(t_data *data, t_token *temp, int *flag)
 {
 	int	status;
 	int	res;
-	int	flag;
+	int syntax_status;
 
-	flag = 0;
 	res = 1;
 	while (temp && temp->next)
 	{
@@ -102,14 +103,16 @@ static int	loop(t_data *data, t_token *temp)
 			data->commands = add_command(data->commands, empty_command());
 		if (!data->commands)
 			return (-1);
-		status = check_syntax_err(temp, data->commands, &flag);
-		if (status < 1)
+		syntax_status = check_syntax_err(temp, data->commands, flag);
+		if (status == -1)
 			return (status);
 		status = parse(data, &temp);
 		if (temp->type == END)
 			break ;
 		if (status == -1 || status == -4 || status == -12)
 			return (status);
+		if (syntax_status < 1)
+			return (syntax_status);
 		if (res == 1 && status < 1)
 			res = status;
 	}
@@ -129,9 +132,11 @@ int	create_commands(t_data *data)
 	t_token	*temp;
 	int		status;
 	int		res;
+	int 	flag;
 
+	flag = 0;
 	temp = data->tokens;
-	res = loop(data, temp);
+	res = loop(data, temp, &flag);
 	if (res == -1 || res == -4)
 		return (res);
 	status = handle_no_args(data);
