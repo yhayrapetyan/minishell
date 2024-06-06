@@ -16,8 +16,6 @@ static int	has_n_option(t_data *data)
 {
 	int	i;
 
-	if (!data)
-		return (NOT_FOUND);
 	if (data->commands->args)
 	{
 		if (data->commands->args[0])
@@ -26,14 +24,16 @@ static int	has_n_option(t_data *data)
 			{
 				if (data->commands->args[1][0] == '-')
 				{
-					i = 1;
-					while (data->commands->args[1][i])
+					if (data->commands->args[1][1] == 'n')
 					{
-						if (data->commands->args[1][i] != 'n')
-							return (NOT_FOUND);
-						++i;
+						i = 1;
+						while (data->commands->args[1][++i])
+						{
+							if (data->commands->args[1][i] != 'n')
+								return (NOT_FOUND);
+						}
+						return (EXIT_SUCCESS);
 					}
-					return (EXIT_SUCCESS);
 				}
 			}
 		}
