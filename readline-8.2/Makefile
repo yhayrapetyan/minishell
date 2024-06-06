@@ -31,7 +31,7 @@ PACKAGE_TARNAME = readline
 srcdir = .
 
 top_srcdir = .
-BUILD_DIR = /Users/yuhayrap/Desktop/myProjects/minishell/readline-8.2
+BUILD_DIR = /mnt/c/SharedFolder/myProjects/minishell_github/readline-8.2
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
@@ -48,7 +48,7 @@ MV = mv
 
 SHELL = /bin/sh
 
-prefix = /Users/yuhayrap/Desktop/myProjects/minishell/readline_yuhayrap_skedikia
+prefix = /mnt/c/SharedFolder/myProjects/minishell_github/readline_yuhayrap_skedikia
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share
