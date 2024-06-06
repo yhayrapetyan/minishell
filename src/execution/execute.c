@@ -95,6 +95,8 @@ int	execute(t_data *data)
 		builtin_run(data);
 		if (ft_strcmp(data->commands->name, "exit") == 0)
 			builtin_exit(data);
+		if (data->commands->is_input_heredoc)
+			unlink(data->commands->io_fds->infile);
 	}
 	else
 		status = create_processes(data);

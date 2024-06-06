@@ -63,9 +63,6 @@ UTILS =		env_utils.c \
 			start_minishell.c \
 			signals.c
 
-GNL =		get_next_line_utils.c \
-			get_next_line.c
-
 LEXER =		lexer.c \
 			check_separators_consecutives.c \
 			handle_quotes.c \
@@ -118,7 +115,6 @@ LIBFT_DIR = ./src/libft/
 UTILS_DIR = ./src/utils/
 LEXER_DIR = ./src/lexer/
 TOKEN_DIR = ./src/tokenization/
-GNL_DIR = ./src/GNL/
 EXPANSION_DIR = ./src/expansion/
 PARSING_DIR = ./src/parsing/
 EXECUTION_DIR = ./src/execution/
@@ -136,7 +132,6 @@ EXPANSION := $(addprefix $(EXPANSION_DIR), $(EXPANSION))
 PARSING := $(addprefix $(PARSING_DIR), $(PARSING))
 EXECUTION := $(addprefix $(EXECUTION_DIR), $(EXECUTION))
 BUILTIN := $(addprefix $(BUILTIN_DIR), $(BUILTIN))
-GNL := $(addprefix $(GNL_DIR), $(GNL))
 OBJS = $(SRC:.c=.o)
 
 SRC += $(HELPERS)
@@ -144,7 +139,6 @@ SRC += $(LIBFT)
 SRC += $(UTILS)
 SRC += $(LEXER)
 SRC += $(TOKEN)
-SRC += $(GNL)
 SRC += $(EXPANSION)
 SRC += $(PARSING)
 SRC += $(EXECUTION)
