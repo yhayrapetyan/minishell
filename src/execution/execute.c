@@ -37,26 +37,30 @@ static void	exit_helper(char *cmd_name, char *err_message)
 	exit(CMD_NOT_FOUND_STAT);
 }
 
+static void handle_error(t_data *data, t_command *cmd)
+{
+	write(2, cmd->err_message, ft_strlen(cmd->err_message));
+	write(2, "\n", 1);
+	err_type = cmd->err_type;
+	clean_data(data);
+	exit(get_exit_status(err_type));
+}
+
 int	execute_command(t_data *data, t_command *cmd)
 {
 	int		status;
 	int		err_type;
 
 	if (cmd->err_message)
-	{
-		write(2, cmd->err_message, ft_strlen(cmd->err_message));
-		write(2, "\n", 1);
-		err_type = cmd->err_type;
-		clean_data(data);
-		exit(get_exit_status(err_type));
-	}
+		handle_error(data, cmd);
 	status = handle_descriptors(cmd);
 	if (status < 1)
 		exit(1);
 	if (is_builtin(cmd->name))
 	{
-		data->commands = cmd;//need to check
+		data->commands = cmd;
 		builtin_run(data);
+		clean_data(data);
 		exit(g_exit_status);
 	}
 	status = get_path(data, cmd);

@@ -1,4 +1,4 @@
-prefix=/Users/yuhayrap/Desktop/myProjects/minishell/readline_yuhayrap_skedikia
+prefix=/mnt/c/SharedFolder/myProjects/minishell_github/readline_yuhayrap_skedikia
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
