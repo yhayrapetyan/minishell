@@ -153,8 +153,8 @@ SRC += $(BUILTIN)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I ./readline_yuhayrap_skedikia/include
-# READLINE_LIB = -lreadline
-READLINE_LIB =  -Lreadline_yuhayrap_skedikia/lib -lreadline
+READLINE_LIB = -lreadline
+#READLINE_LIB =  -Lreadline_yuhayrap_skedikia/lib -lreadline
 NAME = minishell
 RM = rm -f
 

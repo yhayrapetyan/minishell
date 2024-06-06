@@ -21,7 +21,7 @@ RL_LIBRARY_VERSION = 8.2
 SHELL = /bin/sh
 RM = rm -f
 
-prefix = /Users/yuhayrap/Desktop/myProjects/minishell/readline_yuhayrap_skedikia
+prefix = /mnt/c/SharedFolder/myProjects/minishell_github/readline_yuhayrap_skedikia
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share
@@ -32,7 +32,7 @@ datadir = ${datarootdir}
 
 top_srcdir = ..
 #BUILD_DIR = .
-BUILD_DIR = /Users/yuhayrap/Desktop/myProjects/minishell/readline-8.2
+BUILD_DIR = /mnt/c/SharedFolder/myProjects/minishell_github/readline-8.2
 installdir = $(datadir)/readline
 
 INSTALL = /usr/bin/install -c
