@@ -49,9 +49,15 @@ int	builtin_exit(t_data *data)
 		minishell_error("exit", "NULL", "Data error\n");
 		return (EXIT_FAILURE);
 	}
+	if (!data->commands)
+	{
+		write(STDOUT_FILENO, "exit\n", 5);
+		exit(0);
+	}
 	status = builtin_exit_norm(data);
 	if (status != EXIT_SUCCESS)
 		return (status);
+	write(STDOUT_FILENO, "exit\n", 5);
 	exit(g_exit_status);
 	return (EXIT_SUCCESS);
 }

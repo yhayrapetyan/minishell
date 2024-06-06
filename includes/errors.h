@@ -23,7 +23,7 @@
 # define FORK_CREATE_ERR	"Can't create the child process\n"
 # define DUP_ERR			"Can't duplicate the descriptor\n"
 # define EXEC_ERR			"Can't execute the command\n"
-# define CMD_NOT_FOUND_ERR	"Command not found\n"
+# define CMD_NOT_FOUND_ERR	"Command not found"
 # define ENV_INIT_ERR		"Can't init env\n"
 # define EXPORT_INIT_ERR	"Can't init export\n"
 # define WDIR_INIT_ERR 		"Can't init work dir\n"

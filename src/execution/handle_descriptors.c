@@ -48,6 +48,20 @@ static int	handle_pipe_fds(t_command *cmd)
 	return (1);
 }
 
+static int handle_one_cmd_io_fds(t_command *cmd)
+{
+	int status;
+
+	status = 1;
+	if (cmd->io_fds->infile && cmd->io_fds->fd_in != -1)
+		status = dup2_and_close(cmd->io_fds->fd_in, STDIN_FILENO);
+	if (status < 1)
+		return (status);
+	if (cmd->io_fds->outfile && cmd->io_fds->fd_out != -1)
+		status = dup2_and_close(cmd->io_fds->fd_out, STDOUT_FILENO);
+	return (status);
+}
+
 static int	handle_io_fds(t_command *cmd)
 {
 	int	status;
@@ -78,6 +92,8 @@ int	handle_descriptors(t_command *cmd)
 		status = handle_io_fds(cmd);
 	else if (cmd->pipe_fd)
 		status = handle_pipe_fds(cmd);
+	else if (!cmd->pipe_fd && cmd->io_fds)
+		status = handle_one_cmd_io_fds(cmd);
 	else if (cmd->prev && cmd->prev->pipe_flag == 1)
 	{
 		close(cmd->prev->pipe_fd[1]);

@@ -82,7 +82,7 @@ int	builtin_export(t_data *data)
 	}
 	status = EXIT_SUCCESS;
 	i = 1;
-	if (data->commands->args)
+	if (data->commands->args && data->commands->args[i])
 	{
 		while (data->commands->args[i])
 		{

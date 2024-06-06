@@ -50,13 +50,7 @@ void	start_minishell(t_data *data)
 		if (!data->input)
 		{
 			clean_data(data);
-			printf("exit\n");
-			exit(0);
-		}
-		if (data->input && ft_strcmp(data->input, "exit") == 0)
-		{
-			rl_clear_history();
-			break ;
+			builtin_exit(data);
 		}
 		status = lexer(data);
 		if (status > -5 && status < 0)

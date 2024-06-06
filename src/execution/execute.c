@@ -39,6 +39,8 @@ static void	exit_helper(char *cmd_name, char *err_message)
 
 static void handle_error(t_data *data, t_command *cmd)
 {
+	int		err_type;
+
 	write(2, cmd->err_message, ft_strlen(cmd->err_message));
 	write(2, "\n", 1);
 	err_type = cmd->err_type;
@@ -49,7 +51,6 @@ static void handle_error(t_data *data, t_command *cmd)
 int	execute_command(t_data *data, t_command *cmd)
 {
 	int		status;
-	int		err_type;
 
 	if (cmd->err_message)
 		handle_error(data, cmd);
@@ -84,7 +85,17 @@ int	execute(t_data *data)
 	if (status < 1)
 		return (status);
 	if (!data->commands->prev && !data->commands->pipe_fd && is_builtin(data->commands->name))
+	{
+		if (data->commands->err_message)
+		{
+			write(2, data->commands->err_message, ft_strlen(data->commands->err_message));
+			write(2, "\n", 1);
+			return (get_exit_status(data->commands->err_type));
+		}
 		builtin_run(data);
+		if (ft_strcmp(data->commands->name, "exit") == 0)
+			builtin_exit(data);
+	}
 	else
 		status = create_processes(data);
 	return (status);
