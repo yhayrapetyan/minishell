@@ -84,17 +84,22 @@ int	execute(t_data *data)
 	status = create_pipes(data);
 	if (status < 1)
 		return (status);
+	status = 0;
 	if (!data->commands->prev && !data->commands->pipe_fd && is_builtin(data->commands->name))
 	{
 		if (data->commands->err_message)
 		{
 			write(2, data->commands->err_message, ft_strlen(data->commands->err_message));
 			write(2, "\n", 1);
+			if (data->commands->is_input_heredoc)
+				unlink(data->commands->io_fds->infile);
 			return (get_exit_status(data->commands->err_type));
 		}
 		builtin_run(data);
 		if (ft_strcmp(data->commands->name, "exit") == 0)
 			builtin_exit(data);
+		if (data->commands->is_input_heredoc)
+			unlink(data->commands->io_fds->infile);
 	}
 	else
 		status = create_processes(data);

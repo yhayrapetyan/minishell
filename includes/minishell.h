@@ -22,7 +22,6 @@
 # include "expansion.h"
 # include "tokenization.h"
 # include "builtin.h"
-# include "get_next_line.h"
 # include "execution.h"
 
 /* HELPERS */
