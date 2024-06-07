@@ -105,6 +105,5 @@ int	remove_quotes(t_token **tokens)
 	new_content[j] = '\0';
 	free((*tokens)->content);
 	(*tokens)->content = new_content;
-	(*tokens)->join = 1;
 	return (1);
 }

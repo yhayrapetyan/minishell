@@ -17,9 +17,10 @@ static int	count_proper_size(t_token *token)
 	int	i;
 
 	i = 0;
-	while (token->type == WORD || token->type == ENV)
+	while (token->type == WORD || token->type == ENV || token->type == SPACES)
 	{
-		i++;
+		if (token->type == WORD || token->type == ENV)
+			i++;
 		token = token->next;
 	}
 	return (i);
@@ -44,9 +45,10 @@ int	create_args(t_token **tokens, t_command *lst_cmd)
 	lst_cmd->args[i++] = ft_strdup(lst_cmd->name);
 	if (!lst_cmd->args[i - 1])
 		return (0);
-	while (temp->type == WORD || temp->type == ENV)
+	while (temp->type == WORD || temp->type == ENV || temp->type == SPACES)
 	{
-		lst_cmd->args[i++] = ft_strdup(temp->content);
+		if (temp->type == WORD || temp->type == ENV)
+			lst_cmd->args[i++] = ft_strdup(temp->content);
 		if (!lst_cmd->args[i - 1])
 			return (0);
 		temp = temp->next;
@@ -75,12 +77,12 @@ static char	**replace_args(t_token **tokens, t_command *lst_cmd,
 			return (free_arr(new_args));
 		i++;
 	}
-	while (temp->type == WORD || temp->type == ENV)
+	while (temp->type == WORD || temp->type == ENV || temp->type == SPACES)
 	{
-		new_args[i] = ft_strdup(temp->content);
-		if (!new_args[i])
+		if (temp->type == WORD || temp->type == ENV)
+			new_args[i++] = ft_strdup(temp->content);
+		if (!new_args[i - 1])
 			return (free_arr(new_args));
-		i++;
 		temp = temp->next;
 	}
 	new_args[i] = NULL;
@@ -100,9 +102,10 @@ int	add_args(t_token **tokens, t_command *lst_cmd)
 
 	i = 0;
 	temp = *tokens;
-	while (temp->type == WORD || temp->type == ENV)
+	while (temp->type == WORD || temp->type == ENV || temp->type == SPACES)
 	{
-		i++;
+		if (temp->type == WORD || temp->type == ENV)
+			i++;
 		temp = temp->next;
 	}
 	len = 0;

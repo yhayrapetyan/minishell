@@ -41,6 +41,8 @@ static int	parse(t_data *data, t_token **token)
 		status = parse_append(&data->commands, token);
 	else if ((*token)->type == HEREDOC)
 		status = parse_heredoc(data, &data->commands, token);
+	else if ((*token)->type == SPACES)
+		(*token) = (*token)->next;
 	return (status);
 }
 
