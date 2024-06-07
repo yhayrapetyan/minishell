@@ -44,6 +44,8 @@ int	init_io_fds(t_command	*command)
 		command->io_fds->delim_in_quotes = 0;
 		command->io_fds->fd_in = -1;
 		command->io_fds->fd_out = -1;
+		command->io_fds->stdin_backup = -1;
+		command->io_fds->stdout_backup = -1;
 	}
 	return (1);
 }

@@ -44,9 +44,10 @@ void	start_minishell(t_data *data)
 
 	while (1)
 	{
-		set_signals_interactive();
+//		set_signals_interactive();
+//		data->input = readline("");
 		data->input = readline(RED PROMPT RESET_COLOR);
-		set_signals_noninteractive();
+//		set_signals_noninteractive();
 		if (!data->input)
 		{
 			clean_data(data);

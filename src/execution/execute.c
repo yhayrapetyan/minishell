@@ -12,17 +12,6 @@
 
 #include "minishell.h"
 
-static int	get_exit_status(int err_type)
-{
-	if (err_type == -5)
-		return (SYNTAX_STAT);
-	else if (err_type == -6)
-		return (AMBIGOUS_REDIR_STAT);
-	else if (err_type == -7)
-		return (FILE_OPEN_STAT);
-	return (0);
-}
-
 /* idk how to name this function */
 static void	exit_helper(char *cmd_name, char *err_message)
 {
@@ -74,6 +63,35 @@ int	execute_command(t_data *data, t_command *cmd)
 	return (1);
 }
 
+int execute_builtin(t_data *data)
+{
+	int status;
+
+	status = 0;
+	if (data->commands->err_message)
+	{
+		write(2, data->commands->err_message, ft_strlen(data->commands->err_message));
+		write(2, "\n", 1);
+		if (data->commands->is_input_heredoc)
+			unlink(data->commands->io_fds->infile);
+		return (get_exit_status(data->commands->err_type));
+	}
+	if (data->commands->io_fds)
+	{
+		data->commands->io_fds->stdin_backup = dup(STDIN_FILENO);
+		data->commands->io_fds->stdout_backup = dup(STDOUT_FILENO);
+	}
+	handle_descriptors(data->commands);
+	builtin_run(data);
+	if (reset_descriptors(data->commands->io_fds) < 0)
+		return (-10);
+	if (ft_strcmp(data->commands->name, "exit") == 0)
+		builtin_exit(data);
+	if (data->commands->is_input_heredoc)
+		unlink(data->commands->io_fds->infile);
+	return (status);
+}
+
 int	execute(t_data *data)
 {
 	int	status;
@@ -86,21 +104,7 @@ int	execute(t_data *data)
 		return (status);
 	status = 0;
 	if (!data->commands->prev && !data->commands->pipe_fd && is_builtin(data->commands->name))
-	{
-		if (data->commands->err_message)
-		{
-			write(2, data->commands->err_message, ft_strlen(data->commands->err_message));
-			write(2, "\n", 1);
-			if (data->commands->is_input_heredoc)
-				unlink(data->commands->io_fds->infile);
-			return (get_exit_status(data->commands->err_type));
-		}
-		builtin_run(data);
-		if (ft_strcmp(data->commands->name, "exit") == 0)
-			builtin_exit(data);
-		if (data->commands->is_input_heredoc)
-			unlink(data->commands->io_fds->infile);
-	}
+		status = execute_builtin(data);
 	else
 		status = create_processes(data);
 	return (status);

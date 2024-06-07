@@ -28,6 +28,5 @@ int			remove_old_ref(t_io_fds *io, int flag);
 int			remove_empty_var(t_token **tokens);
 int			count_echo_args(t_token *temp);
 int			is_valid_filename(char *str);
-char		*join_vars(t_token **tokens);
 
 #endif

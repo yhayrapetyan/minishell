@@ -12,6 +12,17 @@
 
 #include "minishell.h"
 
+int	get_exit_status(int err_type)
+{
+	if (err_type == -5)
+		return (SYNTAX_STAT);
+	else if (err_type == -6)
+		return (AMBIGOUS_REDIR_STAT);
+	else if (err_type == -7)
+		return (FILE_OPEN_STAT);
+	return (0);
+}
+
 static int	wait_for_childes(t_data *data)
 {
 	int			i;

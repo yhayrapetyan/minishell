@@ -12,6 +12,23 @@
 
 #include "minishell.h"
 
+static int is_option(char *str)
+{
+	int i;
+
+	if (!str)
+		return (0);
+	i = 0;
+	if (str[i++] == '-')
+	{
+		while (str[i] && str[i] == 'n')
+			i++;
+		if (str[i] == '\0')
+			return (1);
+	}
+	return (0);
+}
+
 static int	create(t_token **tmp, t_command *last_cmd)
 {
 	int	i;
@@ -20,15 +37,14 @@ static int	create(t_token **tmp, t_command *last_cmd)
 	last_cmd->args[0] = ft_strdup(last_cmd->name);
 	if (!last_cmd->args[0])
 		return (0);
-	while ((*tmp)->type == WORD || (*tmp)->type == ENV)
+	while ((*tmp)->type == WORD || (*tmp)->type == ENV || (*tmp)->type == SPACES)
 	{
-		if ((*tmp)->join == 1)
-			last_cmd->args[i] = join_vars(tmp);
-		else
-			last_cmd->args[i] = ft_strdup((*tmp)->content);
-		if (!last_cmd->args[i])
+		if (i != 1 && (*tmp)->prev && !is_option(last_cmd->args[i - 1]) && (*tmp)->prev->type == SPACES)
+			last_cmd->args[i++] = ft_strjoin(" ", (*tmp)->content);
+		else if ((*tmp)->type != SPACES)
+			last_cmd->args[i++] = ft_strdup((*tmp)->content);
+		if (!last_cmd->args[i - 1])
 			return (0);
-		i++;
 		(*tmp) = (*tmp)->next;
 	}
 	last_cmd->args[i] = NULL;
@@ -66,15 +82,12 @@ static char	**replace_echo_args(t_token **tokens, t_command *lst_cmd, \
 		if (!new_args[i])
 			return (free_arr(new_args));
 	}
-	while (temp->type == WORD || temp->type == ENV)
+	while (temp->type == WORD || temp->type == ENV || temp->type == SPACES)
 	{
-		if (temp->join == 1)
-			new_args[i] = join_vars(&temp);
-		else
-			new_args[i] = ft_strdup(temp->content);
-		if (!new_args[i])
+		if (temp->prev->type == SPACES)
+			new_args[i++] = ft_strjoin(" ", temp->content);
+		if (!new_args[i - 1])
 			return (free_arr(new_args));
-		i++;
 		temp = temp->next;
 	}
 	new_args[i] = NULL;
