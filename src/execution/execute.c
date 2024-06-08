@@ -65,9 +65,6 @@ int	execute_command(t_data *data, t_command *cmd)
 
 int execute_builtin(t_data *data)
 {
-	int status;
-
-	status = 0;
 	if (data->commands->err_message)
 	{
 		write(2, data->commands->err_message, ft_strlen(data->commands->err_message));
@@ -85,11 +82,11 @@ int execute_builtin(t_data *data)
 	builtin_run(data);
 	if (reset_descriptors(data->commands->io_fds) < 0)
 		return (-10);
-	if (ft_strcmp(data->commands->name, "exit") == 0)
-		builtin_exit(data);
 	if (data->commands->is_input_heredoc)
 		unlink(data->commands->io_fds->infile);
-	return (status);
+	if (ft_strcmp(data->commands->name, "exit") == 0)
+		g_exit_status = builtin_exit(data);
+	return (g_exit_status);
 }
 
 int	execute(t_data *data)

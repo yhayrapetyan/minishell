@@ -27,12 +27,17 @@ static int	parse(t_data *data, t_token **token)
 	int	status;
 
 	status = 0;
-	if (data->commands->err_message)
-		return (1);
-	if ((*token)->type == WORD || (*token)->type == ENV)
-		status = parse_word(&data->commands, token);
-	else if ((*token)->type == PIPE)
+	if ((*token)->type == SPACES)
+		(*token) = (*token)->next;
+	if ((*token)->type == PIPE)
 		status = parse_pipe(&data->commands, token);
+	else if ((*token)->type == WORD || (*token)->type == ENV)
+		status = parse_word(&data->commands, token);
+	else if (data->commands->err_message)
+	{
+		(*token) = (*token)->next;
+		return (1);
+	}
 	else if ((*token)->type == INPUT)
 		status = parse_input(&data->commands, token);
 	else if ((*token)->type == TRUNC)
@@ -41,8 +46,6 @@ static int	parse(t_data *data, t_token **token)
 		status = parse_append(&data->commands, token);
 	else if ((*token)->type == HEREDOC)
 		status = parse_heredoc(data, &data->commands, token);
-	else if ((*token)->type == SPACES)
-		(*token) = (*token)->next;
 	return (status);
 }
 

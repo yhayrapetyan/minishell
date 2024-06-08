@@ -63,11 +63,9 @@ int	parse_trunc(t_command **commands, t_token **tokens)
 	if (!init_io_fds(lst_cmd))
 		return (-1);
 	status = open_trunc(lst_cmd->io_fds, tmp->next, lst_cmd);
-	if (status < 1)
-		return (status);
 	if (tmp->next->next)
 		*tokens = tmp->next->next;
 	else
 		*tokens = tmp->next;
-	return (1);
+	return (status);
 }
