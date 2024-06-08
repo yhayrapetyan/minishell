@@ -38,7 +38,7 @@
 # define MALLOC_STAT 			3
 # define ARG_STAT				4
 # define WRT_PERM_STAT			1
-# define FILE_OPEN_STAT			6
+# define FILE_OPEN_STAT			1
 # define PIPE_CLOSE_STAT		7
 # define PIPE_CREATE_STAT		8
 # define FORK_CREATE_STAT		9
@@ -51,7 +51,7 @@
 # define DQUOTE_STAT			16
 # define AMBIGOUS_REDIR_STAT	17
 # define SYNTAX_STAT			2
-# define EXEC_STAT				126
+# define PERMISSION_STAT		126
 # define CMD_NOT_FOUND_STAT		127
 
 #endif

@@ -53,6 +53,10 @@ int	lexer(t_data *data)
 	status = expand_variables(data);
 	if (status < 1)
 		return (status);
+	rm_empty_tokens(data);
+	status = join_tokens(data);
+	if (status < 1)
+		return (status);
 	status = handle_quotes(data);
 	if (status < 1)
 		return (status);

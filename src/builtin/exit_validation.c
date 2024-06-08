@@ -25,6 +25,11 @@ int	builtin_exit_validation(char *arg)
 	i = 0;
 	while (arg[i])
 	{
+		if (i == 0 && (arg[i] == '+' || arg[i] == '-'))
+		{
+			i++;
+			continue;
+		}
 		if (!ft_isdigit(arg[i]))
 		{
 			write(STDOUT_FILENO, "exit\n", 5);

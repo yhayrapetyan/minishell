@@ -52,14 +52,13 @@ int	is_builtin(char *cmd)
 		"eval", "exec", "exit", "export", "false", "fc", "fg",
 		"getopts", "hash", "help", "history", "jobs", "kill", "let",
 		"local", "logout", "mapfile", "popd", "printf", "pushd", "pwd",
-		"read", "readarray", "readonly", "return", "set", "shift",
+		"read", "readarray", "readonly", "return", "set", "shift", "env",
 		"shopt", "source", "suspend", "test", "times", "trap", "true",
 		"type", "typeset", "ulimit", "umask", "unalias", "unset", "wait", NULL
 	};
 	const char	*our_builtins[] = {
 		"echo", "pwd", "cd", "unset", "export", "env", "exit", NULL
 	};
-
 	if (!cmd)
 		return (0);
 	return (check_builtins(builtins, our_builtins, cmd));

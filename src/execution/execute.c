@@ -22,6 +22,11 @@ static void	exit_helper(char *cmd_name, char *err_message)
 		exit (1);
 	write(2, err_msg, ft_strlen(err_msg));
 	write(2, "\n", 1);
+	if (ft_strstr(err_msg, "Permission denied") != NULL)
+	{
+		free(err_msg);
+		exit(PERMISSION_STAT);
+	}
 	free(err_msg);
 	exit(CMD_NOT_FOUND_STAT);
 }
@@ -29,12 +34,14 @@ static void	exit_helper(char *cmd_name, char *err_message)
 static void handle_error(t_data *data, t_command *cmd)
 {
 	int		err_type;
+	char 	*err_message;
 
 	write(2, cmd->err_message, ft_strlen(cmd->err_message));
 	write(2, "\n", 1);
 	err_type = cmd->err_type;
+	err_message = cmd->err_message;//carefull
 	clean_data(data);
-	exit(get_exit_status(err_type));
+	exit(get_exit_status(err_type, err_message));
 }
 
 int	execute_command(t_data *data, t_command *cmd)
@@ -65,16 +72,13 @@ int	execute_command(t_data *data, t_command *cmd)
 
 int execute_builtin(t_data *data)
 {
-	int status;
-
-	status = 0;
 	if (data->commands->err_message)
 	{
 		write(2, data->commands->err_message, ft_strlen(data->commands->err_message));
 		write(2, "\n", 1);
 		if (data->commands->is_input_heredoc)
 			unlink(data->commands->io_fds->infile);
-		return (get_exit_status(data->commands->err_type));
+		return (get_exit_status(data->commands->err_type, data->commands->err_message));
 	}
 	if (data->commands->io_fds)
 	{
@@ -85,11 +89,11 @@ int execute_builtin(t_data *data)
 	builtin_run(data);
 	if (reset_descriptors(data->commands->io_fds) < 0)
 		return (-10);
-	if (ft_strcmp(data->commands->name, "exit") == 0)
-		builtin_exit(data);
 	if (data->commands->is_input_heredoc)
 		unlink(data->commands->io_fds->infile);
-	return (status);
+	if (ft_strcmp(data->commands->name, "exit") == 0)
+		g_exit_status = builtin_exit(data);
+	return (g_exit_status);
 }
 
 int	execute(t_data *data)

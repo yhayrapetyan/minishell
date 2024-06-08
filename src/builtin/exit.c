@@ -58,6 +58,7 @@ int	builtin_exit(t_data *data)
 	if (status != EXIT_SUCCESS)
 		return (status);
 	write(STDOUT_FILENO, "exit\n", 5);
+	clean_data(data);
 	exit(g_exit_status);
 	return (EXIT_SUCCESS);
 }

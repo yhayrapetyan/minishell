@@ -109,6 +109,7 @@ int	builtin_unset(t_data *data)
 	int	i;
 	int	status;
 
+	status = 0;
 	if (!data)
 	{
 		minishell_error("unset", "NULL", "Data error\n");

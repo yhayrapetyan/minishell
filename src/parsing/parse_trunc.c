@@ -37,7 +37,7 @@ static int	open_trunc(t_io_fds *io, t_token *token, t_command *cmd)
 	io->fd_out = open(io->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (io->fd_out == -1)
 	{
-		cmd->err_message = parse_err(io->infile, strerror(errno));
+		cmd->err_message = parse_err(io->outfile, strerror(errno));
 		if (!cmd->err_message)
 			return (-1);
 		cmd->err_type = -7;
@@ -63,11 +63,9 @@ int	parse_trunc(t_command **commands, t_token **tokens)
 	if (!init_io_fds(lst_cmd))
 		return (-1);
 	status = open_trunc(lst_cmd->io_fds, tmp->next, lst_cmd);
-	if (status < 1)
-		return (status);
 	if (tmp->next->next)
 		*tokens = tmp->next->next;
 	else
 		*tokens = tmp->next;
-	return (1);
+	return (status);
 }

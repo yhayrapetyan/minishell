@@ -105,11 +105,9 @@ int	parse_heredoc(t_data *data, t_command **commands, t_token **tokens)
 		status = handle_error(data, io, tmp, lst_cmd);
 	else
 		status = handle_default(data, io, tmp, lst_cmd);
-	if (status < 1)
-		return (status);
 	if (tmp->next->next)
 		*tokens = tmp->next->next;
 	else
 		*tokens = tmp->next;
-	return (1);
+	return (status);
 }
