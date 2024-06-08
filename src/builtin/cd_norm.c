@@ -64,6 +64,8 @@ static int	cd_parent_move_case(t_data *data)
 // cd 'path'
 static int	cd_path_move_case(t_data *data, char *path)
 {
+	char	cwd[PATH_MAX];
+
 	if (!data)
 	{
 		minishell_error("cd", "NULL", "Data error\n");
@@ -74,7 +76,12 @@ static int	cd_path_move_case(t_data *data, char *path)
 		minishell_error("cd", path, "No such file or directory\n");
 		return (EXIT_FAILURE);
 	}
-	return (cd_update_workdirs(data, path));
+	if (!getcwd(cwd, sizeof(cwd)))
+	{
+		minishell_error("cd", NULL, "getcwd error\n");
+		return (EXIT_FAILURE);
+	}
+	return (cd_update_workdirs(data, cwd));
 }
 
 // cd

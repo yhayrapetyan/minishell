@@ -12,6 +12,7 @@ BUILTIN =	builtin_utils_norm.c \
 			builtin_utils.c \
 			builtin.c \
 			cd_norm.c \
+			cd_utils_norm.c \
 			cd_utils.c \
 			cd_validation.c \
 			cd.c \

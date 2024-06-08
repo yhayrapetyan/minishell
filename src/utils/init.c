@@ -75,6 +75,7 @@ int	init_work_dir(t_data *data)
 }
 
 int	g_exit_status = 0;
+int	g_pwd_unset = 0;
 
 void	init_data(t_data *data, char **env)
 {

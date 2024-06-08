@@ -25,7 +25,7 @@
 # define ERROR_VALUE -1
 # define NOT_FOUND -2
 # define NOT_NUMERIC_ERROR 2
-# define CHAR_SIZE_COMBINATIONS 256
+# define CHAR_SIZE_COMBINATIONS 255
 
 /*
 	BUILTINS
@@ -37,7 +37,6 @@ int		builtin_unset(t_data *data);
 int		builtin_cd(t_data *data);
 int		builtin_export(t_data *data);
 int		builtin_echo(t_data *data);
-int		builtin_exit(t_data *data);
 
 /*
 	builtin_utils.c functions
@@ -63,6 +62,7 @@ char	*create_export_variable(char *key, char *value);
 int		builtin_export_validation(char *arg);
 char	*separate_key(char *line);
 char	*separate_value(char *line);
+int		add_to_enviroment(t_data *data, char *key, char *value);
 
 /*
 	cd functions
@@ -78,5 +78,10 @@ int		change_directory(t_data *data, char *arg);
 	exit functions
 */
 int		builtin_exit_validation(char *arg);
+
+/*
+	unset functions
+*/
+int	delete_variable(t_data *data, char *arg);
 
 #endif

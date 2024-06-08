@@ -43,6 +43,7 @@
 # endif
 
 extern int	g_exit_status;
+extern int	g_pwd_unset;
 
 /* UTILS */
 t_command	*add_command(t_command *old_command, t_command *new_command);

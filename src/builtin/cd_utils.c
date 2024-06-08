@@ -51,7 +51,7 @@ int	cd_update_workdirs(t_data *data, char *new_path)
 	return (EXIT_SUCCESS);
 }
 
-int	cd_update_export_values(t_data *data)
+int	old_cd_update_export_values(t_data *data)
 {
 	char	*new_pwd;
 	char	*new_oldpwd;
@@ -80,7 +80,7 @@ int	cd_update_export_values(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-int	cd_update_env_values(t_data *data)
+int	old_cd_update_env_values(t_data *data)
 {
 	char	*new_pwd;
 	char	*new_oldpwd;
