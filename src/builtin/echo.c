@@ -12,53 +12,52 @@
 
 #include "builtin.h"
 
-static int	has_n_option(t_data *data)
+static int	hyphen_n_case(char *arg, int *is_new_line)
 {
 	int	i;
 
-	if (data->commands->args)
+	if (!arg || !is_new_line)
+		return (0);
+	i = 1;
+	while (arg[i])
 	{
-		if (data->commands->args[0])
-		{
-			if (data->commands->args[1])
-			{
-				if (data->commands->args[1][0] == '-')
-				{
-					if (data->commands->args[1][1] == 'n')
-					{
-						i = 1;
-						while (data->commands->args[1][++i])
-						{
-							if (data->commands->args[1][i] != 'n')
-								return (NOT_FOUND);
-						}
-						return (EXIT_SUCCESS);
-					}
-				}
-			}
-		}
+		if (arg[i] != 'n')
+			return (0);
+		++i;
 	}
-	return (NOT_FOUND);
+	*is_new_line = 0;
+	return (1);
 }
 
-static void	print_echo(t_data *data, int start)
+static void	echo_print(t_data *data, int *is_new_line)
 {
 	int	i;
 
-	if (!data)
+	if (!data || !is_new_line)
 		return ;
-	i = start;
+	i = 1;
+	while (data->commands->args[i])
+	{
+		if (data->commands->args[i][0] != '-')
+			break ;
+		if (!hyphen_n_case(data->commands->args[i], is_new_line))
+			break ;
+		++i;
+	}
 	while (data->commands->args[i])
 	{
 		write(STDOUT_FILENO, data->commands->args[i],
 			ft_strlen(data->commands->args[i]));
-//		if (data->commands->args[i + 1])
-//			write(STDOUT_FILENO, " ", 1);
+		if (data->commands->args[i + 1])
+			write(STDOUT_FILENO, " ", 1);
 		++i;
 	}
 }
+
 int	builtin_echo(t_data *data)
 {
+	int	is_new_line;
+
 	if (!data)
 	{
 		minishell_error("echo", "NULL", "Data error\n");
@@ -66,13 +65,10 @@ int	builtin_echo(t_data *data)
 	}
 	if (data->commands->args)
 	{
-		if (has_n_option(data) != NOT_FOUND)
-			print_echo(data, 2);
-		else
-		{
-			print_echo(data, 1);
+		is_new_line = 1;
+		echo_print(data, &is_new_line);
+		if (is_new_line)
 			write(STDOUT_FILENO, "\n", 1);
-		}
 	}
 	else
 		write(STDOUT_FILENO, "\n", 1);
