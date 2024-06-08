@@ -37,7 +37,7 @@ static int	open_append(t_io_fds *io, t_token *token, t_command *cmd)
 	io->fd_out = open(io->outfile, O_WRONLY | O_CREAT | O_APPEND, 0664);
 	if (io->fd_out == -1)
 	{
-		cmd->err_message = parse_err(io->infile, strerror(errno));
+		cmd->err_message = parse_err(io->outfile, strerror(errno));
 		if (!cmd->err_message)
 			return (-1);
 		cmd->err_type = -7;

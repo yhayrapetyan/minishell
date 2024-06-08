@@ -51,7 +51,7 @@
 # define DQUOTE_STAT			16
 # define AMBIGOUS_REDIR_STAT	17
 # define SYNTAX_STAT			2
-# define EXEC_STAT				126
+# define PERMISSION_STAT		126
 # define CMD_NOT_FOUND_STAT		127
 
 #endif

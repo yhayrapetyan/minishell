@@ -52,8 +52,8 @@ static void	print_echo(t_data *data, int start)
 	{
 		write(STDOUT_FILENO, data->commands->args[i],
 			ft_strlen(data->commands->args[i]));
-//		if (data->commands->args[i + 1])
-//			write(STDOUT_FILENO, " ", 1);
+		if (data->commands->args[i + 1])
+			write(STDOUT_FILENO, " ", 1);
 		++i;
 	}
 }

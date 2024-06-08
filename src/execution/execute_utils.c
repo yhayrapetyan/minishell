@@ -12,14 +12,18 @@
 
 #include "minishell.h"
 
-int	get_exit_status(int err_type)
+int	get_exit_status(int err_type, char *err_message)
 {
 	if (err_type == -5)
 		return (SYNTAX_STAT);
 	else if (err_type == -6)
 		return (AMBIGOUS_REDIR_STAT);
 	else if (err_type == -7)
+	{
+		if (ft_strstr(err_message, "Permission denied") != NULL)
+			return (PERMISSION_STAT);
 		return (FILE_OPEN_STAT);
+	}
 	return (0);
 }
 

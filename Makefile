@@ -49,7 +49,8 @@ LIBFT = 	ft_strtrim.c \
 			ft_isalnum.c \
 			ft_isalpha.c \
 			ft_isdigit.c \
-			ft_memset.c
+			ft_memset.c \
+			ft_strstr.c
 
 UTILS =		env_utils.c \
 			print_commands.c \
