@@ -26,6 +26,15 @@ static int	invalid_consecutive(t_token *token)
 	return (0);
 }
 
+static int separators_consecutive_helper(t_token *tkn, t_command *cmd)
+{
+	if (tkn->next->type == END)
+		cmd->err_message = syntax_err(SYNTAX_ERR, "newline", 1);
+	else
+		cmd->err_message = syntax_err(SYNTAX_ERR, "|", 1);
+	return (-5);
+}
+
 /*
  * returns
  * 1 => success
@@ -44,13 +53,7 @@ int	check_separators_consecutive(t_token *tkn, t_command *cmd)
 		if (tkn->prev && tkn->prev->type == HEREDOC)
 			break ;
 		if (tkn->type == HEREDOC && tkn->next && (tkn->next->type == END || tkn->next->type == PIPE))
-		{
-			if (tkn->next->type == END)
-				cmd->err_message = syntax_err(SYNTAX_ERR, "newline", 1);
-			else
-				cmd->err_message = syntax_err(SYNTAX_ERR, "|", 1);
-			return (-5);
-		}
+			return (separators_consecutive_helper(tkn, cmd));
 		if (invalid_consecutive(tkn))
 		{
 			if (tkn->type == END && tkn->prev && tkn->prev->type > PIPE)
