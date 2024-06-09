@@ -12,7 +12,7 @@
 
 #include "builtin.h"
 
-static int	add_to_enviroment(t_data *data, char *key, char *value)
+int	add_to_enviroment(t_data *data, char *key, char *value)
 {
 	char	*new_env_var;
 	char	*new_export_var;

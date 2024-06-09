@@ -18,7 +18,7 @@ static int	invalid_consecutive(t_token *token)
 	{
 		if (token->type == PIPE && token->prev->type == PIPE)
 			return (1);
-		if (token->type > PIPE && token->prev->type > PIPE)
+		if (token->type >= PIPE && token->prev->type > PIPE)
 			return (1);
 		if (token->type == END && token->prev->type >= PIPE)
 			return (1);
@@ -43,6 +43,14 @@ int	check_separators_consecutive(t_token *tkn, t_command *cmd)
 	{
 		if (tkn->prev && tkn->prev->type == HEREDOC)
 			break ;
+		if (tkn->type == HEREDOC && tkn->next && (tkn->next->type == END || tkn->next->type == PIPE))
+		{
+			if (tkn->next->type == END)
+				cmd->err_message = syntax_err(SYNTAX_ERR, "newline", 1);
+			else
+				cmd->err_message = syntax_err(SYNTAX_ERR, "|", 1);
+			return (-5);
+		}
 		if (invalid_consecutive(tkn))
 		{
 			if (tkn->type == END && tkn->prev && tkn->prev->type > PIPE)
@@ -58,25 +66,3 @@ int	check_separators_consecutive(t_token *tkn, t_command *cmd)
 	}
 	return (1);
 }
-
-/* ORIG */
-// int	check_separators_consecutive(t_token *tkn)
-// {
-// 	tkn = get_first_token(tkn);
-// 	if (tkn->type == PIPE)
-// 		return (syntax_err(SYNTAX_ERR, tkn->content, 1));
-// 	while (tkn)
-// 	{
-// 		if (invalid_consecutive(tkn))
-// 		{
-// 			if (tkn->type == END && tkn->prev && tkn->prev->type > PIPE)
-// 				return (syntax_err(SYNTAX_ERR, "newline", 1));
-// 			else if (tkn->type == END && tkn->prev)
-// 				return (syntax_err(SYNTAX_ERR, tkn->prev->content, 1));
-// 			else
-// 				return (syntax_err(SYNTAX_ERR, tkn->content, 1));
-// 		}
-// 		tkn = tkn->next;
-// 	}
-// 	return (1);
-// }

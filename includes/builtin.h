@@ -25,7 +25,7 @@
 # define ERROR_VALUE -1
 # define NOT_FOUND -2
 # define NOT_NUMERIC_ERROR 2
-# define CHAR_SIZE_COMBINATIONS 255
+# define CHAR_SIZE_COMBINATIONS 256
 
 /*
 	BUILTINS
@@ -37,6 +37,7 @@ int		builtin_unset(t_data *data);
 int		builtin_cd(t_data *data);
 int		builtin_export(t_data *data);
 int		builtin_echo(t_data *data);
+int		builtin_exit(t_data *data);
 
 /*
 	builtin_utils.c functions

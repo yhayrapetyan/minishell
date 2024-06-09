@@ -29,15 +29,12 @@ static int	parse(t_data *data, t_token **token)
 	status = 0;
 	if ((*token)->type == SPACES)
 		(*token) = (*token)->next;
+	if (data->commands->err_message && data->commands->err_type == -5)
+		return (1);
 	if ((*token)->type == PIPE)
 		status = parse_pipe(&data->commands, token);
 	else if ((*token)->type == WORD || (*token)->type == ENV)
 		status = parse_word(&data->commands, token);
-	else if (data->commands->err_message)
-	{
-		(*token) = (*token)->next;
-		return (1);
-	}
 	else if ((*token)->type == INPUT)
 		status = parse_input(&data->commands, token);
 	else if ((*token)->type == TRUNC)
