@@ -81,7 +81,7 @@ static int	delete_from_env(t_data *data, char *arg)
 	return (EXIT_SUCCESS);
 }
 
-static int	delete_variable(t_data *data, char *arg)
+int	delete_variable(t_data *data, char *arg)
 {
 	int	status;
 
