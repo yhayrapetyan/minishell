@@ -46,11 +46,11 @@ int	execute_command(t_data *data, t_command *cmd)
 {
 	int		status;
 
+	if (cmd->err_message)
+		handle_error(data, cmd);
 	status = handle_descriptors(cmd);
 	if (status < 1)
 		exit(1);
-	if (cmd->err_message)
-		handle_error(data, cmd);
 	if (is_builtin(cmd->name))
 	{
 		data->commands = cmd;

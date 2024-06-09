@@ -106,7 +106,7 @@ static int	loop(t_data *data, t_token *temp, int *flag)
 		if (!data->commands)
 			return (-1);
 		syntax_status = check_syntax_err(temp, data->commands, flag);
-		if (status == -1)
+		if (syntax_status == -1)
 			return (status);
 		status = parse(data, &temp);
 		if (temp->type == END)
