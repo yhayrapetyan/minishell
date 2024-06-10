@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute_command.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/10 12:50:54 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/06/10 12:50:54 by yuhayrap         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /* idk how to name this function */
@@ -19,9 +31,9 @@ static void	exit_helper(char *cmd_name, char *err_message)
 	exit(CMD_NOT_FOUND_STAT);
 }
 
-static void handle_error(t_data *data, t_command *cmd)
+static void	handle_error(t_data *data, t_command *cmd)
 {
-	int 	exit_status;
+	int	exit_status;
 
 	write(2, cmd->err_message, ft_strlen(cmd->err_message));
 	write(2, "\n", 1);
@@ -53,7 +65,7 @@ int	execute_command(t_data *data, t_command *cmd)
 	{
 		if (cmd->is_input_heredoc)
 			unlink(cmd->io_fds->infile);
-		exit(0);//idk about this
+		exit(0);
 	}
 	status = get_path(data, cmd);
 	if (status < 1)

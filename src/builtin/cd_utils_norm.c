@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils_norm.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:47:15 by skedikia          #+#    #+#             */
-/*   Updated: 2024/06/04 13:47:46 by skedikia         ###   ########.fr       */
+/*   Updated: 2024/06/10 12:53:45 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-static int	cd_update_export_value_oldpwd(t_data *data, int pwd_pos, int oldpwd_pos)
+static int	cd_update_export_value_oldpwd(t_data *data, int pwd_pos, \
+		int oldpwd_pos)
 {
 	int		status;
 
@@ -30,7 +31,8 @@ static int	cd_update_export_value_oldpwd(t_data *data, int pwd_pos, int oldpwd_p
 			status = add_to_enviroment(data, "OLDPWD", data->old_work_dir);
 		}
 		else
-			status = add_to_enviroment(data, "OLDPWD", get_env_value(data->env, "PWD"));
+			status = add_to_enviroment(data, "OLDPWD", \
+				get_env_value(data->env, "PWD"));
 	}
 	return (status);
 }
@@ -60,7 +62,8 @@ int	cd_update_export_values(t_data *data)
 	return (status);
 }
 
-static int	cd_update_env_value_oldpwd(t_data *data, int pwd_pos, int oldpwd_pos)
+static int	cd_update_env_value_oldpwd(t_data *data, int pwd_pos, \
+		int oldpwd_pos)
 {
 	int		status;
 
@@ -79,7 +82,8 @@ static int	cd_update_env_value_oldpwd(t_data *data, int pwd_pos, int oldpwd_pos)
 			status = add_to_enviroment(data, "OLDPWD", data->old_work_dir);
 		}
 		else
-			status = add_to_enviroment(data, "OLDPWD", get_env_value(data->env, "PWD"));
+			status = add_to_enviroment(data, "OLDPWD", \
+				get_env_value(data->env, "PWD"));
 	}
 	return (status);
 }

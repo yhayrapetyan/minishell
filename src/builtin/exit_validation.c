@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_validation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:59:32 by skedikia          #+#    #+#             */
-/*   Updated: 2024/06/04 13:59:33 by skedikia         ###   ########.fr       */
+/*   Updated: 2024/06/10 12:53:05 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	builtin_exit_validation(char *arg)
 		if (i == 0 && (arg[i] == '+' || arg[i] == '-'))
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		if (!ft_isdigit(arg[i]))
 		{

@@ -6,21 +6,22 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:33:08 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/31 16:23:42 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/06/10 12:57:30 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int      create(t_token **tmp, t_command *last_cmd)
+static int	create(t_token **tmp, t_command *last_cmd)
 {
-	int     i;
+	int	i;
 
 	i = 1;
 	last_cmd->args[0] = ft_strdup(last_cmd->name);
 	if (!last_cmd->args[0])
 		return (0);
-	while ((*tmp)->type == WORD || (*tmp)->type == ENV || (*tmp)->type == SPACES)
+	while ((*tmp)->type == WORD || (*tmp)->type == ENV || \
+		(*tmp)->type == SPACES)
 	{
 		if ((*tmp)->type == WORD || (*tmp)->type == ENV)
 			last_cmd->args[i++] = ft_strdup((*tmp)->content);
@@ -32,10 +33,10 @@ static int      create(t_token **tmp, t_command *last_cmd)
 	return (1);
 }
 
-int     create_echo_args(t_token **tokens, t_command *last_cmd)
+int	create_echo_args(t_token **tokens, t_command *last_cmd)
 {
-	t_token *tmp;
-	int             nb_args;
+	t_token	*tmp;
+	int		nb_args;
 
 	remove_empty_var(tokens);
 	tmp = *tokens;
@@ -49,11 +50,11 @@ int     create_echo_args(t_token **tokens, t_command *last_cmd)
 	return (1);
 }
 
-static char     **replace_echo_args(t_token **tokens, t_command *lst_cmd, \
-        char **new_args, int len)
+static char	**replace_echo_args(t_token **tokens, t_command *lst_cmd, \
+		char **new_args, int len)
 {
-	int             i;
-	t_token *temp;
+	int		i;
+	t_token	*temp;
 
 	i = -1;
 	temp = *tokens;
@@ -76,12 +77,12 @@ static char     **replace_echo_args(t_token **tokens, t_command *lst_cmd, \
 	return (new_args);
 }
 
-int     add_echo_args(t_token **tokens, t_command *lst_cmd)
+int	add_echo_args(t_token **tokens, t_command *lst_cmd)
 {
-	t_token *tmp;
-	int             nb_args;
-	int             len;
-	char    **new_args;
+	t_token	*tmp;
+	int		nb_args;
+	int		len;
+	char	**new_args;
 
 	remove_empty_var(tokens);
 	tmp = *tokens;
@@ -100,4 +101,3 @@ int     add_echo_args(t_token **tokens, t_command *lst_cmd)
 	*tokens = tmp;
 	return (1);
 }
-

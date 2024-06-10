@@ -74,39 +74,10 @@ int	init_work_dir(t_data *data)
 	return (1);
 }
 
-int	g_exit_status = 0;
-int	g_pwd_unset = 0;
-
-char *get_shlvl(int level, int flag)
+int	increase_shlvl(t_data *data)
 {
-	char *value;
-	char *lvl;
-	char *temp;
-
-	lvl = ft_itoa(level);
-	if (!lvl)
-		return (NULL);
-	if (flag == 0)
-	{
-		temp = ft_strjoin("declare -x SHELL=\"", lvl);
-		free(lvl);
-		if (!temp)
-			return (NULL);
-		value = ft_strjoin(temp, "\"");
-		free(temp);
-	}
-	else
-	{
-		value = ft_strjoin("SHLVL=", lvl);
-		free(lvl);
-	}
-	return (value);
-}
-
-int increase_shlvl(t_data *data)
-{
-	int level;
-	char *value;
+	int		level;
+	char	*value;
 
 	if (get_env_index(data->env, "SHLVL") == -1)
 		add_to_enviroment(data, "SHLVL", "1");
@@ -122,9 +93,12 @@ int increase_shlvl(t_data *data)
 	return (1);
 }
 
+int	g_exit_status = 0;
+int	g_pwd_unset = 0;
+
 void	init_data(t_data *data, char **env)
 {
-	data->env = ft_arrdup(env);//need to increment shell level or set to 1
+	data->env = ft_arrdup(env);
 	if (!data->env)
 		ft_error(ENV_INIT_ERR, ENV_INIT_STAT);
 	if (!init_export(data))

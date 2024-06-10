@@ -56,8 +56,8 @@ typedef struct s_io_fds
 	int		delim_in_quotes;
 	int		fd_in;
 	int		fd_out;
-	int 	stdin_backup;
-	int 	stdout_backup;
+	int		stdin_backup;
+	int		stdout_backup;
 }	t_io_fds;
 
 typedef struct s_command
@@ -83,7 +83,7 @@ typedef struct s_data
 	char		*old_work_dir;
 	char		*input;
 	pid_t		*childes_pid;
-	pid_t		pid;//check
+	pid_t		pid;
 	int			commands_count;
 	t_token		*tokens;
 	t_command	*commands;

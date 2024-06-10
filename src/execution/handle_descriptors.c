@@ -48,9 +48,9 @@ static int	handle_pipe_fds(t_command *cmd)
 	return (1);
 }
 
-static int handle_one_cmd_io_fds(t_command *cmd)
+static int	handle_one_cmd_io_fds(t_command *cmd)
 {
-	int status;
+	int	status;
 
 	status = 1;
 	if (cmd->io_fds->infile && cmd->io_fds->fd_in != -1)

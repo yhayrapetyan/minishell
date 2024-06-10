@@ -24,6 +24,12 @@ static void	clean_loop(t_data *data)
 	data->childes_pid = NULL;
 }
 
+static void	clean_and_exit(t_data *data, int status)
+{
+	clean_data(data);
+	system_errors(status);
+}
+
 /*
  * -1 	=> malloc_err
  * -2 	=> dquote_err
@@ -44,9 +50,9 @@ void	start_minishell(t_data *data)
 
 	while (1)
 	{
-//		set_signals_interactive();
+		set_signals_interactive();
 		data->input = readline(RED PROMPT RESET_COLOR);
-//		set_signals_noninteractive();
+		set_signals_noninteractive();
 		if (!data->input)
 		{
 			clean_data(data);
@@ -54,16 +60,10 @@ void	start_minishell(t_data *data)
 		}
 		status = lexer(data);
 		if (status > -5 && status < 0)
-		{
-			clean_data(data);
-			system_errors(status);
-		}
+			clean_and_exit(data, status);
 		g_exit_status = execute(data);
 		if (g_exit_status < 0)
-		{
-			clean_data(data);
-			system_errors(g_exit_status);
-		}
+			clean_and_exit(data, status);
 		clean_loop(data);
 	}
 }

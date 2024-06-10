@@ -96,7 +96,7 @@ static int	loop(t_data *data, t_token *temp, int *flag)
 {
 	int	status;
 	int	res;
-	int syntax_status;
+	int	syntax_status;
 
 	res = 1;
 	while (temp && temp->next)
@@ -134,7 +134,7 @@ int	create_commands(t_data *data)
 	t_token	*temp;
 	int		status;
 	int		res;
-	int 	flag;
+	int		flag;
 
 	flag = 0;
 	temp = data->tokens;
