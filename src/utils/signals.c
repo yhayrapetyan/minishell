@@ -22,7 +22,7 @@ void	set_signals_interactive(void)
 	sigemptyset(&act.sa_mask);
 	act.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &act, NULL);
-    disable_echoctl();
+	disable_echoctl();
 }
 
 void	set_signals_noninteractive(void)
