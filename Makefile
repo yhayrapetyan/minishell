@@ -65,7 +65,8 @@ UTILS =		env_utils.c \
 			init.c \
 			init_export.c \
 			start_minishell.c \
-			signals.c
+			signals.c \
+			signals_utils.c
 
 LEXER =		lexer.c \
 			check_separators_consecutives.c \
