@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:03:38 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/26 14:35:18 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:42:48 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int			parse_input(t_command **commands, t_token **tokens);
 int			parse_trunc(t_command **commands, t_token **tokens);
 int			parse_word(t_command **commands, t_token **tokens);
 int			parse_pipe(t_command **commands, t_token **tokens);
+int			create_args(t_token **tokens, t_command *lst_cmd);
+int			add_args(t_token **tokens, t_command *lst_cmd);
 int			remove_old_ref(t_io_fds *io, int flag);
 int			remove_empty_var(t_token **tokens);
 int			count_echo_args(t_token *temp);

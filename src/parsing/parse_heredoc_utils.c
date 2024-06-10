@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static int	validate_line_helper(t_data *data, char **line, t_io_fds *io)
+static int	validate_line_helper(t_data *data, t_io_fds *io)
 {
 	char		*tmp;
 	t_command	*lst_cmd;
@@ -42,7 +42,7 @@ static int	validate_line(t_data *data, char **line, t_io_fds *io)
 	char		*tmp;
 
 	if (!*line)
-		return (validate_line_helper(data, line, io));
+		return (validate_line_helper(data, io));
 	if (ft_strcmp(*line, io->delimiter) == 0)
 		return (0);
 	if (io->delim_in_quotes == 0 && ft_strchr(*line, '$'))
