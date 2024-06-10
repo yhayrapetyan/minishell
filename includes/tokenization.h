@@ -27,6 +27,6 @@ void		*clean_tokens(t_token *tokens);
 int			rm_empty_tokens(t_data *data);
 void		delete_token(t_token *token);
 int			tokenization(t_data *data);
-int 		join_tokens(t_data *data);
+int			join_tokens(t_data *data);
 
 #endif

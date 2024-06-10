@@ -12,77 +12,17 @@
 
 #include "minishell.h"
 
-/* idk how to name this function */
-static void	exit_helper(char *cmd_name, char *err_message)
-{
-	char	*err_msg;
-
-	err_msg = parse_err(cmd_name, err_message);
-	if (!err_msg)
-		exit (1);
-	write(2, err_msg, ft_strlen(err_msg));
-	write(2, "\n", 1);
-	if (ft_strstr(err_msg, "Permission denied") != NULL)
-	{
-		free(err_msg);
-		exit(PERMISSION_STAT);
-	}
-	free(err_msg);
-	exit(CMD_NOT_FOUND_STAT);
-}
-
-static void handle_error(t_data *data, t_command *cmd)
-{
-	int 	exit_status;
-
-	write(2, cmd->err_message, ft_strlen(cmd->err_message));
-	write(2, "\n", 1);
-	exit_status = get_exit_status(cmd->err_type, cmd->err_message);
-	clean_data(data);
-	exit(exit_status);
-}
-
-int	execute_command(t_data *data, t_command *cmd)
-{
-	int		status;
-
-	status = handle_descriptors(cmd);
-	if (status < 1)
-		exit(1);
-	if (cmd->err_message)
-		handle_error(data, cmd);
-	if (is_builtin(cmd->name))
-	{
-		data->commands = cmd;
-		builtin_run(data);
-		clean_data(data);
-		exit(g_exit_status);
-	}
-	if (cmd->name == NULL)
-	{
-		if (cmd->is_input_heredoc)
-			unlink(cmd->io_fds->infile);
-		exit(0);//idk about this
-	}
-	status = get_path(data, cmd);
-	if (status < 1)
-		exit(1);
-	if (cmd->path == NULL)
-		exit_helper(cmd->name, CMD_NOT_FOUND_ERR);
-	if (execve(cmd->path, cmd->args, data->env) == -1)
-		exit_helper(cmd->name, strerror(errno));
-	return (1);
-}
-
-int execute_builtin(t_data *data)
+int	execute_builtin(t_data *data)
 {
 	if (data->commands->err_message)
 	{
-		write(2, data->commands->err_message, ft_strlen(data->commands->err_message));
+		write(2, data->commands->err_message, \
+			ft_strlen(data->commands->err_message));
 		write(2, "\n", 1);
 		if (data->commands->is_input_heredoc)
 			unlink(data->commands->io_fds->infile);
-		return (get_exit_status(data->commands->err_type, data->commands->err_message));
+		return (get_exit_status(data->commands->err_type, \
+			data->commands->err_message));
 	}
 	if (data->commands->io_fds)
 	{
@@ -111,7 +51,8 @@ int	execute(t_data *data)
 	if (status < 1)
 		return (status);
 	status = 0;
-	if (!data->commands->prev && !data->commands->pipe_fd && is_builtin(data->commands->name))
+	if (!data->commands->prev && !data->commands->pipe_fd && \
+		is_builtin(data->commands->name))
 		status = execute_builtin(data);
 	else
 		status = create_processes(data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:29:30 by skedikia          #+#    #+#             */
-/*   Updated: 2024/06/04 13:30:24 by skedikia         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:34:15 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ int		builtin_exit_validation(char *arg);
 /*
 	unset functions
 */
-int	delete_variable(t_data *data, char *arg);
+int		delete_variable(t_data *data, char *arg);
 
 #endif

@@ -103,7 +103,8 @@ int	parse_word(t_command **commands, t_token **tokens)
 	t_command	*last_cmd;
 
 	temp_token = (*tokens);
-	while (temp_token->type == WORD || temp_token->type == ENV || temp_token->type == SPACES)
+	while (temp_token->type == WORD || temp_token->type == ENV || \
+		temp_token->type == SPACES)
 	{
 		last_cmd = get_last_command(*commands);
 		if (temp_token->prev == NULL || \

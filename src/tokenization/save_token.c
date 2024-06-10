@@ -39,7 +39,7 @@ int	save_word(t_data *data, int start, int end)
 	return (1);
 }
 
-static int save_end(t_data *data, int type)
+static int	save_end(t_data *data, int type)
 {
 	if (type == END && data->tokens->type == SPACES)
 	{
@@ -48,6 +48,7 @@ static int save_end(t_data *data, int type)
 	}
 	return (0);
 }
+
 int	save_separator(t_data *data, int index, int type)
 {
 	int		i;
@@ -93,7 +94,7 @@ static int	save_helper(t_data *data, int *start, int *end, int type)
 	}
 	else
 	{
-		if (data->tokens &&  data->tokens->type == WORD)
+		if (data->tokens && data->tokens->type == WORD)
 		{
 			if (!save_separator(data, *end, type))
 				return (0);

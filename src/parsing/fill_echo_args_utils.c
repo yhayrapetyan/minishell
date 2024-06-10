@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:35:56 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/05/31 13:10:38 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/06/10 12:57:23 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	count_echo_args(t_token *temp)
 	int	i;
 
 	i = 0;
-	while (temp && (temp->type == WORD || temp->type == ENV || temp->type == SPACES))
+	while (temp && (temp->type == WORD || temp->type == ENV || \
+		temp->type == SPACES))
 	{
 		if ((temp->type == ENV || temp->type == WORD))
 			i++;

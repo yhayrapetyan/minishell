@@ -96,7 +96,7 @@ static int	loop(t_data *data, t_token *temp, int *flag)
 {
 	int	status;
 	int	res;
-	int syntax_status;
+	int	syntax_status;
 
 	res = 1;
 	while (temp && temp->next)
@@ -106,7 +106,7 @@ static int	loop(t_data *data, t_token *temp, int *flag)
 		if (!data->commands)
 			return (-1);
 		syntax_status = check_syntax_err(temp, data->commands, flag);
-		if (status == -1)
+		if (syntax_status == -1)
 			return (status);
 		status = parse(data, &temp);
 		if (temp->type == END)
@@ -134,7 +134,7 @@ int	create_commands(t_data *data)
 	t_token	*temp;
 	int		status;
 	int		res;
-	int 	flag;
+	int		flag;
 
 	flag = 0;
 	temp = data->tokens;

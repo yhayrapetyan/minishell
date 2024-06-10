@@ -12,6 +12,25 @@
 
 #include "minishell.h"
 
+static int	validate_line_helper(t_data *data, char **line, t_io_fds *io)
+{
+	char		*tmp;
+	t_command	*lst_cmd;
+
+	unlink(io->infile);
+	tmp = parse_err("warning", \
+		"here-document delimited by end-of-file: wanted ");
+	if (!tmp)
+		return (-1);
+	lst_cmd = get_last_command(data->commands);
+	lst_cmd->err_message = ft_strjoin(tmp, io->delimiter);
+	free(tmp);
+	if (!get_last_command(data->commands)->err_message)
+		return (-1);
+	lst_cmd->err_type = -6;
+	return (-12);
+}
+
 /*
 *	1 => continue
 *	0 => break
@@ -20,21 +39,10 @@
 */
 static int	validate_line(t_data *data, char **line, t_io_fds *io)
 {
-	char	*tmp;
+	char		*tmp;
 
 	if (!*line)
-	{
-		unlink(io->infile);
-		tmp = parse_err("warning", "here-document delimited by end-of-file: wanted ");
-		if (!tmp)
-			return (-1);
-		get_last_command(data->commands)->err_message = ft_strjoin(tmp, io->delimiter);
-		free(tmp);
-		if (!get_last_command(data->commands)->err_message)
-			return (-1);
-		get_last_command(data->commands)->err_type = -6;//temp
-		return (-12);
-	}
+		return (validate_line_helper(data, line, io));
 	if (ft_strcmp(*line, io->delimiter) == 0)
 		return (0);
 	if (io->delim_in_quotes == 0 && ft_strchr(*line, '$'))

@@ -34,7 +34,8 @@ EXECUTION = execute.c \
 			handle_descriptors.c \
 			execute_utils.c \
 			pipe_utils.c \
-			reset_descriptors.c
+			reset_descriptors.c \
+			execute_command.c
 
 LIBFT = 	ft_strtrim.c \
 			ft_strlen.c \
@@ -85,7 +86,8 @@ EXPANSION =	expand_variables.c \
 TOKEN =		tokenization.c \
             tokenization_utils.c \
             save_token.c \
-            token_list_utils.c
+            token_list_utils.c \
+			join_tokens.c
 
 PARSING =	parse_word.c \
 			parse_pipe.c \
@@ -98,7 +100,8 @@ PARSING =	parse_word.c \
 			parse_heredoc_utils.c \
 			is_valid_filename.c \
 			fill_echo_args_utils.c \
-			fill_echo_args.c
+			fill_echo_args.c \
+			fill_args_utils.c
 
 HEADERS = 	minishell.h \
 			colors.h \
@@ -150,8 +153,8 @@ SRC += $(BUILTIN)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I ./readline_yuhayrap_skedikia/include
-READLINE_LIB = -lreadline
-#READLINE_LIB =  -Lreadline_yuhayrap_skedikia/lib -lreadline
+# READLINE_LIB = -lreadline
+READLINE_LIB =  -Lreadline_yuhayrap_skedikia/lib -lreadline
 NAME = minishell
 RM = rm -f
 

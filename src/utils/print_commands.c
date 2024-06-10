@@ -14,9 +14,9 @@
 
 static void	print_table_header(void)
 {
-	printf("===========================================================================\n");
+	printf("===============================================================n");
 	printf("                        COMMANDS                             \n");
-	printf("============================================================================\n");
+	printf("==============================================================\n");
 	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 	printf("Name          | Path          | Infile 	               | Outfilear              | Args\n");
 	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n");
@@ -30,7 +30,8 @@ static void	print_table_row(t_data *data)
 	nl = NULL;
 	printf("%-13s | %-13s |", data->commands->name, data->commands->path);
 	if (data->commands->io_fds)
-		printf(" %-13s fd = %-3d | %-13s fd = %-3d |", data->commands->io_fds->infile,
+		printf(" %-13s fd = %-3d | %-13s fd = %-3d |", \
+			data->commands->io_fds->infile,
 			data->commands->io_fds->fd_in,
 			data->commands->io_fds->outfile,
 			data->commands->io_fds->fd_out);
@@ -50,7 +51,8 @@ static void	print_table_row(t_data *data)
 	}
 	else
 		printf("(null)\n");
-	printf("-----------------------------------------------------------------------------\n");
+	printf("----------------------------------------");
+	printf("-------------------------------------\n");
 }
 
 void	print_commands(t_data *data)
