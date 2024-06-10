@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:40:16 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/06/10 15:58:06 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:05:19 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <string.h>
 # include <signal.h>
 # include <sys/wait.h>
-#include <termios.h>
+# include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "colors.h"//maybe need to delete
