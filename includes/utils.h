@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:40:16 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/06/04 14:38:45 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:05:19 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <string.h>
 # include <signal.h>
 # include <sys/wait.h>
+# include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "colors.h"//maybe need to delete
@@ -56,13 +57,17 @@ char		*get_env_value(char **env, char *key);
 int			get_env_index(char **env, char *key);
 void		*clean_commands(t_command *commands);
 void		ft_error(char *message, int status);
+void		signal_print_newline(int signal);
 void		set_signals_noninteractive(void);
 void		set_signals_interactive(void);
 void		start_minishell(t_data *data);
 void		print_commands(t_data *data);
+void		signal_reset_prompt(int sig);
 void		print_tokens(t_data *data);
 void		system_errors(int status);
 int			get_env_len(char **env);
 void		print_arr(char **arr);
+void		disable_echoctl(void);
+void		ignore_sigquit(void);
 
 #endif
