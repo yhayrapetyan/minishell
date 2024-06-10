@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:06:57 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/06/10 13:29:34 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:44:24 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static char	**replace_args(t_token **tokens, t_command *lst_cmd,
 	return (new_args);
 }
 
-static int	add_args_helper(t_token **tokens, t_token **temp)
+static int	add_args_helper(t_token **temp)
 {
 	int		i;
 
@@ -116,7 +116,7 @@ int	add_args(t_token **tokens, t_command *lst_cmd)
 	t_token	*temp;
 
 	temp = *tokens;
-	i = add_args_helper(tokens, &temp);
+	i = add_args_helper(&temp);
 	len = 0;
 	while (lst_cmd->args[len])
 		len++;
