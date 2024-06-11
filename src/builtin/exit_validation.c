@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:59:32 by skedikia          #+#    #+#             */
-/*   Updated: 2024/06/10 12:53:05 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/06/11 15:00:24 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	builtin_exit_validation(char *arg)
 
 	if (!arg)
 	{
-		write(STDOUT_FILENO, "exit\n", 5);
+		// write(STDOUT_FILENO, "exit\n", 5);
 		minishell_error("exit", "NULL", "not a valid identifier\n");
 		return (NOT_NUMERIC_ERROR);
 	}
@@ -32,8 +32,8 @@ int	builtin_exit_validation(char *arg)
 		}
 		if (!ft_isdigit(arg[i]))
 		{
-			write(STDOUT_FILENO, "exit\n", 5);
 			minishell_error("exit", arg, "numeric argument required\n");
+			g_exit_status = 255;
 			return (NOT_NUMERIC_ERROR);
 		}
 		++i;

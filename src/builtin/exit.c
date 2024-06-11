@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:53:00 by skedikia          #+#    #+#             */
-/*   Updated: 2024/06/04 13:59:14 by skedikia         ###   ########.fr       */
+/*   Updated: 2024/06/11 14:59:37 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ static int	builtin_exit_norm(t_data *data)
 					return (NOT_NUMERIC_ERROR);
 				if (data->commands->args[2])
 				{
-					write(STDOUT_FILENO, "exit\n", 5);
+					// write(STDOUT_FILENO, "exit\n", 5);
 					minishell_error("exit", NULL, "too many arguments\n");
 					return (EXIT_FAILURE);
 				}
-				g_exit_status = ft_atoi(data->commands->args[1])
+				g_exit_status = \
+					ft_atoi_with_check(data->commands->args[1], data)
 					% CHAR_SIZE_COMBINATIONS;
 			}
 		}
@@ -43,21 +44,24 @@ int	builtin_exit(t_data *data)
 {
 	int	status;
 
+	write(STDOUT_FILENO, "exit\n", 5);
 	if (!data)
 	{
-		write(STDOUT_FILENO, "exit\n", 5);
+		// write(STDOUT_FILENO, "exit\n", 5);
 		minishell_error("exit", "NULL", "Data error\n");
 		return (EXIT_FAILURE);
 	}
 	if (!data->commands)
 	{
-		write(STDOUT_FILENO, "exit\n", 5);
+		// write(STDOUT_FILENO, "exit\n", 5);
 		exit(0);
 	}
 	status = builtin_exit_norm(data);
-	if (status != EXIT_SUCCESS)
+	// write(STDOUT_FILENO, "exit\n", 5);
+	// if (status != EXIT_SUCCESS)
+	// 	return (status);
+	if (status == EXIT_FAILURE)
 		return (status);
-	write(STDOUT_FILENO, "exit\n", 5);
 	clean_data(data);
 	exit(g_exit_status);
 	return (EXIT_SUCCESS);
