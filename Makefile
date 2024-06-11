@@ -89,7 +89,8 @@ TOKEN =		tokenization.c \
             tokenization_utils.c \
             save_token.c \
             token_list_utils.c \
-			join_tokens.c
+			join_tokens.c \
+			rm_empty_tokens.c
 
 PARSING =	parse_word.c \
 			parse_pipe.c \
