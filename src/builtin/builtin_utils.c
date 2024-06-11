@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:38:26 by skedikia          #+#    #+#             */
-/*   Updated: 2024/06/04 13:40:18 by skedikia         ###   ########.fr       */
+/*   Updated: 2024/06/11 14:45:38 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,15 @@ static int	is_space(char c)
 		|| c == '\f' || c == '\r' || c == ' ');
 }
 
-int	ft_atoi(const char *str)
+static void	overflow_error(const char *str, t_data *data)
+{
+	write(1, "exit\n", 5);
+	minishell_error("exit", (char *)str, "numeric argument required\n");
+	clean_data(data);
+	exit(255);
+}
+
+int	ft_atoi_with_check(const char *str, t_data *data)
 {
 	size_t		i;
 	long long	nbr;
@@ -97,6 +105,8 @@ int	ft_atoi(const char *str)
 	while (str[i] && ft_isdigit(str[i]))
 	{
 		nbr = (nbr * 10) + (str[i] - '0');
+		if (nbr > INT_MAX || nbr < INT_MIN)//long long or unsigned long long
+			overflow_error(str, data);
 		++i;
 	}
 	if (isneg)

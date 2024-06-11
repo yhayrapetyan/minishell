@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:29:30 by skedikia          #+#    #+#             */
-/*   Updated: 2024/06/10 13:34:15 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/06/11 14:39:20 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ int		builtin_exit(t_data *data);
 /*
 	builtin_utils.c functions
 */
+int		ft_atoi_with_check(const char *str, t_data *data);
 int		split_size(char **split);
 void	minishell_error(char *cmd, char *arg, char *msg);
 int		find_env_variable_position(char **env, char *arg);
 int		find_export_variable_position(char **export, char *arg);
 void	data_sort_export(t_data *data);
-int		ft_atoi(const char *str);
 
 /*
 	export functions
