@@ -105,7 +105,7 @@ int	ft_atoi_with_check(const char *str, t_data *data)
 	while (str[i] && ft_isdigit(str[i]))
 	{
 		nbr = (nbr * 10) + (str[i] - '0');
-		if (nbr > INT_MAX || nbr < INT_MIN)//long long or unsigned long long
+		if (nbr > INT_MAX || nbr < INT_MIN)
 			overflow_error(str, data);
 		++i;
 	}

@@ -27,7 +27,6 @@ static int	builtin_exit_norm(t_data *data)
 					return (NOT_NUMERIC_ERROR);
 				if (data->commands->args[2])
 				{
-					// write(STDOUT_FILENO, "exit\n", 5);
 					minishell_error("exit", NULL, "too many arguments\n");
 					return (EXIT_FAILURE);
 				}
@@ -47,19 +46,14 @@ int	builtin_exit(t_data *data)
 	write(STDOUT_FILENO, "exit\n", 5);
 	if (!data)
 	{
-		// write(STDOUT_FILENO, "exit\n", 5);
 		minishell_error("exit", "NULL", "Data error\n");
 		return (EXIT_FAILURE);
 	}
 	if (!data->commands)
 	{
-		// write(STDOUT_FILENO, "exit\n", 5);
 		exit(0);
 	}
 	status = builtin_exit_norm(data);
-	// write(STDOUT_FILENO, "exit\n", 5);
-	// if (status != EXIT_SUCCESS)
-	// 	return (status);
 	if (status == EXIT_FAILURE)
 		return (status);
 	clean_data(data);
