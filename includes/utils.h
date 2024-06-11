@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:40:16 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/06/10 16:05:19 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/06/11 13:58:46 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@
 # endif
 
 extern int	g_exit_status;
-extern int	g_pwd_unset;
 
 /* UTILS */
 t_command	*add_command(t_command *old_command, t_command *new_command);

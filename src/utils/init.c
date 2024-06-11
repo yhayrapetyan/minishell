@@ -94,7 +94,6 @@ int	increase_shlvl(t_data *data)
 }
 
 int	g_exit_status = 0;
-int	g_pwd_unset = 0;
 
 void	init_data(t_data *data, char **env)
 {
@@ -119,4 +118,5 @@ void	init_data(t_data *data, char **env)
 	data->childes_pid = NULL;
 	data->commands_count = 0;
 	data->pid = -1;
+	data->is_pwd_unset_for_cd = 0;
 }

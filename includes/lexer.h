@@ -85,6 +85,7 @@ typedef struct s_data
 	pid_t		*childes_pid;
 	pid_t		pid;
 	int			commands_count;
+	int			is_pwd_unset_for_cd;
 	t_token		*tokens;
 	t_command	*commands;
 }	t_data;

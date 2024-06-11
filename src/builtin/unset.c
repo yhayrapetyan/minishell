@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:14 by skedikia          #+#    #+#             */
-/*   Updated: 2024/06/04 14:30:28 by skedikia         ###   ########.fr       */
+/*   Updated: 2024/06/11 14:23:41 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int	delete_variable(t_data *data, char *arg)
 		minishell_error("unset", "NULL", "export delete error\n");
 		return (status);
 	}
+	if (find_export_variable_position(data->export, "PWD") == NOT_FOUND)
+		data->is_pwd_unset_for_cd = 1;
 	return (EXIT_SUCCESS);
 }
 
