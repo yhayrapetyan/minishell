@@ -22,6 +22,7 @@
 # include <signal.h>
 # include <sys/wait.h>
 # include <termios.h>
+# include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "colors.h"//maybe need to delete

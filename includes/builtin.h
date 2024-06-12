@@ -78,7 +78,7 @@ int		change_directory(t_data *data, char *arg);
 /*
 	exit functions
 */
-int		builtin_exit_validation(char *arg);
+int		builtin_exit_validation(char *arg,t_data *data);
 
 /*
 	unset functions

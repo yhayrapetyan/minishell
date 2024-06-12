@@ -16,7 +16,9 @@ void	disable_echoctl(void)
 {
 	struct termios	term;
 
-	tcgetattr(STDIN_FILENO, &term);
+
+	if (tcgetattr(STDIN_FILENO, &term) != 0)
+		return ;
 	term.c_lflag &= ~(ECHOCTL);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }

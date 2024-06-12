@@ -21,7 +21,7 @@ int	get_exit_status(int err_type, char *err_message)
 	else if (err_type == -7)
 	{
 		if (ft_strstr(err_message, "Permission denied") != NULL)
-			return (PERMISSION_STAT);
+			return (REDIR_PERMISSION_STAT);
 		return (FILE_OPEN_STAT);
 	}
 	return (0);

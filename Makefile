@@ -156,8 +156,11 @@ SRC += $(BUILTIN)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I ./readline_yuhayrap_skedikia/include
-# READLINE_LIB = -lreadline
-READLINE_LIB =  -Lreadline_yuhayrap_skedikia/lib -lreadline
+ifeq ($(UNAME),Darwin)
+	READLINE_LIB =  -Lreadline_yuhayrap_skedikia/lib -lreadline
+else
+	READLINE_LIB = -lreadline
+endif
 NAME = minishell
 RM = rm -f
 
@@ -177,7 +180,7 @@ all: print_info $(NAME)
 
 $(NAME): $(OBJS)
 	@$(CC) $(OBJS) $(READLINE_LIB) -o $(NAME)
-	@printf "%b" "$(BLUE)\n$@ $(GREEN)[✓]\n"
+	@printf "%b" "$(BLUE)\n$@ $(GREEN)[✓]$(NO_COLOR)\n"
 
 $(OBJS): $(HEADERS) Makefile
 
@@ -195,14 +198,14 @@ config:
 
 clean: print_name
 	@$(RM) $(OBJS) $(BONUS_OBJS)
-	@printf "%b" "$(BLUE)$@: $(GREEN)[✓]\n"
+	@printf "%b" "$(BLUE)$@: $(GREEN)[✓]$(NO_COLOR)\n"
 
 fclean: clean
 	@$(RM) $(NAME) $(BONUS_NAME)
-	@printf "%b" "$(BLUE)$@: $(GREEN)[✓]\n"
+	@printf "%b" "$(BLUE)$@: $(GREEN)[✓]$(NO_COLOR)\n"
 
 re: fclean all
-	@printf "%b" "$(BLUE)$@: $(GREEN)[✓]\n"
+	@printf "%b" "$(BLUE)$@: $(GREEN)[✓]$(NO_COLOR)\n"
 
 print_info: print_name
 	@printf "%b" "$(BLUE)Compiler: $(GREEN)$(CC)\n"
@@ -213,6 +216,6 @@ print_info: print_name
 
 print_name:
 	@printf "%b" "$(BLUE)"
-	@echo "$(NAME)\n"
+	@echo "$(NAME)$(NO_COLOR)\n"
 
 .PHONY: all clean fclean re sanitize print_name print_info

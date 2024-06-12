@@ -34,6 +34,13 @@
 # define AMBIGOUS_REDIR_ERR "ambiguous redirect"
 
 //syntax err exit status 2
+# ifdef __linux__
+#  define OVERFLOW_STAT 		2
+#  define NOT_NUMERIC_STAT		2
+# else
+#  define OVERFLOW_STAT 		255
+#  define NOT_NUMERIC_STAT		255
+# endif
 # define WAIT_STAT 				2
 # define MALLOC_STAT 			3
 # define ARG_STAT				4
@@ -52,6 +59,7 @@
 # define AMBIGOUS_REDIR_STAT	17
 # define SYNTAX_STAT			2
 # define PERMISSION_STAT		126
+# define REDIR_PERMISSION_STAT	1
 # define CMD_NOT_FOUND_STAT		127
 
 #endif

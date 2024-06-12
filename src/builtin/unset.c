@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "minishell.h"
 
 static void	move_split_elements_except_one(char **split_1,
 		char **split_2, int pos)
