@@ -19,6 +19,7 @@ int	builtin_exit_validation(char *arg, t_data *data)
 	if (!arg)
 	{
 		minishell_error("exit", "NULL", "not a valid identifier\n");
+		g_exit_status = 255;
 		return (NOT_NUMERIC_ERROR);
 	}
 	i = 0;
