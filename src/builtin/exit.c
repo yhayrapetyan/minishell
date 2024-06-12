@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "minishell.h"
 
 static int	builtin_exit_norm(t_data *data)
 {
@@ -22,7 +22,7 @@ static int	builtin_exit_norm(t_data *data)
 		{
 			if (data->commands->args[1])
 			{
-				if (builtin_exit_validation(data->commands->args[1])
+				if (builtin_exit_validation(data->commands->args[1], data)
 					!= EXIT_SUCCESS)
 					return (NOT_NUMERIC_ERROR);
 				if (data->commands->args[2])

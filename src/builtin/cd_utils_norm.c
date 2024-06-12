@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "minishell.h"
 
 static int	cd_update_export_value_oldpwd(t_data *data, int pwd_pos, \
 		int oldpwd_pos)

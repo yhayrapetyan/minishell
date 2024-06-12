@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "minishell.h"
 
-int	builtin_exit_validation(char *arg)
+int	builtin_exit_validation(char *arg, t_data *data)
 {
 	int	i;
 
@@ -33,10 +33,11 @@ int	builtin_exit_validation(char *arg)
 		if (!ft_isdigit(arg[i]))
 		{
 			minishell_error("exit", arg, "numeric argument required\n");
-			g_exit_status = 255;
+			g_exit_status = NOT_NUMERIC_STAT;
 			return (NOT_NUMERIC_ERROR);
 		}
 		++i;
 	}
+	ft_atoi_with_check(arg, data);
 	return (EXIT_SUCCESS);
 }

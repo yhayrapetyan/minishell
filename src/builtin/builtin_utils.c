@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "minishell.h"
 
 int	split_size(char **split)
 {
@@ -77,19 +77,22 @@ static int	is_space(char c)
 		|| c == '\f' || c == '\r' || c == ' ');
 }
 
-static void	overflow_error(const char *str, t_data *data)
+static void	overflow_error(const char *str, t_data *data, \
+	unsigned long long nbr, int isneg)
 {
-	write(1, "exit\n", 5);
-	minishell_error("exit", (char *)str, "numeric argument required\n");
-	clean_data(data);
-	exit(255);
+	if (!isneg || nbr > (unsigned long long)LLONG_MAX + 1)
+	{
+		minishell_error("exit", (char *)str, "numeric argument required\n");
+		clean_data(data);
+		exit(OVERFLOW_STAT);
+	}
 }
 
 int	ft_atoi_with_check(const char *str, t_data *data)
 {
-	size_t		i;
-	long long	nbr;
-	int			isneg;
+	size_t				i;
+	unsigned long long	nbr;
+	int					isneg;
 
 	i = 0;
 	nbr = 0;
@@ -105,8 +108,8 @@ int	ft_atoi_with_check(const char *str, t_data *data)
 	while (str[i] && ft_isdigit(str[i]))
 	{
 		nbr = (nbr * 10) + (str[i] - '0');
-		if (nbr > INT_MAX || nbr < INT_MIN)
-			overflow_error(str, data);
+		if (nbr > LLONG_MAX)
+			overflow_error(str, data, nbr, isneg);
 		++i;
 	}
 	if (isneg)
