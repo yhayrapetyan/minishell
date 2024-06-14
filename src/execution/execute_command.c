@@ -20,7 +20,7 @@ static void	exit_helper(char *cmd_name, char *err_message, t_data *data)
 	if (ft_strstr(err_message, "Permission denied") != NULL)
 	{
 		if (access(cmd_name, F_OK) == 0 && access(cmd_name, X_OK) == 0)
-			err_msg = parse_err(cmd_name, "Is a directory");
+			err_msg = parse_err(cmd_name, "is a directory");
 		else
 			err_msg = parse_err(cmd_name, err_message);
 	}
@@ -31,7 +31,7 @@ static void	exit_helper(char *cmd_name, char *err_message, t_data *data)
 	write(2, err_msg, ft_strlen(err_msg));
 	write(2, "\n", 1);
 	if (ft_strstr(err_msg, "Permission denied") != NULL || \
-		ft_strstr(err_msg, "Is a directory") != NULL)
+		ft_strstr(err_msg, "is a directory") != NULL)
 	{
 		free(err_msg);
 		exit(PERMISSION_STAT);

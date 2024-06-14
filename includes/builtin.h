@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:29:30 by skedikia          #+#    #+#             */
-/*   Updated: 2024/06/14 13:20:01 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/06/14 13:54:02 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ int		builtin_exit_validation(char *arg, t_data *data);
 	unset functions
 */
 int		delete_variable(t_data *data, char *arg);
+int		validate_args(char *arg);
 
 #endif

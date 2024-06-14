@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:00:03 by skedikia          #+#    #+#             */
-/*   Updated: 2024/06/04 14:27:33 by skedikia         ###   ########.fr       */
+/*   Updated: 2024/06/14 15:16:38 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,6 @@ int	builtin_export(t_data *data)
 	int	i;
 	int	status;
 
-	if (!data)
-	{
-		minishell_error("export", "NULL", "Data error\n");
-		return (EXIT_FAILURE);
-	}
 	status = EXIT_SUCCESS;
 	i = 1;
 	if (data->commands->args && data->commands->args[i])
@@ -88,7 +83,7 @@ int	builtin_export(t_data *data)
 		{
 			if (builtin_export_validation(data->commands->args[i])
 				== EXIT_FAILURE)
-				status = EXIT_FAILURE;
+				g_exit_status = EXIT_FAILURE;
 			else
 				status = export_variable(data, data->commands->args[i]);
 			++i;
@@ -96,5 +91,7 @@ int	builtin_export(t_data *data)
 	}
 	else
 		status = builtin_export_no_args(data->export);
+	if (g_exit_status != EXIT_SUCCESS)
+		return (g_exit_status);
 	return (status);
 }
