@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:30:14 by skedikia          #+#    #+#             */
-/*   Updated: 2024/06/11 14:23:41 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/06/14 14:06:10 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,13 @@ int	delete_variable(t_data *data, char *arg)
 {
 	int	status;
 
-	if (!data)
-		return (EXIT_FAILURE);
 	if (!arg)
 		return (EXIT_SUCCESS);
+	if (validate_args(arg) != EXIT_SUCCESS)
+	{
+		minishell_error("unset", arg, "not a valid identifier\n");
+		return (-3);
+	}
 	status = delete_from_env(data, arg);
 	if (status != EXIT_SUCCESS)
 	{
@@ -110,8 +113,10 @@ int	builtin_unset(t_data *data)
 {
 	int	i;
 	int	status;
+	int	err_status;
 
 	status = 0;
+	err_status = 0;
 	if (!data)
 	{
 		minishell_error("unset", "NULL", "Data error\n");
@@ -123,7 +128,11 @@ int	builtin_unset(t_data *data)
 	while (data->commands->args[i])
 	{
 		status = delete_variable(data, data->commands->args[i]);
+		if (status == -3)
+			err_status = 1;
 		++i;
 	}
+	if (err_status == 1)
+		return (err_status);
 	return (status);
 }

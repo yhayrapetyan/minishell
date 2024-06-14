@@ -27,6 +27,7 @@ BUILTIN =	builtin_utils_norm.c \
 			export.c \
 			pwd.c \
 			unset.c \
+			unset_utils_norm.c \
 
 EXECUTION = execute.c \
 			get_path.c \
@@ -156,7 +157,8 @@ SRC += $(BUILTIN)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I ./readline_yuhayrap_skedikia/include
-ifeq ($(UNAME),Darwin)
+UNAME = $(shell uname -s)
+ifeq ($(UNAME), Darwin)
 	READLINE_LIB =  -Lreadline_yuhayrap_skedikia/lib -lreadline
 else
 	READLINE_LIB = -lreadline
@@ -212,7 +214,6 @@ print_info: print_name
 	@printf "%b" "$(BLUE)Name: $(GREEN)$(NAME)\n"
 	@printf "%b" "$(BLUE)C Flags: $(GREEN)$(CFLAGS)\n"
 	@printf "%b" "$(BLUE)Src Count: $(GREEN)$(SRC_COUNT_TOT)$(NO_COLOR)\n"
-
 
 print_name:
 	@printf "%b" "$(BLUE)"

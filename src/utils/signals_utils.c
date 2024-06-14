@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 15:55:42 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/06/10 15:56:22 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/06/14 13:13:46 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	disable_echoctl(void)
 {
 	struct termios	term;
-
 
 	if (tcgetattr(STDIN_FILENO, &term) != 0)
 		return ;

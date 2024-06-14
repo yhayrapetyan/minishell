@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:38:26 by skedikia          #+#    #+#             */
-/*   Updated: 2024/06/11 14:45:38 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/06/14 13:16:38 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,50 +69,4 @@ void	data_sort_export(t_data *data)
 			}
 		}
 	}
-}
-
-static int	is_space(char c)
-{
-	return (c == '\t' || c == '\n' || c == '\v'
-		|| c == '\f' || c == '\r' || c == ' ');
-}
-
-static void	overflow_error(const char *str, t_data *data, \
-	unsigned long long nbr, int isneg)
-{
-	if (!isneg || nbr > (unsigned long long)LLONG_MAX + 1)
-	{
-		minishell_error("exit", (char *)str, "numeric argument required\n");
-		clean_data(data);
-		exit(OVERFLOW_STAT);
-	}
-}
-
-int	ft_atoi_with_check(const char *str, t_data *data)
-{
-	size_t				i;
-	unsigned long long	nbr;
-	int					isneg;
-
-	i = 0;
-	nbr = 0;
-	isneg = 0;
-	while (str[i] && is_space(str[i]))
-		++i;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			isneg = 1;
-		++i;
-	}
-	while (str[i] && ft_isdigit(str[i]))
-	{
-		nbr = (nbr * 10) + (str[i] - '0');
-		if (nbr > LLONG_MAX)
-			overflow_error(str, data, nbr, isneg);
-		++i;
-	}
-	if (isneg)
-		return (-nbr);
-	return (nbr);
 }
