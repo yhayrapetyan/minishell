@@ -16,6 +16,7 @@
 static void	exit_helper(char *cmd_name, char *err_message, t_data *data)
 {
 	char	*err_msg;
+
 	if (ft_strstr(err_message, "Permission denied") != NULL)
 	{
 		if (access(cmd_name, F_OK) == 0 && access(cmd_name, X_OK) == 0)
@@ -36,7 +37,7 @@ static void	exit_helper(char *cmd_name, char *err_message, t_data *data)
 		exit(PERMISSION_STAT);
 	}
 	free(err_msg);
-	clean_data(data);//check
+	clean_data(data);
 	exit(CMD_NOT_FOUND_STAT);
 }
 
