@@ -24,6 +24,8 @@ int	get_exit_status(int err_type, char *err_message)
 			return (REDIR_PERMISSION_STAT);
 		return (FILE_OPEN_STAT);
 	}
+	else if (err_type == -12)
+		return (127);
 	return (0);
 }
 

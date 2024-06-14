@@ -27,7 +27,7 @@ static int	validate_line_helper(t_data *data, t_io_fds *io)
 	free(tmp);
 	if (!get_last_command(data->commands)->err_message)
 		return (-1);
-	lst_cmd->err_type = -6;
+	lst_cmd->err_type = -12;
 	return (-12);
 }
 
