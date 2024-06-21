@@ -96,7 +96,7 @@ void		fill_data_with_null(t_data *data);
 int			init_io_fds(t_command	*command);
 int			init_work_dir(t_data *data);
 int			init_export(t_data *data);
-void		*clean_data(t_data *data);//need to move
+void		*clean_data(t_data *data);
 
 /* LEXER */
 int			check_separators_consecutive(t_token *tokens, t_command *cmd);
