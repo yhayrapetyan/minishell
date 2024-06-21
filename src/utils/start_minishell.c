@@ -63,7 +63,7 @@ void	start_minishell(t_data *data)
 			clean_and_exit(data, status);
 		g_exit_status = execute(data);
 		if (g_exit_status < 0)
-			clean_and_exit(data, status);
+			clean_and_exit(data, g_exit_status);
 		clean_loop(data);
 	}
 }

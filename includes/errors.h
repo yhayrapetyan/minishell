@@ -33,7 +33,6 @@
 # define SYNTAX_ERR			"syntax error near unexpected token"
 # define AMBIGOUS_REDIR_ERR "ambiguous redirect"
 
-//syntax err exit status 2
 # ifdef __linux__
 #  define OVERFLOW_STAT 		2
 #  define NOT_NUMERIC_STAT		2

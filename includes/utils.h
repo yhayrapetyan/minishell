@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:40:16 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/06/11 13:58:46 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/06/21 15:08:11 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "colors.h"//maybe need to delete
-# include "lexer.h"//maybe need to delete
+# include "colors.h"
+# include "lexer.h"
 
 # ifndef PATH_MAX
 #  define PATH_MAX 4096
@@ -34,7 +34,7 @@
 
 //need to change to /tmp/.minishell_heredoc_
 # ifndef HEREDOC_NAME
-#  define HEREDOC_NAME "heredoc"
+#  define HEREDOC_NAME ".minishell_heredoc_"
 # endif
 # ifndef PROG_NAME
 #  define PROG_NAME "minishell: "
