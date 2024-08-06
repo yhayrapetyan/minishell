@@ -56,6 +56,8 @@ static void	handle_builtin(t_data *data, t_command *cmd)
 {
 	data->commands = cmd;
 	builtin_run(data);
+	if (ft_strcmp(data->commands->name, "exit") == 0)
+		g_exit_status = builtin_exit(data);
 	clean_data(data);
 	exit(g_exit_status);
 }

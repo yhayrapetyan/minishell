@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:40:16 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/06/21 15:08:11 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/06/21 18:11:42 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,7 @@ void		signal_print_newline(int signal);
 void		set_signals_noninteractive(void);
 void		set_signals_interactive(void);
 void		start_minishell(t_data *data);
-void		print_commands(t_data *data);
 void		signal_reset_prompt(int sig);
-void		print_tokens(t_data *data);
 void		system_errors(int status);
 int			get_env_len(char **env);
 void		print_arr(char **arr);

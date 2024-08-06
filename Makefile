@@ -57,11 +57,9 @@ LIBFT = 	ft_strtrim.c \
 			ft_atoi.c
 
 UTILS =		env_utils.c \
-			print_commands.c \
 			print_arr.c \
 			command_utils.c \
 			clean_commands.c \
-			print_tokens.c \
 			errors.c \
 			clean_data.c \
 			init.c \
