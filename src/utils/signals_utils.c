@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 15:55:42 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/06/14 13:13:46 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:56:31 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ void	signal_reset_prompt(int sig)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+	g_exit_status = 1;
 }

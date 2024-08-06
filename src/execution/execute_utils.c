@@ -42,6 +42,8 @@ static int	wait_for_childes(t_data *data)
 			return (-11);
 		i++;
 	}
+	if (WIFSIGNALED(status))
+		return (WTERMSIG(status) + 128);
 	if (status != 0)
 		return ((status >> 8) & 0xFF);
 	return (0);
