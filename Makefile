@@ -127,9 +127,14 @@ EXPANSION_DIR = ./src/expansion/
 PARSING_DIR = ./src/parsing/
 EXECUTION_DIR = ./src/execution/
 BUILTIN_DIR = ./src/builtin/
-INC = ./includes/
+HEADERS_DIR = ./includes/
+OBJS_DIR = ./obj/
 
-HEADERS := $(addprefix $(INC), $(HEADERS))
+READLINE_DIR = readline_local
+
+
+HEADERS := $(addprefix $(HEADERS_DIR), $(HEADERS))
+READLINE_HEADERS := $(addprefix ./$(READLINE_DIR), /include)
 SRC := $(addprefix $(SRC_DIR), $(SRC))
 HELPERS := $(addprefix $(HELPERS_DIR), $(HELPERS))
 LIBFT := $(addprefix $(LIBFT_DIR), $(LIBFT))
@@ -140,7 +145,7 @@ EXPANSION := $(addprefix $(EXPANSION_DIR), $(EXPANSION))
 PARSING := $(addprefix $(PARSING_DIR), $(PARSING))
 EXECUTION := $(addprefix $(EXECUTION_DIR), $(EXECUTION))
 BUILTIN := $(addprefix $(BUILTIN_DIR), $(BUILTIN))
-OBJS = $(SRC:.c=.o)
+READLINE_PATH := $(addprefix $(shell pwd)/, $(READLINE_DIR))
 
 SRC += $(HELPERS)
 SRC += $(LIBFT)
@@ -153,16 +158,17 @@ SRC += $(EXECUTION)
 SRC += $(BUILTIN)
 
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -I ./readline_yuhayrap_skedikia/include
-UNAME = $(shell uname -s)
-ifeq ($(UNAME), Darwin)
-	READLINE_LIB =  -Lreadline_yuhayrap_skedikia/lib -lreadline
+ifeq ($(shell uname -s), Darwin)
+	READLINE_LIB =  -L$(READLINE_DIR) -lreadline
 else
-	READLINE_LIB = -lreadline
+	READLINE_LIB =  -lreadline
 endif
+
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+
 NAME = minishell
-RM = rm -f
+RM = rm -rf
 
 BLUE   = \033[0;34m
 GREEN    = \033[0;32m
@@ -170,39 +176,54 @@ RED = \033[0;31m
 YELLOW  = \033[0;33m
 NO_COLOR    = \033[m
 
-
 SRC := $(shell printf "$(SRC)" | tr '\r' '\n')
 SRC_COUNT_TOT := $(words $(SRC))
 SRC_COUNT := 0
 SRC_PCT = $(shell expr 100 \* $(SRC_COUNT) / $(SRC_COUNT_TOT))
 
+OBJS = $(patsubst $(SRC_DIR)%.c, $(OBJS_DIR)%.o, $(SRC))
+
 all: print_info $(NAME)
 
+install:
+	@if [ ! -d ./$(READLINE_DIR) ]; then \
+		curl -O https://ftp.gnu.org/gnu/readline/readline-8.2.tar.gz; \
+		tar -xpf readline-8.2.tar.gz; \
+		rm -rf readline-8.2.tar.gz; \
+		mkdir -p ./${READLINE_DIR}; \
+		cd readline-8.2; \
+		./configure --prefix="${READLINE_PATH}"; \
+		make; \
+		make install; \
+		rm -rf ../readline-8.2; \
+	fi
+
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(READLINE_LIB) -o $(NAME)
+	@${CC} ${CFLAGS} -I $(HEADERS_DIR) -I $(READLINE_HEADERS)  ${OBJS} $(READLINE_LIB)  -o ${NAME}
 	@printf "%b" "$(BLUE)\n$@ $(GREEN)[✓]$(NO_COLOR)\n"
 
 $(OBJS): $(HEADERS) Makefile
 
 sanitize: fclean print_info $(OBJS)
-	@cc $(OBJS) $(READLINE_LIB) -fsanitize=address -o $(NAME)
+	@cc $(OBJS) ./$(READLINE_LIB)/ -fsanitize=address -o $(NAME)
 
-.c.o:
+$(OBJS_DIR)%.o: $(SRC_DIR)%.c
+	@mkdir -p $(dir $@)
 	@$(eval SRC_COUNT = $(shell expr $(SRC_COUNT) + 1))
 	@printf "\r%18s\r$(YELLOW)[ %d/%d (%d%%) ]$(NO_COLOR)" "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
-	@$(CC) $(CFLAGS) -I $(INC) -c  $< -o $(<:.c=.o)
-
-config:
-	mkdir -p readline_yuhayrap_skedikia
-	./readline_config.sh readline_yuhayrap_skedikia
+	@$(CC) $(CFLAGS)  -I $(HEADERS_DIR) -I $(READLINE_HEADERS) -c $< -o $@
 
 clean: print_name
-	@$(RM) $(OBJS) $(BONUS_OBJS)
+	@$(RM) $(OBJS_DIR)
 	@printf "%b" "$(BLUE)$@: $(GREEN)[✓]$(NO_COLOR)\n"
 
 fclean: clean
-	@$(RM) $(NAME) $(BONUS_NAME)
+	@$(RM) $(NAME)
 	@printf "%b" "$(BLUE)$@: $(GREEN)[✓]$(NO_COLOR)\n"
+
+uninstall:
+	@$(RM) readline-8.2
+	@$(RM) readline_local
 
 re: fclean all
 	@printf "%b" "$(BLUE)$@: $(GREEN)[✓]$(NO_COLOR)\n"
@@ -217,4 +238,4 @@ print_name:
 	@printf "%b" "$(BLUE)"
 	@echo "$(NAME)$(NO_COLOR)\n"
 
-.PHONY: all clean fclean re sanitize print_name print_info
+.PHONY: all clean fclean re sanitize print_name print_info install uninstall
